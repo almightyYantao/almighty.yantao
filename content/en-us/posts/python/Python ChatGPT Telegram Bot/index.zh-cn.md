@@ -2,6 +2,7 @@
 title: Python ChatGPT Telegram Bot  
 date: 2023-02-21  
 tags: ['python','chatgpt','gpt','telegram']  
+featured_image: img.png
 ---
 
 # 注册
@@ -12,7 +13,7 @@ tags: ['python','chatgpt','gpt','telegram']
 主要提供下Python的实现代码，首先需要准备一下的东西：
  - Telegram Bot 的 Key ：找机器人爸爸获取
  - ChatGPT 的 API Key  ： https://platform.openai.com/account/api-keys
-<!-- more -->  
+
 # 脚本：
 {% codeblock "main.py" lang:python >folded %}
 # 1. Start by importing the necessary libraries and setting up the API clients  

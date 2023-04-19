@@ -96,6 +96,13 @@ $manuMain:
     params:
       icon: eva eva-heart
     url: /about/
+  - &mainMenuGitHub
+    name: GitHub
+    weight: 80
+    identifier: github
+    params:
+      icon: eva eva-github
+    url: /github/
   - &mainMenuArchives
     name: Archives
     weight: 40
@@ -132,6 +139,7 @@ menu:
     - *mainMenuHome
     - *mainMenuAbout
     - *mainMenuArchives
+    - *mainMenuGitHub
     - *mainMenuSearch
   # 副导航 / sub-navigation
   # sub:
@@ -297,7 +305,7 @@ params:
   twitter:
     enabled: true
     rsshub: "https://rsshub.rssforever.com" # rsshub url, see https://github.com/DIYgod/RSSHub
-    id: "GenshinImpact" # Twitter ID
+    id: "almightyYantao" # Twitter ID
     # 如果为 true，Hugo 将下载图片和视频并进行优化，如果你在中国大陆地区，请谨慎启用这个选项
     # If enabled, Hugo will download videos and images from the Tweet and optimize them
     imageProcessing: true

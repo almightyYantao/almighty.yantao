@@ -17,7 +17,7 @@ curl -O https://raw.githubusercontent.com/atrandys/wireguard/master/wg_mult.sh &
 ```
 
 ### 2.2、设置访问权限
-环境变量：`$WG_PEER_IP`可以获取连接着的IP地址
+环境变量：`WG_PEER_IP`可以获取连接着的IP地址
 ```bash
 PostUp = /path/to/script.sh
 PostDown = /path/to/teardown.sh
