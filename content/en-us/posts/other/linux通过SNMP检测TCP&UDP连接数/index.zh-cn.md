@@ -16,12 +16,31 @@ featured_image: https://raw.githubusercontent.com/almightyYantao/blog-img/master
 别的不说，这图还是很好看的；
 <img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202303112218722.png"/>
 
-## 现在讲讲获取TCP/UDP连接数的准备
-- SNMP (yum install snmpd)
+## 准备
+- SNMP 
 - 自定义OID
 
-## 创建获取连接数脚本
+### snmp安装
 ```bash
+yum install net-snmp
+systemctl start snmpd
+systemctl enable snmpd
+```
+
+### 修改配置文件
+```bash {linenos=table,hl_lines=[4,5,7,8],title="/etc/snmp/snmpd.conf"}
+# 修改团体名
+com2sec notConfigUser default xxxxx
+
+# view systemview included .1.3.6.1.2.1. （这两行注释）  
+# view systemview included .1.3.6.1.2.1.25.1.1   
+# 这两行新增，表示可以查看所有的信息，要不然只能查看上面那两个指定的信息
+view all included .
+view systemview included .1
+```
+
+## 创建获取连接数脚本
+```bash {title="/etc/snmp/shell/zabbix.tcp.sh"}
 #!/bin/bash
 echo $2
 echo integer
@@ -38,7 +57,7 @@ chmod 766 zabbix.tcp.sh
 
 文件路径：`/etc/snmp/snmpd.conf`
 
-```bash
+```bash {title="/etc/snmp/snmpd.conf"}
 pass .1.3.6.1.4.1.2021.21 /etc/snmp/shell/zabbix.tcp.sh
 ```
 

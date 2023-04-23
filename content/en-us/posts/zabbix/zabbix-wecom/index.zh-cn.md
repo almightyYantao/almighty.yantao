@@ -15,11 +15,11 @@ import os
 import time
 import re
  
-url = 'http://10.1.1.59/zabbix/api_jsonrpc.php'
+url = 'http://xx.xx.xx.xx/zabbix/api_jsonrpc.php'
 headers = {'Content-Type': 'application/json-rpc'}
 graph_path = '/data/zabbix/images/'  # 定义图片存储路径
-graph_url = 'http://10.1.1.59/zabbix/chart.php'  # 定义图表的url
-loginurl = "http://10.1.1.59/zabbix/index.php"  # 定义登录的url
+graph_url = 'http://xx.xx.xx.xx/zabbix/chart.php'  # 定义图表的url
+loginurl = "http://xx.xx.xx.xx/zabbix/index.php"  # 定义登录的url
  
  
 def uploadImg(path,accessToken):
@@ -43,13 +43,13 @@ def get_imgUrl(itemid):
     session = requests.Session()
     try:
         loginheaders = {
-            "Host": "10.1.1.59",
+            "Host": "xx.xx.xx.xx",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
         }
         # 定义请求消息头
  
         payload = {
-            "name": 'yantao',
+            "name": 'xxxxxxx',
             "password": 'xxxxxxx',
             "autologin": "1",
             "enter": "Sign in",

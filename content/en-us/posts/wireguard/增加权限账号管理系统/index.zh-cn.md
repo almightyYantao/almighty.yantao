@@ -2,7 +2,7 @@
 title: 通过iptables进行wireguard的权限管理
 date: 2023-04-18 
 tags: ['wireguard','权限管理','权限']  
-featured_image: img.webp
+featured_image: img.png
 ---
 
 ## 一、背景

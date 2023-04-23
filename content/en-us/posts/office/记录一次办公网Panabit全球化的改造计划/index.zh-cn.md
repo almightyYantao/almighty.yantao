@@ -75,7 +75,7 @@ sleep 10
 <img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103432.png"/>
 对象管理 → 账号管理 → 本地账号：
 处理用户组需要选择前面创建的用户组，其他的根据实际情况填写
-<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103454.png"/>
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202304211018672.png"/>
 ### (4)、创建iWAN服务
 应用路由 → iWAN服务 → 服务列表：
 注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发
@@ -105,6 +105,6 @@ iWAN使用的是UDP连接，因此端口需要开放UDP
 <img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103713.png"/>
 
 # 附件
-169IP段： https://www.123pan.com/s/cRk7Vv-frSsH 提取码:NzAF  
-Linux操作系统： https://www.123pan.com/s/cRk7Vv-arSsH 提取码:A5MC  
-joskmc： https://www.123pan.com/s/cRk7Vv-BrSsH 提取码:kTu9  
+169IP段： https://www.123pan.com/s/cRk7Vv-frSsH 提取码:NzAF   
+Linux操作系统： https://www.123pan.com/s/cRk7Vv-arSsH 提取码:A5MC   
+joskmc： https://www.123pan.com/s/cRk7Vv-BrSsH 提取码:kTu9   

@@ -76,7 +76,7 @@ backend servers
     "server":"127.0.0.1", # 这里改成Haproxy的地址
     "server_port":50001, # 这里改成Haproxy监听的端口
     "local_port":1080, # 这里本地监听端口
-    "password":"qunheadmin",
+    "password":"xxxxxxxx",
     "timeout":60,
     "method":"aes-256-gcm",
     "mode":"tcp_and_udp"
