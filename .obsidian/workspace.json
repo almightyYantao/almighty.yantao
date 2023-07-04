@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "5cb887be50a51306",
+        "id": "3cf80d01a2d7de23",
         "type": "tabs",
         "children": [
           {
-            "id": "24ef2910ac165db4",
+            "id": "d63c051623274088",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/en-us/posts/wireguard/wg-quick Bash3 的问题/index.zh-cn.md",
+                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
                 "mode": "source",
                 "source": false
               }
@@ -64,6 +64,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "48ebed4e8059a21f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/en-us/posts/wireguard/wg-quick Bash3 的问题/index.zh-cn.md",
+                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/en-us/posts/wireguard/wg-quick Bash3 的问题/index.zh-cn.md",
+                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/en-us/posts/wireguard/wg-quick Bash3 的问题/index.zh-cn.md"
+                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md"
               }
             }
           }
@@ -146,54 +154,54 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "24ef2910ac165db4",
+  "active": "d63c051623274088",
   "lastOpenFiles": [
-    "resources/_gen/images/posts/wireguard/wg-quick Bash3 的问题/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg",
-    "resources/_gen/images/posts/wireguard/wg-quick Bash3 的问题/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
-    "resources/_gen/images/posts/wireguard/wg-quick Bash3 的问题/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
-    "resources/_gen/images/posts/wireguard/wg-quick Bash3 的问题/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png",
-    "resources/_gen/images/posts/wireguard/wg-quick Bash3 的问题/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
-    "resources/_gen/images/posts/wireguard/wg-quick Bash3 的问题/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
-    "resources/_gen/images/posts/wireguard/wg-quick Bash3 的问题",
-    "content/en-us/posts/wireguard/增加权限账号管理系统/index.zh-cn.md",
+    "content/en-us/posts/other%2FCentos Install Confluence%2Fimg%2Fimg1.png.md",
+    "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
+    "content/en-us/posts/other/解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题/index.zh-cn.md",
+    "content/en-us/posts/other/curl 检测代理的可用性以及延迟/index.zh-cn.md",
+    "content/en-us/posts/other/hugo + github自动化部署静态博客/index.zh-cn.md",
+    "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/index.zh-cn.md",
+    "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/img.webp",
+    "content/en-us/posts/other/Centos Install Confluence/img/img6.png",
+    "content/en-us/posts/other/Centos Install Confluence/img/img5.png",
+    "content/en-us/posts/other/Centos Install Confluence/img/img4.png",
+    "content/en-us/posts/other/Centos Install Confluence/img/img3.png",
+    "Pasted image 20230704133442.png",
+    "Pasted image 20230704133309.png.md",
+    "content/en-us/posts/other/Centos Install Confluence/img/img2.png",
+    "content/en-us/posts/other/Centos Install Confluence/img/img1.png",
+    "content/en-us/posts/other/Centos Install Confluence/img",
+    "Pasted image 20230704133309.png",
+    "content/en-us/posts/other/hugo + github自动化部署静态博客/img.png",
+    "未命名.md",
+    "content/en-us/posts/other/Centos7&8开启BBR加速/index.zh-cn.md",
+    "content/en-us/posts/other/VSPhere VCenter 6.5以上版本安装80%失败处理/index.zh-cn.md",
+    "content/en-us/posts/other/Centos Install Confluence",
+    "public/tags/vsphere/index.xml",
+    "public/tags/vcenter/index.xml",
+    "public/tags/vsphere/page/1/index.html",
+    "public/tags/vsphere/page/1",
+    "public/tags/vsphere/page",
+    "public/tags/vsphere/index.html",
+    "public/tags/vsphere",
+    "public/tags/vcenter/page/1/index.html",
+    "mg1.png.md",
     "content/en-us/posts/wireguard/wg-quick Bash3 的问题/index.zh-cn.md",
-    "content/en-us/posts/wireguard/增加权限账号管理系统/img.png",
-    "content/en-us/posts/wireguard/wg-quick Bash3 的问题/img.png",
-    "content/en-us/posts/wireguard/wg-quick Bash3 的问题",
+    "content/en-us/posts/wireguard/增加权限账号管理系统/index.zh-cn.md",
     "content/en-us/posts/office/记录一次办公网Panabit全球化的改造计划/index.zh-cn.md",
     "content/en-us/posts/openvpn/openvpn-dynamic-route-permissions/index.zh-cn.md",
     "content/en-us/posts/openvpn/openvpn-auth/index.zh-cn.md",
     "openvpn-auth/image2022-12-12_20-11-38.png.md",
-    "openvpn-auth",
     "content/en-us/posts/openvpn/openvpn-access-server/index.zh-cn.md",
     "content/en-us/posts/openvpn/clearOpenvpnInvalidIp/index.zh-cn.md",
     "content/en-us/posts/haproxy/haproxy-load/index.zh-cn.md",
     "content/en-us/posts/zabbix/zabbix-wecom/index.zh-cn.md",
-    "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/index.zh-cn.md",
-    "public/tags/ssh/index.xml",
-    "public/tags/ssh/page/1/index.html",
-    "public/tags/ssh/page/1",
-    "public/tags/ssh/page",
-    "public/tags/ssh/index.html",
-    "public/tags/ssh",
-    "public/2023/02/21/python-chatgpt-telegram-bot.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_66df8b40cec26a8c5681f8581fbc4f22.jpg",
-    "public/2023/02/21/python-chatgpt-telegram-bot.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
-    "public/2023/02/21/python-chatgpt-telegram-bot.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_q95_h2_catmullrom_3.webp",
-    "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/index.html",
     "content/en-us/posts/python/使用 Python ssh 远程登陆服务器的最佳方案/index.zh-cn.md",
     "content/en-us/posts/python/Python ChatGPT Telegram Bot/index.zh-cn.md",
     "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/未命名.canvas",
-    "content/en-us/posts/other/hugo + github自动化部署静态博客/index.zh-cn.md",
     "content/en-us/posts/Obsidian/Obsidian 免费的实时同步服务/index.zh-cn.md",
     "content/en-us/about.zh-cn.md",
-    "content/en-us/posts/wireguard/增加权限账号管理系统/未命名 1.md",
-    "content/en-us/archives.md",
-    "content/en-us/about.md",
-    "archetypes/default.md",
-    "content/en-us/posts/Shortcodes/index.md",
-    "content/en-us/links/index.md",
-    "content/en-us/links/index.zh-cn.md",
-    "content/en-us/twitter.md",
-    "content/en-us/posts/other/curl 检测代理的可用性以及延迟/index.zh-cn.md"
+    "content/en-us/posts/wireguard/增加权限账号管理系统/未命名 1.md"
   ]
 }
