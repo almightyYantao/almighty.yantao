@@ -8,7 +8,7 @@ tags: ['nginx','tomcat','SSL']
 公司之前用的是http，但是出于苹果app审核和服务器安全性问题，要改为https，我们公司用的是沃通的ssl，按照沃通的官方文档提供的步骤完成服务器的配置。 架构上使用了 Nginx +tomcat 集群, 且nginx下配置了SSL,tomcat 没有配置SSL,项目使用https协议。
 
 ## 原因
-![](content/en-us/posts/other/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img1.png)
+![](img/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img1.png)
 配置成功后明明是https url请求,发现 log里面，tomcat获取scheme的时候，一直是http，而不是想像中的https
 ```shell
 0415 16:01:10 INFO  (PaymentInterceptor.java:44) preHandle() - requestStringForLog:    {
@@ -32,7 +32,7 @@ Reconstructs the URL the client used to make the request.
 The returned URL contains a protocol, server name, port number, and server path, 
 but it does not include query string parameters.
 ```
-![](content/en-us/posts/other/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img2.png)
+![](img/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img2.png)
 
 ## 解决
 ### 配置nginx

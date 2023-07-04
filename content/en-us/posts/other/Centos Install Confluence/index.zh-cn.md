@@ -2,19 +2,20 @@
 title: CentOS 7 安装 Confluence 并且破解
 date: 2023-06-16
 tags: ['CentOS','Confluence','破解']  
+featured_image: banner.png
 ---
 
 ## 简介
 Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。部署Confluence前，需确认服务器已部署Nginx+MySQL环境。
 
 ## 搭建环境
-系统版本：CentOS Linux release 7.6.1810 (Core)
-confluence版本：Confluence 7.13.4（最新版本）
-Java版本：`java-11-openjdk-devel.x86_64`
-confluence解除工具：`confluence_keygen.jar`
-注：解除工具链接:  https://pan.baidu.com/s/1po6wouAIZPHbMG39oKKMVw
-提取码: guck
-Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​
+系统版本：CentOS Linux release 7.6.1810 (Core)  
+confluence版本：Confluence 7.13.4（最新版本）   
+Java版本：`java-11-openjdk-devel.x86_64`  
+confluence解除工具：`confluence_keygen.jar`  
+注：解除工具链接:  https://pan.baidu.com/s/1po6wouAIZPHbMG39oKKMVw  
+提取码: guck  
+Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​  
 > mysql-connector-java版本：[mysql-connector-java-5.1.49](https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-5.1.49.tar.gz)
 
 注：以上插件下载地址如下截图可自选【系统版本】和【插件版本】，切记不要使用最新版本插件，由于官网文档说明不支持最新版，然后我特意亲测了一下确实不支持，最大支持mysql-connector-java-5.1.x 高于此版本都不支持，建议使用5.1.x版本插件，插件下载地址： https://downloads.mysql.com/archives/c-j/
@@ -105,19 +106,19 @@ echo -e ‘\nexport JAVA_OPTS=“-javaagent:/opt/atlassian/atlassian-agent-v1.2.
 
 ### Confluence 界面配置
 #### 本地打开浏览器：http://localhost:8090
-![](content/en-us/posts/other/Centos%20Install%20Confluence/img/img1.png)
+![](img/Centos%20Install%20Confluence/img1.png)
 #### 修改语言为中文
-![](content/en-us/posts/other/Centos%20Install%20Confluence/img/img2.png)
+![](img/Centos%20Install%20Confluence/img2.png)
 #### 进行实例安装
-![](content/en-us/posts/other/Centos%20Install%20Confluence/img/img3.png)
-![](content/en-us/posts/other/Centos%20Install%20Confluence/img/img4.png)
+![](img/Centos%20Install%20Confluence/img3.png)
+![](img/Centos%20Install%20Confluence/img4.png)
 #### 获取授权
 方式一：保存服务器ID，安装JDK（windows或者Mac）
 下载confluence解除工具。将服务器/opt/atlassian/confluence/confluence/WEB-INF/lib/目录下的
 atlassian-extras-decoder-v2-3.4.1.jar下载到电脑上。下载文件前一定要先做备份，方便回退。运行解除程序，添加相关信息，先点击「.patch」选择下载下来的文件，然后如下截图一步一步添加字段，最后点击「.gen！」生成解除密钥，复制保存密钥。
-![](content/en-us/posts/other/Centos%20Install%20Confluence/img/img5.png)
+![](img/Centos%20Install%20Confluence/img5.png)
 方式二：保存服务器ID，安装JDK（linux）返回ssh命令行，使用atlassian-agent生成授权码
 `java -jar /opt/atlassian/atlassian-agent-v1.2.3/atlassian-agent.jar -p conf -m  mail@qq.com -n confluence -o confluence -s BVMH-X6Q1-ELT4-Q1OD`
-![](content/en-us/posts/other/Centos%20Install%20Confluence/img/img6.png)
+![](img/Centos%20Install%20Confluence/img6.png)
 授权完成后进行数据库链接即可正常使用！
 > 注：以上就彻底完成了confluence7.13.4的搭建部署，另外提醒一下这个版本不需要安装中文包，在设置里自带中文设置，直接更改即可。
