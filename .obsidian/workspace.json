@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
+                "file": "content/zh-cn/github.zh-cn.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
+                "file": "content/zh-cn/github.zh-cn.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
+                "file": "content/zh-cn/github.zh-cn.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md"
+                "file": "content/zh-cn/github.zh-cn.md"
               }
             }
           }
@@ -154,54 +154,54 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "6241108a139fbf22",
+  "active": "76ee4493a294165f",
   "lastOpenFiles": [
     "public/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css",
     "public/robots.txt",
     "public/sitemap.xml",
     "public/index.xml",
-    "public/tags/破解/index.xml",
     "public/tags/认证/index.xml",
-    "public/tags/自动化部署/index.xml",
     "public/tags/权限管理/index.xml",
-    "public/tags/检测/index.xml",
+    "public/tags/自动化部署/index.xml",
+    "public/tags/破解/index.xml",
     "public/tags/权限/index.xml",
-    "public/tags/国际化/index.xml",
-    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_956x0_resize_q95_h2_catmullrom_3.webp",
+    "public/tags/检测/index.xml",
+    "public/tags/动态下发/index.xml",
+    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
     "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_956x0_resize_catmullrom_3.png",
     "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_40515351d39bfb6db522ea6d9cd1fccd.jpg",
-    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
+    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_956x0_resize_q95_h2_catmullrom_3.webp",
     "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner.png",
     "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg",
     "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
     "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png",
     "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
     "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
-    "content/en-us/posts/other/hugo + github自动化部署静态博客/index.zh-cn.md",
-    "content/en-us/posts/other/curl 检测代理的可用性以及延迟/index.zh-cn.md",
-    "content/en-us/posts/other/Centos7&8开启BBR加速/index.zh-cn.md",
-    "content/en-us/posts/other/解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题/index.zh-cn.md",
-    "content/en-us/posts/other/Centos Install Confluence/index.zh-cn.md",
-    "img/confluence/img1.png.md",
-    "content/en-us/posts/other%2FCentos Install Confluence%2Fimg%2Fimg1.png.md",
-    "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/index.zh-cn.md",
-    "Pasted image 20230704133309.png.md",
-    "未命名.md",
-    "content/en-us/posts/other/VSPhere VCenter 6.5以上版本安装80%失败处理/index.zh-cn.md",
-    "mg1.png.md",
-    "content/en-us/posts/wireguard/wg-quick Bash3 的问题/index.zh-cn.md",
-    "content/en-us/posts/wireguard/增加权限账号管理系统/index.zh-cn.md",
-    "content/en-us/posts/office/记录一次办公网Panabit全球化的改造计划/index.zh-cn.md",
-    "content/en-us/posts/openvpn/openvpn-dynamic-route-permissions/index.zh-cn.md",
-    "content/en-us/posts/openvpn/openvpn-auth/index.zh-cn.md",
-    "openvpn-auth/image2022-12-12_20-11-38.png.md",
-    "content/en-us/posts/openvpn/openvpn-access-server/index.zh-cn.md",
-    "content/en-us/posts/openvpn/clearOpenvpnInvalidIp/index.zh-cn.md",
-    "content/en-us/posts/haproxy/haproxy-load/index.zh-cn.md",
-    "content/en-us/posts/zabbix/zabbix-wecom/index.zh-cn.md",
-    "content/en-us/posts/python/使用 Python ssh 远程登陆服务器的最佳方案/index.zh-cn.md",
-    "content/en-us/posts/python/Python ChatGPT Telegram Bot/index.zh-cn.md",
-    "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/未命名.canvas",
-    "content/en-us/posts/Obsidian/Obsidian 免费的实时同步服务/index.zh-cn.md"
+    "content/zh-cn/github.md",
+    "content/zh-cn/posts/openvpn/openvpn-auth/index.zh-cn.md",
+    "content/zh-cn/posts/office/记录一次办公网Panabit全球化的改造计划/index.zh-cn.md",
+    "themes/hugo-theme-luna/node_modules/es-abstract/CHANGELOG.md",
+    "themes/hugo-theme-luna/node_modules/es-abstract/README.md",
+    "themes/hugo-theme-luna/node_modules/caniuse-lite/README.md",
+    "themes/hugo-theme-luna/node_modules/tailwindcss/README.md",
+    "themes/hugo-theme-luna/node_modules/tailwindcss/CHANGELOG.md",
+    "themes/hugo-theme-luna/node_modules/postcss-load-config/node_modules/yaml/README.md",
+    "themes/hugo-theme-luna/node_modules/sucrase/README.md",
+    "themes/hugo-theme-luna/node_modules/css-tree/README.md",
+    "themes/hugo-theme-luna/node_modules/css-tree/CHANGELOG.md",
+    "themes/hugo-theme-luna/node_modules/resolve/SECURITY.md",
+    "themes/hugo-theme-luna/node_modules/chroma-js/readme.md",
+    "themes/hugo-theme-luna/node_modules/svgo/README.md",
+    "themes/hugo-theme-luna/node_modules/jiti/README.md",
+    "themes/hugo-theme-luna/node_modules/autoprefixer/README.md",
+    "themes/hugo-theme-luna/node_modules/csso/README.md",
+    "themes/hugo-theme-luna/node_modules/csso/CHANGELOG.md",
+    "themes/hugo-theme-luna/node_modules/object.assign/README.md",
+    "themes/hugo-theme-luna/node_modules/object.assign/CHANGELOG.md",
+    "themes/hugo-theme-luna/node_modules/yaml/README.md",
+    "themes/hugo-theme-luna/node_modules/postcss-easing-gradients/node_modules/postcss/README.md",
+    "themes/hugo-theme-luna/node_modules/postcss-selector-parser/README.md",
+    "themes/hugo-theme-luna/node_modules/postcss-replace-values/node_modules/postcss/README.md",
+    "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/未命名.canvas"
   ]
 }

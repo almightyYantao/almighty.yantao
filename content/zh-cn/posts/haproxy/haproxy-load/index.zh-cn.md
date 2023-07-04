@@ -1,6 +1,7 @@
 ---
 title: 通过 Haproxy 实现 Shadowshadows 负载均衡
 description: HAProxy是一个使用C语言编写的自由及开放原始码软件[3]，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。
+date: 2023-03-05
 ---
 
 ## 介绍

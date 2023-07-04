@@ -2,6 +2,7 @@
 title: zabbix 警报推送至企业微信（图文版）
 tags: ['zabbix','企业微信','报警']
 index_img: "/img/zabbix.webp"
+date: 2023-02-05
 ---
 
 ## 新增Python脚本

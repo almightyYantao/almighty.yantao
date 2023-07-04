@@ -297,8 +297,9 @@ params:
   # GitHub 页面设置
   # github page
   github:
-    id: "torvalds" # or ["torvalds", "gvanrossum"]
+    id: "gvanrossum" # or ["torvalds", "gvanrossum"]
     minStars: 5 # 最小 star 项目 / min stars
+    rsshub: "https://rsshub.rssforever.com"
 
   # Twitter 页面设置
   # tweet page
@@ -425,7 +426,7 @@ build:
 
 languages:
   zh-cn:
-    contentDir: content/zh-hans
+    contentDir: content/zh-cn
     languageName: 中文
     params:
       languageIcon: "images/i18n/zh-cn.svg" # in assets folder
@@ -437,6 +438,7 @@ languages:
         imageProcessing: true
       github:
         id: "almightyYantao"
+        rsshub: "https://rsshub.rssforever.com"
         minStars: 10
       license:
         enabled: true
