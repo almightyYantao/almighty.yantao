@@ -51,7 +51,7 @@ Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​&lt;/p&gt;
 &lt;p&gt;注：以上插件下载地址如下截图可自选【系统版本】和【插件版本】，切记不要使用最新版本插件，由于官网文档说明不支持最新版，然后我特意亲测了一下确实不支持，最大支持mysql-connector-java-5.1.x 高于此版本都不支持，建议使用5.1.x版本插件，插件下载地址： https://downloads.mysql.com/archives/c-j/&lt;/p&gt;
 &lt;p&gt;关闭防火墙 &lt;code&gt;systemctl stop firewalld.service​&lt;/code&gt;&lt;br&gt;
 禁止防火墙开机自启 &lt;code&gt;systemctl disable firewalld.service​&lt;/code&gt;&lt;br&gt;
-关闭 &lt;code&gt;selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config&lt;/code&gt;&lt;br&gt;
+关闭 selinux​ &lt;code&gt;sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config&lt;/code&gt;&lt;br&gt;
 重启系统即可 &lt;code&gt;reboot&lt;/code&gt;&lt;/p&gt;
 
 
