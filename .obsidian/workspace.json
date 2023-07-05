@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/zh-cn/github.zh-cn.md",
+                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/zh-cn/github.zh-cn.md",
+                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/zh-cn/github.zh-cn.md",
+                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/zh-cn/github.zh-cn.md"
+                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md"
               }
             }
           }
@@ -154,29 +154,30 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "76ee4493a294165f",
+  "active": "6241108a139fbf22",
   "lastOpenFiles": [
-    "almighty.yantao",
     "public/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css",
     "public/robots.txt",
     "public/sitemap.xml",
     "public/index.xml",
-    "public/tags/破解/index.xml",
-    "public/tags/检测/index.xml",
     "public/tags/认证/index.xml",
-    "public/tags/权限/index.xml",
-    "public/tags/自动化部署/index.xml",
+    "public/tags/报警/index.xml",
+    "public/tags/多拨/index.xml",
+    "public/tags/检测/index.xml",
     "public/tags/权限管理/index.xml",
-    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg",
-    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
-    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
-    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png",
-    "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_catmullrom_3.png",
-    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
-    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
-    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img.png",
-    "public/2023/03/11/linux通过snmp检测tcpudp连接数.html/img.webp",
+    "public/tags/破解/index.xml",
+    "public/tags/自动化部署/index.xml",
+    "content/zh-cn/github.zh-cn.md",
+    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_40515351d39bfb6db522ea6d9cd1fccd.jpg",
+    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_956x0_resize_q95_h2_catmullrom_3.webp",
+    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_956x0_resize_catmullrom_3.png",
     "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner_huc06033f5e782140dcc5da83974cb7a35_82830_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
+    "public/2023/06/16/centos-7-安装-confluence-并且破解.html/banner.png",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
     "content/zh-cn/github.md",
     "content/zh-cn/posts/openvpn/openvpn-auth/index.zh-cn.md",
     "content/zh-cn/posts/office/记录一次办公网Panabit全球化的改造计划/index.zh-cn.md",
@@ -201,7 +202,6 @@
     "themes/hugo-theme-luna/node_modules/yaml/README.md",
     "themes/hugo-theme-luna/node_modules/postcss-easing-gradients/node_modules/postcss/README.md",
     "themes/hugo-theme-luna/node_modules/postcss-selector-parser/README.md",
-    "themes/hugo-theme-luna/node_modules/postcss-replace-values/node_modules/postcss/README.md",
     "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/未命名.canvas"
   ]
 }

@@ -29,7 +29,7 @@ Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​
 ### 下载mysql数据库社区yum源
 ```bash
 wget  http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​
-yum -y install mysql57-community-release-el7-10.noarch.rpm
+rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm
 yum -y install mysql-community-server
 ```
 ### 修改配置文件
