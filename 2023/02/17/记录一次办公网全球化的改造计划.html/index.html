@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-cn" class="lang-zh-cn">
+    <head><meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="keywords" content="办公网,全球化,全球办公,国际化,Panabit,iwan,sd-wan,Hugo,Blog,Almighty.YanTao,yantao," /><meta name="description" content="背景 办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～
+之前尝试过下面这种方式： 新增一台海外的机器（新加坡、香港）搭建SS/v2ray/trojan之类的协议，然后办公网新增一个软路由去连接，通过ACL把部分IP的用户跳转过去； 但是这种方式自己家里用用还行，如果想要在企业的办公网来使用的话，人一多就不行，因为所有人都从这个IP出去了，而且每次都需要命令行去操作ACL增加用户，非常的麻烦；
+Panabit 的 iWAN 为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 SD-WAN；
+重连速度很快：
+比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而我们只需要一次即可 客户端不受底层承载线路IP变化影响：
+当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；
+因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；
+而用iWAN的话，现有的会话可以照常使用，不需要做任何改变； 传输效率高：
+iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；
+如果用国际线路的话，节省下来的流量费用都是很可观的； 抗干扰：
+不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。 部署 1、搭建panabit 记得服务器申请2H的，1H需要需改核心，非常麻烦 下载Linux系统文件：文末 上传文件到root根目录下
+1 2 3 4 tar -xzf PanabitFREE_SUIr2p3_20220413_Linux3.tar.gz cd PanabitFREE_SUIr2p3_20220413_Linux3 # 输入以下命令进行安装 ./ipeinstall 修改/etc/PG.conf文件 因为是单网口，所以数据口和管理口都需要配置成eth0，后面不要加任何东西
+1 DATA_PORTS 修改成：DATA_PORTS=&amp;#34;eth0&amp;#34; 修改端口 上传文件，修改配置 需要上传一个joskmc文件（文件在文末） 在/etc/PG.conf中新增一下一行
+1 HTTPS_PORT=2194 执行joskmc 1 /root/joskmc tcp 2194 修改：/etc/rc.local，增加一下三行 1 2 sleep 10 /root/joskmc tcp 2194 2、进行隧道配置（海外） (1)、登录WEB页面，修改网卡方向 默认账号密码：admin/panabit 系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路 (2)、创建WAN线路 应用路由 → 接口线路： 需要注意，Mac地址必须克隆 (3)、创建IWAN连接账号 对象管理 → 账号管理 → 组织架构： 地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好 地址范围需要把网关地址留出来！！！！！ 对象管理 → 账号管理 → 本地账号： 处理用户组需要选择前面创建的用户组，其他的根据实际情况填写 (4)、创建iWAN服务 应用路由 → iWAN服务 → 服务列表： 注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发 应用路由 → iWAN服务 → 服务映射： 根据配置情况选择即可 iWAN使用的是UDP连接，因此端口需要开放UDP (5)、创建策略路由 应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败 这里选择iWAN的线路 3、客户端配置（办公网） (1)、新建WAN线路 应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置 注意：必须有一个外网的网卡，并且最好把加密开起来 (2)、设置DNS牵引 应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改 主要解决DNS污染问题，要不然可能部分网站会无法访问 这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效 (3)、设置策略路由 应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载） 主要为了只有需要海外的才出去，不能把所有的流量全部导出去 附件 169IP段： https://www." />
+<meta itemprop="description" content="背景 办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～
+之前尝试过下面这种方式： 新增一台海外的机器（新加坡、香港）搭建SS/v2ray/trojan之类的协议，然后办公网新增一个软路由去连接，通过ACL把部分IP的用户跳转过去； 但是这种方式自己家里用用还行，如果想要在企业的办公网来使用的话，人一多就不行，因为所有人都从这个IP出去了，而且每次都需要命令行去操作ACL增加用户，非常的麻烦；
+Panabit 的 iWAN 为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 SD-WAN；
+重连速度很快：
+比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而我们只需要一次即可 客户端不受底层承载线路IP变化影响：
+当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；
+因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；
+而用iWAN的话，现有的会话可以照常使用，不需要做任何改变； 传输效率高：
+iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；
+如果用国际线路的话，节省下来的流量费用都是很可观的； 抗干扰：
+不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。 部署 1、搭建panabit 记得服务器申请2H的，1H需要需改核心，非常麻烦 下载Linux系统文件：文末 上传文件到root根目录下
+1 2 3 4 tar -xzf PanabitFREE_SUIr2p3_20220413_Linux3.tar.gz cd PanabitFREE_SUIr2p3_20220413_Linux3 # 输入以下命令进行安装 ./ipeinstall 修改/etc/PG.conf文件 因为是单网口，所以数据口和管理口都需要配置成eth0，后面不要加任何东西
+1 DATA_PORTS 修改成：DATA_PORTS=&amp;#34;eth0&amp;#34; 修改端口 上传文件，修改配置 需要上传一个joskmc文件（文件在文末） 在/etc/PG.conf中新增一下一行
+1 HTTPS_PORT=2194 执行joskmc 1 /root/joskmc tcp 2194 修改：/etc/rc.local，增加一下三行 1 2 sleep 10 /root/joskmc tcp 2194 2、进行隧道配置（海外） (1)、登录WEB页面，修改网卡方向 默认账号密码：admin/panabit 系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路 (2)、创建WAN线路 应用路由 → 接口线路： 需要注意，Mac地址必须克隆 (3)、创建IWAN连接账号 对象管理 → 账号管理 → 组织架构： 地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好 地址范围需要把网关地址留出来！！！！！ 对象管理 → 账号管理 → 本地账号： 处理用户组需要选择前面创建的用户组，其他的根据实际情况填写 (4)、创建iWAN服务 应用路由 → iWAN服务 → 服务列表： 注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发 应用路由 → iWAN服务 → 服务映射： 根据配置情况选择即可 iWAN使用的是UDP连接，因此端口需要开放UDP (5)、创建策略路由 应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败 这里选择iWAN的线路 3、客户端配置（办公网） (1)、新建WAN线路 应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置 注意：必须有一个外网的网卡，并且最好把加密开起来 (2)、设置DNS牵引 应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改 主要解决DNS污染问题，要不然可能部分网站会无法访问 这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效 (3)、设置策略路由 应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载） 主要为了只有需要海外的才出去，不能把所有的流量全部导出去 附件 169IP段： https://www." />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta itemprop="name" content="记录一次办公网全球化的改造计划 - Almighty.YanTao" />
+<link href="/index.xml" title="记录一次办公网全球化的改造计划 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
+<title>记录一次办公网全球化的改造计划 - Almighty.YanTao</title><link rel="stylesheet" href="/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="记录一次办公网全球化的改造计划 - Almighty.YanTao" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="记录一次办公网全球化的改造计划" />
+<meta property="og:description" content="背景 办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～
+之前尝试过下面这种方式： 新增一台海外的机器（新加坡、香港）搭建SS/v2ray/trojan之类的协议，然后办公网新增一个软路由去连接，通过ACL把部分IP的用户跳转过去； 但是这种方式自己家里用用还行，如果想要在企业的办公网来使用的话，人一多就不行，因为所有人都从这个IP出去了，而且每次都需要命令行去操作ACL增加用户，非常的麻烦；
+Panabit 的 iWAN 为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 SD-WAN；
+重连速度很快：
+比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而我们只需要一次即可 客户端不受底层承载线路IP变化影响：
+当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；
+因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；
+而用iWAN的话，现有的会话可以照常使用，不需要做任何改变； 传输效率高：
+iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；
+如果用国际线路的话，节省下来的流量费用都是很可观的； 抗干扰：
+不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。 部署 1、搭建panabit 记得服务器申请2H的，1H需要需改核心，非常麻烦 下载Linux系统文件：文末 上传文件到root根目录下
+1 2 3 4 tar -xzf PanabitFREE_SUIr2p3_20220413_Linux3.tar.gz cd PanabitFREE_SUIr2p3_20220413_Linux3 # 输入以下命令进行安装 ./ipeinstall 修改/etc/PG.conf文件 因为是单网口，所以数据口和管理口都需要配置成eth0，后面不要加任何东西
+1 DATA_PORTS 修改成：DATA_PORTS=&amp;#34;eth0&amp;#34; 修改端口 上传文件，修改配置 需要上传一个joskmc文件（文件在文末） 在/etc/PG.conf中新增一下一行
+1 HTTPS_PORT=2194 执行joskmc 1 /root/joskmc tcp 2194 修改：/etc/rc.local，增加一下三行 1 2 sleep 10 /root/joskmc tcp 2194 2、进行隧道配置（海外） (1)、登录WEB页面，修改网卡方向 默认账号密码：admin/panabit 系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路 (2)、创建WAN线路 应用路由 → 接口线路： 需要注意，Mac地址必须克隆 (3)、创建IWAN连接账号 对象管理 → 账号管理 → 组织架构： 地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好 地址范围需要把网关地址留出来！！！！！ 对象管理 → 账号管理 → 本地账号： 处理用户组需要选择前面创建的用户组，其他的根据实际情况填写 (4)、创建iWAN服务 应用路由 → iWAN服务 → 服务列表： 注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发 应用路由 → iWAN服务 → 服务映射： 根据配置情况选择即可 iWAN使用的是UDP连接，因此端口需要开放UDP (5)、创建策略路由 应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败 这里选择iWAN的线路 3、客户端配置（办公网） (1)、新建WAN线路 应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置 注意：必须有一个外网的网卡，并且最好把加密开起来 (2)、设置DNS牵引 应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改 主要解决DNS污染问题，要不然可能部分网站会无法访问 这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效 (3)、设置策略路由 应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载） 主要为了只有需要海外的才出去，不能把所有的流量全部导出去 附件 169IP段： https://www." />
+<meta property="og:url" content="/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/" /><meta property="article:publisher" content="/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/" /><meta property="article:published_time" content="2023-02-17T00:00:00&#43;08:00" /><meta property="article:modified_time" content="2023-04-21T10:19:07&#43;08:00" /><meta name="theme-color" content="#dd6065" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="记录一次办公网全球化的改造计划 - Almighty.YanTao" />
+<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+
+<meta name="twitter:card" content="summary_large_image" /><meta name="twitter:site" content="@Almighty.YanTao" />
+    <meta name="twitter:creator" content="@Almighty.YanTao" /><meta name="twitter:title" content="记录一次办公网全球化的改造计划 - Almighty.YanTao" />
+<meta name="twitter:description" content="背景 办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～
+之前尝试过下面这种方式： 新增一台海外的机器（新加坡、香港）搭建SS/v2ray/trojan之类的协议，然后办公网新增一个软路由去连接，通过ACL把部分IP的用户跳转过去； 但是这种方式自己家里用用还行，如果想要在企业的办公网来使用的话，人一多就不行，因为所有人都从这个IP出去了，而且每次都需要命令行去操作ACL增加用户，非常的麻烦；
+Panabit 的 iWAN 为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 SD-WAN；
+重连速度很快：
+比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而我们只需要一次即可 客户端不受底层承载线路IP变化影响：
+当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；
+因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；
+而用iWAN的话，现有的会话可以照常使用，不需要做任何改变； 传输效率高：
+iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；
+如果用国际线路的话，节省下来的流量费用都是很可观的； 抗干扰：
+不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。 部署 1、搭建panabit 记得服务器申请2H的，1H需要需改核心，非常麻烦 下载Linux系统文件：文末 上传文件到root根目录下
+1 2 3 4 tar -xzf PanabitFREE_SUIr2p3_20220413_Linux3.tar.gz cd PanabitFREE_SUIr2p3_20220413_Linux3 # 输入以下命令进行安装 ./ipeinstall 修改/etc/PG.conf文件 因为是单网口，所以数据口和管理口都需要配置成eth0，后面不要加任何东西
+1 DATA_PORTS 修改成：DATA_PORTS=&amp;#34;eth0&amp;#34; 修改端口 上传文件，修改配置 需要上传一个joskmc文件（文件在文末） 在/etc/PG.conf中新增一下一行
+1 HTTPS_PORT=2194 执行joskmc 1 /root/joskmc tcp 2194 修改：/etc/rc.local，增加一下三行 1 2 sleep 10 /root/joskmc tcp 2194 2、进行隧道配置（海外） (1)、登录WEB页面，修改网卡方向 默认账号密码：admin/panabit 系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路 (2)、创建WAN线路 应用路由 → 接口线路： 需要注意，Mac地址必须克隆 (3)、创建IWAN连接账号 对象管理 → 账号管理 → 组织架构： 地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好 地址范围需要把网关地址留出来！！！！！ 对象管理 → 账号管理 → 本地账号： 处理用户组需要选择前面创建的用户组，其他的根据实际情况填写 (4)、创建iWAN服务 应用路由 → iWAN服务 → 服务列表： 注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发 应用路由 → iWAN服务 → 服务映射： 根据配置情况选择即可 iWAN使用的是UDP连接，因此端口需要开放UDP (5)、创建策略路由 应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败 这里选择iWAN的线路 3、客户端配置（办公网） (1)、新建WAN线路 应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置 注意：必须有一个外网的网卡，并且最好把加密开起来 (2)、设置DNS牵引 应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改 主要解决DNS污染问题，要不然可能部分网站会无法访问 这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效 (3)、设置策略路由 应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载） 主要为了只有需要海外的才出去，不能把所有的流量全部导出去 附件 169IP段： https://www." />
+<meta name="twitter:url" content="/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/" /><meta name="twitter:image" content="" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
+<link href="/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "记录一次办公网全球化的改造计划",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/2023\/02\/17\/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html\/"
+  },"genre": "posts","keywords": "办公网, 全球化, 全球办公, 国际化, Panabit, iwan, sd-wan","wordcount": 141 ,
+  "url": "\/2023\/02\/17\/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html\/","datePublished": "2023-02-17T00:00:00\u002b08:00","dateModified": "2023-04-21T10:19:07\u002b08:00","author": {
+    "@type": "Person",
+    "name": "Almighty.YanTao"
+  },"description": ""
+}
+</script>
+
+
+    </head>
+
+    <body class="dark:bg-darkBg dark:text-darkText">
+        <div class="relative mx-auto shadow-lg md:max-w-4xl xl:max-w-4xl 2xl:max-w-4xl">
+            <div class="main flex flex-col justify-between bg-white dark:bg-darkFg"><header
+    class="relative"
+><nav id="nav" class="navbar top-0 z-10 flex items-center border-b px-5 py-6 dark:border-darkBorder md:px-10">
+            <div class="route-items flex w-full items-center justify-around"><a
+                        title="首页"
+                        data-active-link="/"
+                        href="/"
+                        class=" relative flex cursor-pointer flex-col items-center text-gray-700 transition duration-150 ease-[ease]"
+                    >
+                        <i
+                            class="eva eva-home flex h-8 w-8 items-center justify-center text-3xl leading-none text-gray-500 transition duration-150 ease-[ease] dark:text-darkTextPlaceholder"
+                        ></i>
+                        <span class="mt-1 block text-xs text-gray-400 dark:text-darkText sm:text-sm md:hidden">首页</span>
+                    </a><a
+                        title="关于我"
+                        data-active-link="/about/"
+                        href="/about/"
+                        class=" relative flex cursor-pointer flex-col items-center text-gray-700 transition duration-150 ease-[ease]"
+                    >
+                        <i
+                            class="eva eva-heart flex h-8 w-8 items-center justify-center text-3xl leading-none text-gray-500 transition duration-150 ease-[ease] dark:text-darkTextPlaceholder"
+                        ></i>
+                        <span class="mt-1 block text-xs text-gray-400 dark:text-darkText sm:text-sm md:hidden">关于我</span>
+                    </a><a
+                        title="归档"
+                        data-active-link="/archives/"
+                        href="/archives/"
+                        class=" relative flex cursor-pointer flex-col items-center text-gray-700 transition duration-150 ease-[ease]"
+                    >
+                        <i
+                            class="eva eva-bar-chart flex h-8 w-8 items-center justify-center text-3xl leading-none text-gray-500 transition duration-150 ease-[ease] dark:text-darkTextPlaceholder"
+                        ></i>
+                        <span class="mt-1 block text-xs text-gray-400 dark:text-darkText sm:text-sm md:hidden">归档</span>
+                    </a><a
+                        title="GitHub"
+                        data-active-link="/github/"
+                        href="/github/"
+                        class=" relative flex cursor-pointer flex-col items-center text-gray-700 transition duration-150 ease-[ease]"
+                    >
+                        <i
+                            class="eva eva-github flex h-8 w-8 items-center justify-center text-3xl leading-none text-gray-500 transition duration-150 ease-[ease] dark:text-darkTextPlaceholder"
+                        ></i>
+                        <span class="mt-1 block text-xs text-gray-400 dark:text-darkText sm:text-sm md:hidden">GitHub</span>
+                    </a><a
+                        title="搜索"
+                        data-active-link="/search/"
+                        href="/search/"
+                        class=" relative flex cursor-pointer flex-col items-center text-gray-700 transition duration-150 ease-[ease]"
+                    >
+                        <i
+                            class="eva eva-search flex h-8 w-8 items-center justify-center text-3xl leading-none text-gray-500 transition duration-150 ease-[ease] dark:text-darkTextPlaceholder"
+                        ></i>
+                        <span class="mt-1 block text-xs text-gray-400 dark:text-darkText sm:text-sm md:hidden">搜索</span>
+                    </a>
+            </div>
+        </nav><div class="dark-mode-switch absolute right-0 top-0 z-10 cursor-pointer pr-2 pt-2 text-xl leading-none">
+    <i class="eva eva-moon opacity-20 dark:opacity-70"></i>
+</div>
+</header>
+<main class=" relative flex flex-grow" id="swup"><style>:root {
+        --font:Times New Roman,Times,Heti Song,serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    }</style>
+<div class="type-posts layout- w-full"><div class="relative h-full">
+    <div class="relative h-full">
+        <div class="page-view-article flex h-full flex-col bg-white dark:bg-darkFg"><div class="relative"><div
+    style="padding-bottom:42%;"
+    class="article-cover h-0Page(/posts/office/记录一次办公网Panabit全球化的改造计划/index.zh-cn.md) relative w-full"
+>
+    <picture class="noscript-hidden"><img
+            data-src="https://bbs.panabit.com/static/image/common/logo.png"
+            src="/images/outload.svg"
+            
+            
+            data-
+            alt="记录一次办公网全球化的改造计划"
+            class="absolute left-0 top-0 h-full w-full object-cover object-center"
+            data-lazyload data-lazyload-blur
+
+        />
+    </picture>
+    <noscript>
+        <picture><img
+                src="https://bbs.panabit.com/static/image/common/logo.png"
+                
+                alt="记录一次办公网全球化的改造计划"
+                
+                class="absolute left-0 top-0 h-full w-full object-cover object-center"
+            />
+        </picture>
+    </noscript>
+</div>
+<h1 class="article-title absolute bottom-0 left-0 w-full px-6 pb-8 pt-32 text-3xl text-white dark:text-darkText md:px-10 md:text-4xl">
+    记录一次办公网全球化的改造计划
+</h1>
+</div>
+<div class="article-info border-b p-6 pb-3 text-sm dark:border-darkBorder md:px-10">
+    <div>
+        <div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+            <i class="eva eva-clock-outline mr-1"></i>
+            <span>
+                <time
+                    title="发布于 2023年2月17日 00:00:00"datetime="2023-02-17T00:00:00+08:00">2023年2月17日</time
+                >
+            </span>
+        </div><span class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+                    <i class="eva eva-edit-2-outline mr-1"></i>
+                    <span>
+                        <time
+                            title="最后修改于：2023年4月21日 10:19:07"datetime="2023-04-21T10:19:07+08:00">2023年4月21日</time
+                        >
+                    </span>
+                </span><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+                <i class="eva eva-flag-outline mr-1"></i>
+                <span>1 分钟</span>
+            </div><div class="mb-3 mr-4 inline-flex items-center sm:rounded-full">
+                <i class="eva eva-bar-chart-outline mr-1"></i>
+                <span>141 字</span>
+            </div></div><div class="mb-3 flex items-center">
+            <i class="eva eva-pricetags-outline mr-1"></i>
+            <span class="mr-3">标签</span><a href="/tags/%E5%8A%9E%E5%85%AC%E7%BD%91" title="办公网" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">办公网</span>
+                </a><a href="/tags/%E5%85%A8%E7%90%83%E5%8C%96" title="全球化" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">全球化</span>
+                </a><a href="/tags/%E5%85%A8%E7%90%83%E5%8A%9E%E5%85%AC" title="全球办公" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">全球办公</span>
+                </a><a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96" title="国际化" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">国际化</span>
+                </a><a href="/tags/panabit" title="Panabit" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">Panabit</span>
+                </a><a href="/tags/iwan" title="iwan" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">iwan</span>
+                </a><a href="/tags/sd-wan" title="sd-wan" class="group mr-2 flex items-center text-sm">
+                    <i class="mr-1 text-gray-400 group-hover:text-theme">#</i>
+                    <span class="text-gray-400 group-hover:text-theme">sd-wan</span>
+                </a></div></div>
+<aside
+            class="toc border-b border-gray-300 px-5 py-5 dark:border-darkBorder md:px-10 2xl:fixed 2xl:top-10 2xl:m-0 2xl:-ml-72 2xl:w-72 2xl:border-none 2xl:p-0 2xl:py-4 2xl:pr-4 "
+        >
+            <header>
+                <h1 class="mb-3 text-2xl font-bold 2xl:mb-4">文章目录</h1>
+            </header>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1搭建panabit">1、搭建panabit</a>
+      <ul>
+        <li><a href="#修改端口">修改端口</a></li>
+      </ul>
+    </li>
+    <li><a href="#2进行隧道配置海外">2、进行隧道配置（海外）</a>
+      <ul>
+        <li><a href="#1登录web页面修改网卡方向">(1)、登录WEB页面，修改网卡方向</a></li>
+        <li><a href="#2创建wan线路">(2)、创建WAN线路</a></li>
+        <li><a href="#3创建iwan连接账号">(3)、创建IWAN连接账号</a></li>
+        <li><a href="#4创建iwan服务">(4)、创建iWAN服务</a></li>
+        <li><a href="#5创建策略路由">(5)、创建策略路由</a></li>
+      </ul>
+    </li>
+    <li><a href="#3客户端配置办公网">3、客户端配置（办公网）</a>
+      <ul>
+        <li><a href="#1新建wan线路">(1)、新建WAN线路</a></li>
+        <li><a href="#2设置dns牵引">(2)、设置DNS牵引</a></li>
+        <li><a href="#3设置策略路由">(3)、设置策略路由</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </aside><section class="article-content typo relative flex-grow px-6 py-5 md:px-10"><i title="更快的阅读" id="bionicReading" class="absolute right-0 top-0 cursor-pointer p-3"
+            ><svg class="w-4 h-4 fill-current text-gray-400" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10811" ><path d="M480 192c-19.2 0-32-12.8-32-32v-128c0-19.2 12.8-32 32-32s32 12.8 32 32v128c0 19.2-12.8 32-32 32zM160 1024c-6.4 0-19.2 0-25.6-6.4l-128-128c0-6.4-6.4-19.2-6.4-25.6s6.4-19.2 6.4-25.6l512-512c12.8-6.4 38.4-6.4 51.2 0l128 128c0 6.4 6.4 19.2 6.4 25.6s-6.4 19.2-6.4 25.6l-512 512c-6.4 6.4-19.2 6.4-25.6 6.4z m-83.2-160l83.2 83.2 467.2-467.2-83.2-83.2-467.2 467.2zM992 576h-128c-19.2 0-32-12.8-32-32s12.8-32 32-32h128c19.2 0 32 12.8 32 32s-12.8 32-32 32zM768 288c-6.4 0-19.2 0-25.6-6.4-12.8-12.8-12.8-32 0-44.8l96-96c12.8-12.8 32-12.8 44.8 0s12.8 32 0 44.8l-96 96c0 6.4-12.8 6.4-19.2 6.4zM256 288c-6.4 0-19.2 0-25.6-6.4L134.4 185.6c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 12.8-12.8 12.8-19.2 12.8zM864 896c-6.4 0-19.2 0-25.6-6.4l-96-96c-12.8-12.8-12.8-32 0-44.8s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 6.4-12.8 6.4-19.2 6.4z" p-id="10812"></path><path d="M544 640c-6.4 0-19.2 0-25.6-6.4l-128-128c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l128 128c12.8 12.8 12.8 38.4 6.4 51.2-6.4 6.4-19.2 6.4-25.6 6.4z" p-id="10813"></path></svg></i
+        >
+
+<h1 class="group " id="背景"
+    >背景<a href="#%e8%83%8c%e6%99%af"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h1>
+
+<p>办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～</p>
+<p>之前尝试过下面这种方式：
+新增一台海外的机器（新加坡、香港）搭建SS/v2ray/trojan之类的协议，然后办公网新增一个软路由去连接，通过ACL把部分IP的用户跳转过去；
+但是这种方式自己家里用用还行，如果想要在企业的办公网来使用的话，人一多就不行，因为所有人都从这个IP出去了，而且每次都需要命令行去操作ACL增加用户，非常的麻烦；</p>
+
+
+<h1 class="group " id="panabit-的-iwan"
+    >Panabit 的 iWAN<a href="#panabit-%e7%9a%84-iwan"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h1>
+
+<p>为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 <code>SD-WAN</code>；</p>
+<ul>
+<li>重连速度很快：<br>
+        比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而我们只需要一次即可</li>
+<li>客户端不受底层承载线路IP变化影响：<br>
+        当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；<br>
+        因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；<br>
+        而用iWAN的话，现有的会话可以照常使用，不需要做任何改变；</li>
+<li>传输效率高：<br>
+        iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；<br>
+        如果用国际线路的话，节省下来的流量费用都是很可观的；</li>
+<li>抗干扰：<br>
+        不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。</li>
+</ul>
+
+
+<h1 class="group " id="部署"
+    >部署<a href="#%e9%83%a8%e7%bd%b2"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h1>
+
+
+
+<h2 class="group " id="1搭建panabit"
+    >1、搭建panabit<a href="#1%e6%90%ad%e5%bb%bapanabit"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h2>
+
+<p>记得服务器申请2H的，1H需要需改核心，非常麻烦
+下载Linux系统文件：文末
+上传文件到root根目录下</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -xzf PanabitFREE_SUIr2p3_20220413_Linux3.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> PanabitFREE_SUIr2p3_20220413_Linux3
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 输入以下命令进行安装</span>
+</span></span><span style="display:flex;"><span>./ipeinstall
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改<code>/etc/PG.conf</code>文件
+因为是单网口，所以数据口和管理口都需要配置成eth0，后面不要加任何东西</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>DATA_PORTS 修改成：DATA_PORTS<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;eth0&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+<h3 class="group " id="修改端口"
+    >修改端口<a href="#%e4%bf%ae%e6%94%b9%e7%ab%af%e5%8f%a3"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+
+
+<h4 class="group " id="上传文件修改配置"
+    >上传文件，修改配置<a href="#%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h4>
+
+<p>需要上传一个joskmc文件（文件在文末）
+在<code>/etc/PG.conf</code>中新增一下一行</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">HTTPS_PORT</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">2194</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+<h4 class="group " id="执行joskmc"
+    >执行joskmc<a href="#%e6%89%a7%e8%a1%8cjoskmc"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h4>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/root/joskmc tcp 2194
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+<h4 class="group " id="修改etcrclocal增加一下三行"
+    >修改：<code>/etc/rc.local</code>，增加一下三行<a href="#%e4%bf%ae%e6%94%b9etcrclocal%e5%a2%9e%e5%8a%a0%e4%b8%80%e4%b8%8b%e4%b8%89%e8%a1%8c"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h4>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sleep 10
+</span></span><span style="display:flex;"><span>/root/joskmc tcp 2194
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+<h2 class="group " id="2进行隧道配置海外"
+    >2、进行隧道配置（海外）<a href="#2%e8%bf%9b%e8%a1%8c%e9%9a%a7%e9%81%93%e9%85%8d%e7%bd%ae%e6%b5%b7%e5%a4%96"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h2>
+
+
+
+<h3 class="group " id="1登录web页面修改网卡方向"
+    >(1)、登录WEB页面，修改网卡方向<a href="#1%e7%99%bb%e5%bd%95web%e9%a1%b5%e9%9d%a2%e4%bf%ae%e6%94%b9%e7%bd%91%e5%8d%a1%e6%96%b9%e5%90%91"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>默认账号密码：admin/panabit
+系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103308.png"/></p>
+
+
+<h3 class="group " id="2创建wan线路"
+    >(2)、创建WAN线路<a href="#2%e5%88%9b%e5%bb%bawan%e7%ba%bf%e8%b7%af"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>应用路由 → 接口线路：
+需要注意，Mac地址必须克隆
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202302171033490.png"/></p>
+
+
+<h3 class="group " id="3创建iwan连接账号"
+    >(3)、创建IWAN连接账号<a href="#3%e5%88%9b%e5%bb%baiwan%e8%bf%9e%e6%8e%a5%e8%b4%a6%e5%8f%b7"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>对象管理 → 账号管理 → 组织架构：
+地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103417.png"/>
+地址范围需要把网关地址留出来！！！！！
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103432.png"/>
+对象管理 → 账号管理 → 本地账号：
+处理用户组需要选择前面创建的用户组，其他的根据实际情况填写
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202304211018672.png"/></p>
+
+
+<h3 class="group " id="4创建iwan服务"
+    >(4)、创建iWAN服务<a href="#4%e5%88%9b%e5%bb%baiwan%e6%9c%8d%e5%8a%a1"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>应用路由 → iWAN服务 → 服务列表：
+注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103517.png"/>
+应用路由 → iWAN服务 → 服务映射：
+根据配置情况选择即可
+iWAN使用的是UDP连接，因此端口需要开放UDP
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103531.png"/></p>
+
+
+<h3 class="group " id="5创建策略路由"
+    >(5)、创建策略路由<a href="#5%e5%88%9b%e5%bb%ba%e7%ad%96%e7%95%a5%e8%b7%af%e7%94%b1"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败
+这里选择iWAN的线路
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103546.png"/></p>
+
+
+<h2 class="group " id="3客户端配置办公网"
+    >3、客户端配置（办公网）<a href="#3%e5%ae%a2%e6%88%b7%e7%ab%af%e9%85%8d%e7%bd%ae%e5%8a%9e%e5%85%ac%e7%bd%91"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h2>
+
+
+
+<h3 class="group " id="1新建wan线路"
+    >(1)、新建WAN线路<a href="#1%e6%96%b0%e5%bb%bawan%e7%ba%bf%e8%b7%af"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置
+注意：必须有一个外网的网卡，并且最好把加密开起来
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103622.png"/>
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103634.png"/></p>
+
+
+<h3 class="group " id="2设置dns牵引"
+    >(2)、设置DNS牵引<a href="#2%e8%ae%be%e7%bd%aedns%e7%89%b5%e5%bc%95"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改
+主要解决DNS污染问题，要不然可能部分网站会无法访问
+这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103653.png"/></p>
+
+
+<h3 class="group " id="3设置策略路由"
+    >(3)、设置策略路由<a href="#3%e8%ae%be%e7%bd%ae%e7%ad%96%e7%95%a5%e8%b7%af%e7%94%b1"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h3>
+
+<p>应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载）
+主要为了只有需要海外的才出去，不能把所有的流量全部导出去
+<img src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/20230217103713.png"/></p>
+
+
+<h1 class="group " id="附件"
+    >附件<a href="#%e9%99%84%e4%bb%b6"
+        ><i class="eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100"></i></a
+></h1>
+
+<p>169IP段： <a
+    class="link"
+    href="https://www.123pan.com/s/cRk7Vv-frSsH"target="_blank" rel="noopener">https://www.123pan.com/s/cRk7Vv-frSsH</a
+>
+ 提取码:NzAF<br>
+Linux操作系统： <a
+    class="link"
+    href="https://www.123pan.com/s/cRk7Vv-arSsH"target="_blank" rel="noopener">https://www.123pan.com/s/cRk7Vv-arSsH</a
+>
+ 提取码:A5MC<br>
+joskmc： <a
+    class="link"
+    href="https://www.123pan.com/s/cRk7Vv-BrSsH"target="_blank" rel="noopener">https://www.123pan.com/s/cRk7Vv-BrSsH</a
+>
+ 提取码:kTu9</p>
+</section>
+<div class="flex items-center justify-center px-6 pb-5 pt-4 text-center text-xl text-gray-500 md:px-10 md:pb-10 md:pt-14"><a
+                class="mr-4 inline-flex h-5 w-5 items-center"
+                title="分享到 Twitter"
+                href="https://twitter.com/share?&text=%e8%83%8c%e6%99%af%20%e5%8a%9e%e5%85%ac%e7%bd%91%e6%af%8f%e6%ac%a1%e5%8e%bb%e6%b5%b7%e5%a4%96%e6%89%be%e8%b5%84%e6%96%99%e9%83%bd%e9%9c%80%e8%a6%81%e9%87%8d%e6%96%b0%e8%bf%9e%e6%8e%a5VPN%ef%bc%8c%e6%88%96%e8%80%85%e8%87%aa%e5%b7%b1%e8%bf%9e%e6%8e%a5%e8%87%aa%e5%b7%b1%e4%b9%b0%e7%9a%84%e5%b0%8f%e9%a3%9e%e6%9c%ba%e4%b9%8b%e7%b1%bb%e7%9a%84%e6%89%8d%e5%8f%af%e4%bb%a5%e3%80%82%e4%bd%86%e6%98%af%e8%bf%99%e7%a7%8d%e5%9c%a8%e4%ba%92%e8%81%94%e7%bd%91%e5%85%ac%e5%8f%b8%e5%86%85%e7%9a%84%e8%af%9d%ef%bc%8c%e9%9d%9e%e5%b8%b8%e7%9a%84%e4%b8%8d%e5%8f%8b%e5%a5%bd%ef%bc%9b%e4%b8%ba%e5%85%ac%e5%8f%b8%e5%b7%a5%e4%bd%9c%e8%bf%98%e8%a6%81%e8%87%aa%e5%b7%b1%e8%8a%b1%e9%92%b1%e4%b9%b0%e5%b0%8f%e9%a3%9e%e6%9c%ba%ef%bd%9e%e4%b9%8b%e5%89%8d%e5%b0%9d%e8%af%95%e8%bf%87%e4%b8%8b%e9%9d%a2%e8%bf%99%e7%a7%8d%e6%96%b9%e5%bc%8f%ef%bc%9a%20%e6%96%b0%e5%a2%9e%e4%b8%80%e5%8f%b0%e6%b5%b7%e5%a4%96%e7%9a%84%e6%9c%ba%e5%99%a8%ef%bc%88%e6%96%b0%e5%8a%a0%e5%9d%a1%e3%80%81%e9%a6%99%e6%b8%af%ef%bc%89%e6%90%ad%e5%bb%baSS/v2ray/trojan%e4%b9%8b%e7%b1%bb%e7%9a%84%e5%8d%8f%e8%ae%ae%ef%bc%8c%e7%84%b6%e5%90%8e%e5%8a%9e%e5%85%ac%e7%bd%91%e6%96%b0%e5%a2%9e%e4%b8%80%e4%b8%aa%e8%bd%af%e8%b7%af%e7%94%b1%e5%8e%bb%e8%bf%9e%e6%8e%a5%ef%bc%8c%e9%80%9a%e8%bf%87ACL%e6%8a%8a%e9%83%a8%e5%88%86IP%e7%9a%84%e7%94%a8%e6%88%b7%e8%b7%b3%e8%bd%ac%e8%bf%87%e5%8e%bb%ef%bc%9b%20%e4%bd%86%e6%98%af%e8%bf%99%e7%a7%8d%e6%96%b9%e5%bc%8f%e8%87%aa%e5%b7%b1%e5%ae%b6%e9%87%8c%e7%94%a8%e7%94%a8%e8%bf%98%e8%a1%8c%ef%bc%8c%e5%a6%82%e6%9e%9c%e6%83%b3%e8%a6%81%e5%9c%a8%e4%bc%81%e4%b8%9a%e7%9a%84%e5%8a%9e%e5%85%ac%e7%bd%91%e6%9d%a5%e4%bd%bf%e7%94%a8%e7%9a%84%e8%af%9d%ef%bc%8c%e4%ba%ba%e4%b8%80%e5%a4%9a%e5%b0%b1%e4%b8%8d%e8%a1%8c%ef%bc%8c%e5%9b%a0%e4%b8%ba%e6%89%80%e6%9c%89%e4%ba%ba%e9%83%bd%e4%bb%8e%e8%bf%99%e4%b8%aaIP%e5%87%ba%e5%8e%bb%e4%ba%86%ef%bc%8c%e8%80%8c%e4%b8%94%e6%af%8f%e6%ac%a1%e9%83%bd%e9%9c%80%e8%a6%81%e5%91%bd%e4%bb%a4%e8%a1%8c%e5%8e%bb%e6%93%8d%e4%bd%9cACL%e5%a2%9e%e5%8a%a0%e7%94%a8%e6%88%b7%ef%bc%8c%e9%9d%9e%e5%b8%b8%e7%9a%84%e9%ba%bb%e7%83%a6%ef%bc%9bPanabit%20%e7%9a%84%20iWAN%20%e4%b8%ba%e4%ba%86%e8%a7%a3%e5%86%b3%e5%89%8d%e9%9d%a2%e7%9a%84%e8%bf%99%e7%a7%8d%e6%96%b9%e5%bc%8f%ef%bc%8c%e5%86%b3%e5%ae%9a%e6%b5%8b%e8%af%95%e4%bd%bf%e7%94%a8%20Panabit%20%e7%9a%84%20Iwan%20%e7%9a%84%e6%96%b9%e5%bc%8f%ef%bc%8c%e4%b9%9f%e5%b0%b1%e6%98%af%e6%89%80%e8%b0%93%e7%9a%84%20Panabit%20%e7%9a%84%20SD-WAN%ef%bc%9b%e9%87%8d%e8%bf%9e%e9%80%9f%e5%ba%a6%e5%be%88%e5%bf%ab%ef%bc%9a%e6%af%94L2TP%e7%9a%84%e8%a6%81%e5%bf%ab%e4%b8%80%e4%b8%aa%e6%95%b0%e9%87%8f%e7%ba%a7%ef%bc%8cL2TP%e8%a6%81%e9%87%8d%e8%bf%9e%ef%bc%8c%e9%9c%80%e8%a6%81%e6%9c%89%e5%87%a0%e5%8d%81%e6%ac%a1%e4%ba%a4%e4%ba%92%ef%bc%8c%e8%80%8c%e6%88%91%e4%bb%ac%e5%8f%aa%e9%9c%80%e8%a6%81%e4%b8%80%e6%ac%a1%e5%8d%b3%e5%8f%af%20%e5%ae%a2%e6%88%b7%e7%ab%af%e4%b8%8d%e5%8f%97%e5%ba%95%e5%b1%82%e6%89%bf%e8%bd%bd%e7%ba%bf%e8%b7%afIP%e5%8f%98%e5%8c%96%e5%bd%b1%e5%93%8d%ef%bc%9a%e5%bd%93%e5%ba%95%e5%b1%82%e6%89%bf%e8%bd%bd%e7%ba%bf%e8%b7%af%ef%bc%88%e6%af%94%e5%a6%82PPPOE%e6%8b%a8%e5%8f%b7%e7%ba%bf%e8%b7%af%ef%bc%89%e7%9a%84IP%e5%9c%b0%e5%9d%80%e5%8f%91%e7%94%9f%e5%8f%98%e5%8c%96%e6%97%b6%ef%bc%8c%e4%b8%8d%e4%bc%9a%e5%bd%b1%e5%93%8diWAN%e9%9a%a7%e9%81%93%ef%bc%8ciWAN%e9%9a%a7%e9%81%93%e4%b8%8d%e4%bc%9a%e4%b8%ad%e6%96%ad%ef%bc%8c%e4%bf%9d%e8%af%81%e9%80%9a%e4%bf%a1%e6%ad%a3%e5%b8%b8%e8%bf%9b%e8%a1%8c%ef%bc%9b%e5%9b%a0%e4%b8%ba%e5%be%88%e5%a4%9a%e7%94%a8%e6%88%b7%e6%98%af%e9%80%9a%e8%bf%87PPPOE%e6%8b%a8%e5%8f%b7%e7%ba%bf%e8%b7%af%e5%87%ba%e5%8e%bb%e7%9a%84%ef%bc%8cPPPOE%e6%8b%a8%e5%8f%b7%e7%ba%bf%e8%b7%af%e9%87%8d%e6%8b%a8%e6%97%b6%e4%b8%80%e8%88%ac%e4%bc%9a%e6%94%b9%e5%8f%98IP%e5%9c%b0%e5%9d%80%ef%bc%8c%e5%a6%82%e6%9e%9c%e7%94%a8L2TP%e7%9a%84%e8%af%9d%ef%bc%8c%e9%82%a3%e4%b9%88%e8%bf%99%e4%b8%aaL2TP%e4%bc%9a%e8%af%9d%e5%b0%b1%e8%a6%81%e9%87%8d%e5%bb%ba%ef%bc%9b%e8%80%8c%e7%94%a8iWAN%e7%9a%84%e8%af%9d%ef%bc%8c%e7%8e%b0%e6%9c%89%e7%9a%84%e4%bc%9a%e8%af%9d%e5%8f%af%e4%bb%a5%e7%85%a7%e5%b8%b8%e4%bd%bf%e7%94%a8%ef%bc%8c%e4%b8%8d%e9%9c%80%e8%a6%81%e5%81%9a%e4%bb%bb%e4%bd%95%e6%94%b9%e5%8f%98%ef%bc%9b%20%e4%bc%a0%e8%be%93%e6%95%88%e7%8e%87%e9%ab%98%ef%bc%9aiWAN%e7%9a%84%e5%8c%85%e5%a4%b4%e5%be%88%e5%b0%8f%ef%bc%8c%e5%8f%aa%e6%9c%898%e4%b8%aa%e5%ad%97%e8%8a%82%ef%bc%8c%e8%80%8c%e4%b8%94%e5%9c%a8%e5%90%8e%e7%bb%ad%e7%89%88%e6%9c%ac%e9%87%8c%ef%bc%8c%e6%88%91%e4%bb%ac%e4%bc%9a%e5%8e%8b%e7%bc%a9IP%e6%8a%a5%e6%96%87%e5%a4%b4%ef%bc%8c%e8%bf%99%e6%a0%b7%e5%8f%af%e4%bb%a5%e7%bb%a7%e7%bb%ad%e5%87%8f%e5%b0%91%e9%a2%9d%e5%a4%96%e6%8a%a5%e6%96%87%e5%a4%b4%e7%9a%84%e5%a4%a7%e5%b0%8f%ef%bc%8c%e6%89%80%e4%bb%a5%e8%83%bd%e5%a4%a7%e5%b9%85%e5%ba%a6%e6%8f%90%e5%8d%87%e4%bc%a0%e8%be%93%e6%95%88%e7%8e%87%ef%bc%9b%e5%a6%82%e6%9e%9c%e7%94%a8%e5%9b%bd%e9%99%85%e7%ba%bf%e8%b7%af%e7%9a%84%e8%af%9d%ef%bc%8c%e8%8a%82%e7%9c%81%e4%b8%8b%e6%9d%a5%e7%9a%84%e6%b5%81%e9%87%8f%e8%b4%b9%e7%94%a8%e9%83%bd%e6%98%af%e5%be%88%e5%8f%af%e8%a7%82%e7%9a%84%ef%bc%9b%20%e6%8a%97%e5%b9%b2%e6%89%b0%ef%bc%9a%e4%b8%8d%e5%83%8fL2TP%ef%bc%8c%e4%b8%ad%e9%97%b4%e4%ba%ba%e5%8f%af%e4%bb%a5%e7%9b%b4%e6%8e%a5%e5%8f%91%e5%8c%85TERMINATE%ef%bc%8ciWAN%e6%8e%a7%e5%88%b6%e5%91%bd%e4%bb%a4%e6%9c%89%e5%ae%8c%e6%95%b4%e6%80%a7%e6%a3%80%e6%9f%a5%ef%bc%8c%e5%8f%af%e4%bb%a5%e9%81%bf%e5%85%8d%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb%e3%80%82%20%e9%83%a8%e7%bd%b2%201%e3%80%81%e6%90%ad%e5%bb%bapanabit%20%e8%ae%b0%e5%be%97%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%94%b3%e8%af%b72H%e7%9a%84%ef%bc%8c1H%e9%9c%80%e8%a6%81%e9%9c%80%e6%94%b9%e6%a0%b8%e5%bf%83%ef%bc%8c%e9%9d%9e%e5%b8%b8%e9%ba%bb%e7%83%a6%20%e4%b8%8b%e8%bd%bdLinux%e7%b3%bb%e7%bb%9f%e6%96%87%e4%bb%b6%ef%bc%9a%e6%96%87%e6%9c%ab%20%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6%e5%88%b0root%e6%a0%b9%e7%9b%ae%e5%bd%95%e4%b8%8b1%202%203%204%20tar%20-xzf%20PanabitFREE_SUIr2p3_20220413_Linux3.tar.gz%20cd%20PanabitFREE_SUIr2p3_20220413_Linux3%20#%20%e8%be%93%e5%85%a5%e4%bb%a5%e4%b8%8b%e5%91%bd%e4%bb%a4%e8%bf%9b%e8%a1%8c%e5%ae%89%e8%a3%85%20./ipeinstall%20%e4%bf%ae%e6%94%b9/etc/PG.conf%e6%96%87%e4%bb%b6%20%e5%9b%a0%e4%b8%ba%e6%98%af%e5%8d%95%e7%bd%91%e5%8f%a3%ef%bc%8c%e6%89%80%e4%bb%a5%e6%95%b0%e6%8d%ae%e5%8f%a3%e5%92%8c%e7%ae%a1%e7%90%86%e5%8f%a3%e9%83%bd%e9%9c%80%e8%a6%81%e9%85%8d%e7%bd%ae%e6%88%90eth0%ef%bc%8c%e5%90%8e%e9%9d%a2%e4%b8%8d%e8%a6%81%e5%8a%a0%e4%bb%bb%e4%bd%95%e4%b8%9c%e8%a5%bf1%20DATA_PORTS%20%e4%bf%ae%e6%94%b9%e6%88%90%ef%bc%9aDATA_PORTS=&amp;#34;eth0&amp;#34;%20%e4%bf%ae%e6%94%b9%e7%ab%af%e5%8f%a3%20%e4%b8%8a%e4%bc%a0%e6%96%87%e4%bb%b6%ef%bc%8c%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%20%e9%9c%80%e8%a6%81%e4%b8%8a%e4%bc%a0%e4%b8%80%e4%b8%aajoskmc%e6%96%87%e4%bb%b6%ef%bc%88%e6%96%87%e4%bb%b6%e5%9c%a8%e6%96%87%e6%9c%ab%ef%bc%89%20%e5%9c%a8/etc/PG.conf%e4%b8%ad%e6%96%b0%e5%a2%9e%e4%b8%80%e4%b8%8b%e4%b8%80%e8%a1%8c1%20HTTPS_PORT=2194%20%e6%89%a7%e8%a1%8cjoskmc%201%20/root/joskmc%20tcp%c2%a02194%20%e4%bf%ae%e6%94%b9%ef%bc%9a/etc/rc.local%ef%bc%8c%e5%a2%9e%e5%8a%a0%e4%b8%80%e4%b8%8b%e4%b8%89%e8%a1%8c%201%202%20sleep%c2%a010%20/root/joskmc%20tcp%c2%a02194%202%e3%80%81%e8%bf%9b%e8%a1%8c%e9%9a%a7%e9%81%93%e9%85%8d%e7%bd%ae%ef%bc%88%e6%b5%b7%e5%a4%96%ef%bc%89%20%281%29%e3%80%81%e7%99%bb%e5%bd%95WEB%e9%a1%b5%e9%9d%a2%ef%bc%8c%e4%bf%ae%e6%94%b9%e7%bd%91%e5%8d%a1%e6%96%b9%e5%90%91%20%e9%bb%98%e8%ae%a4%e8%b4%a6%e5%8f%b7%e5%af%86%e7%a0%81%ef%bc%9aadmin/panabit%20%e7%b3%bb%e7%bb%9f%e6%a6%82%e5%86%b5%20%e2%86%92%20%e7%bd%91%e7%bb%9c%e6%8e%a5%e5%8f%a3%ef%bc%9aeth0%ef%bc%8c%e4%bf%ae%e6%94%b9%e6%88%90%e5%af%b9%e5%a4%96%ef%bc%8c%e5%8f%aa%e6%9c%89%e5%af%b9%e5%a4%96%e6%89%8d%e5%8f%af%e4%bb%a5%e5%88%9b%e5%bb%baWAN%e7%ba%bf%e8%b7%af%20%282%29%e3%80%81%e5%88%9b%e5%bb%baWAN%e7%ba%bf%e8%b7%af%20%e5%ba%94%e7%94%a8%e8%b7%af%e7%94%b1%20%e2%86%92%20%e6%8e%a5%e5%8f%a3%e7%ba%bf%e8%b7%af%ef%bc%9a%20%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%ef%bc%8cMac%e5%9c%b0%e5%9d%80%e5%bf%85%e9%a1%bb%e5%85%8b%e9%9a%86%20%283%29%e3%80%81%e5%88%9b%e5%bb%baIWAN%e8%bf%9e%e6%8e%a5%e8%b4%a6%e5%8f%b7%20%e5%af%b9%e8%b1%a1%e7%ae%a1%e7%90%86%20%e2%86%92%20%e8%b4%a6%e5%8f%b7%e7%ae%a1%e7%90%86%20%e2%86%92%20%e7%bb%84%e7%bb%87%e6%9e%b6%e6%9e%84%ef%bc%9a%20%e5%9c%b0%e5%9d%80%e8%8c%83%e5%9b%b4%ef%bc%9a%e8%bf%99%e4%b8%80%e5%9d%97%e5%8f%af%e4%bb%a5%e8%87%aa%e5%b7%b1%e5%ae%9a%e4%b8%80%e4%b8%aa%e5%86%85%e7%bd%91%e7%9a%84IP%e6%ae%b5%e5%b0%b1%e5%8f%af%e4%bb%a5%ef%bc%8c%e4%b8%8d%e8%a6%81%e5%86%b2%e7%aa%81%e5%b0%b1%e5%a5%bd%20%e5%9c%b0%e5%9d%80%e8%8c%83%e5%9b%b4%e9%9c%80%e8%a6%81%e6%8a%8a%e7%bd%91%e5%85%b3%e5%9c%b0%e5%9d%80%e7%95%99%e5%87%ba%e6%9d%a5%ef%bc%81%ef%bc%81%ef%bc%81%ef%bc%81%ef%bc%81%20%e5%af%b9%e8%b1%a1%e7%ae%a1%e7%90%86%20%e2%86%92%20%e8%b4%a6%e5%8f%b7%e7%ae%a1%e7%90%86%20%e2%86%92%20%e6%9c%ac%e5%9c%b0%e8%b4%a6%e5%8f%b7%ef%bc%9a%20%e5%a4%84%e7%90%86%e7%94%a8%e6%88%b7%e7%bb%84%e9%9c%80%e8%a6%81%e9%80%89%e6%8b%a9%e5%89%8d%e9%9d%a2%e5%88%9b%e5%bb%ba%e7%9a%84%e7%94%a8%e6%88%b7%e7%bb%84%ef%bc%8c%e5%85%b6%e4%bb%96%e7%9a%84%e6%a0%b9%e6%8d%ae%e5%ae%9e%e9%99%85%e6%83%85%e5%86%b5%e5%a1%ab%e5%86%99%20%284%29%e3%80%81%e5%88%9b%e5%bb%baiWAN%e6%9c%8d%e5%8a%a1%20%e5%ba%94%e7%94%a8%e8%b7%af%e7%94%b1%20%e2%86%92%20iWAN%e6%9c%8d%e5%8a%a1%20%e2%86%92%20%e6%9c%8d%e5%8a%a1%e5%88%97%e8%a1%a8%ef%bc%9a%20%e6%b3%a8%e6%84%8f%ef%bc%9a%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%bd%91%e5%85%b3%e5%9c%b0%e5%9d%80%e8%a6%81%e5%92%8c%e4%bd%a0%e5%89%8d%e9%9d%a2%e8%ae%be%e7%bd%ae%e7%9a%84%e5%9c%b0%e5%9d%80%e8%8c%83%e5%9b%b4%e8%a6%81%e5%9c%a8%e4%b8%80%e5%9d%97%ef%bc%8c%e5%b9%b6%e4%b8%94%e9%9c%80%e8%a6%81%e6%8e%92%e9%99%a4%e8%bf%99%e4%b8%aa%e5%9c%b0%e5%9d%80%e7%9a%84%e4%b8%8b%e5%8f%91%20%e5%ba%94%e7%94%a8%e8%b7%af%e7%94%b1%20%e2%86%92%20iWAN%e6%9c%8d%e5%8a%a1%20%e2%86%92%20%e6%9c%8d%e5%8a%a1%e6%98%a0%e5%b0%84%ef%bc%9a%20%e6%a0%b9%e6%8d%ae%e9%85%8d%e7%bd%ae%e6%83%85%e5%86%b5%e9%80%89%e6%8b%a9%e5%8d%b3%e5%8f%af%20iWAN%e4%bd%bf%e7%94%a8%e7%9a%84%e6%98%afUDP%e8%bf%9e%e6%8e%a5%ef%bc%8c%e5%9b%a0%e6%ad%a4%e7%ab%af%e5%8f%a3%e9%9c%80%e8%a6%81%e5%bc%80%e6%94%beUDP%20%285%29%e3%80%81%e5%88%9b%e5%bb%ba%e7%ad%96%e7%95%a5%e8%b7%af%e7%94%b1%20%e5%ba%94%e7%94%a8%e8%b7%af%e7%94%b1%20%e2%86%92%20%e7%ad%96%e7%95%a5%e8%b7%af%e7%94%b1%ef%bc%9a%e9%9c%80%e8%a6%81%e6%b7%bb%e5%8a%a0%e4%b8%80%e6%9d%a1%e5%9b%9e%e7%a8%8b%e7%9a%84%e5%85%a8%e7%a8%8b%e8%b7%af%e7%94%b1%ef%bc%8c%e8%a6%81%e4%b8%8d%e7%84%b6DNS%e7%89%b5%e5%bc%95%e3%80%81FQ%e9%83%bd%e4%bc%9a%e5%a4%b1%e8%b4%a5%20%e8%bf%99%e9%87%8c%e9%80%89%e6%8b%a9iWAN%e7%9a%84%e7%ba%bf%e8%b7%af%203%e3%80%81%e5%ae%a2%e6%88%b7%e7%ab%af%e9%85%8d%e7%bd%ae%ef%bc%88%e5%8a%9e%e5%85%ac%e7%bd%91%ef%bc%89%20%281%29%e3%80%81%e6%96%b0%e5%bb%baWAN%e7%ba%bf%e8%b7%af%20%e5%ba%94%e7%94%a8%e8%b7%af%e7%94%b1%20%e2%86%92%20%e6%8e%a5%e5%8f%a3%e7%ba%bf%e8%b7%af%20%e2%86%92%20WAN%e7%ba%bf%e8%b7%af%ef%bc%9a%e6%8c%89%e7%85%a7%e4%bf%a1%e6%81%af%e6%8f%90%e7%a4%ba%e5%a1%ab%e5%86%99%e5%8d%b3%e5%8f%af%e5%ae%8c%e6%88%90iWAN%e7%ba%bf%e8%b7%af%e9%85%8d%e7%bd%ae%20%e6%b3%a8%e6%84%8f%ef%bc%9a%e5%bf%85%e9%a1%bb%e6%9c%89%e4%b8%80%e4%b8%aa%e5%a4%96%e7%bd%91%e7%9a%84%e7%bd%91%e5%8d%a1%ef%bc%8c%e5%b9%b6%e4%b8%94%e6%9c%80%e5%a5%bd%e6%8a%8a%e5%8a%a0%e5%af%86%e5%bc%80%e8%b5%b7%e6%9d%a5%20%282%29%e3%80%81%e8%ae%be%e7%bd%aeDNS%e7%89%b5%e5%bc%95%20%e5%ba%94%e7%94%a8%e8%b7%af%e7%94%b1%20%e2%86%92%20DNS%e7%ae%a1%e6%8e%a7%ef%bc%9a%e6%b5%b7%e5%a4%96%e5%9f%9f%e5%90%8d%e6%98%af%e4%b8%80%e4%b8%aa%e5%9f%9f%e5%90%8d%e7%be%a4%e7%bb%84%ef%bc%8c%e5%8f%af%e4%bb%a5%e8%87%aa%e5%b7%b1%e4%bf%ae%e6%94%b9%20%e4%b8%bb%e8%a6%81%e8%a7%a3%e5%86%b3DNS%e6%b1%a1%e6%9f%93%e9%97%ae%e9%a2%98%ef%bc%8c%e8%a6%81%e4%b8%8d%e7%84%b6%e5%8f%af%e8%83%bd%e9%83%a8%e5%88%86%e7%bd%91%e7%ab%99%e4%bc%9a%e6%97%a0%e6%b3%95%e8%ae%bf%e9%97%ae%20%e8%bf%99%e9%87%8c%e6%9c%89%e4%b8%80%e4%b8%aa%e5%be%88%e6%b3%a8%e6%84%8f%e7%9a%84%e7%82%b9%ef%bc%8c%e5%b0%b1%e6%98%af%e4%bd%a0%e7%9a%84DNS%ef%bc%8c%e8%ae%bf%e9%97%aeDNS%e7%9a%84%e9%93%be%e8%b7%af%e5%bf%85%e9%a1%bb%e7%bb%8f%e8%bf%87PA%ef%bc%8c%e5%90%a6%e5%88%99%e7%89%b5%e5%bc%95%e4%b8%8d%e4%bc%9a%e7%94%9f%e6%95%88%20%283%29%e3%80%81%e8%ae%be%e7%bd%ae%e7%ad%96%e7%95%a5%e8%b7%af%e7%94%b1%20%e5%ba%94%e7%94%a8%e8%b7%af%e7%94%b1%20%e2%86%92%20%e7%ad%96%e7%95%a5%e8%b7%af%e7%94%b1%ef%bc%9a%e6%88%91%e8%bf%99%e8%be%b9%e7%9b%b4%e6%8e%a5%e6%8b%bf%e4%ba%86%e9%a3%9e%e8%bf%9e%e7%9a%84609%e6%b5%b7%e5%a4%96%e5%88%86%e6%b5%81IP%e6%ae%b5%e8%bf%9b%e8%a1%8c%e5%88%86%e6%b5%81%ef%bc%8c%e4%bd%a0%e4%b9%9f%e5%8f%af%e4%bb%a5%e8%87%aa%e5%b7%b1%e4%bf%ae%e6%94%b9%ef%bc%88%e6%96%87%e6%9c%ab%e4%b8%8b%e8%bd%bd%ef%bc%89%20%e4%b8%bb%e8%a6%81%e4%b8%ba%e4%ba%86%e5%8f%aa%e6%9c%89%e9%9c%80%e8%a6%81%e6%b5%b7%e5%a4%96%e7%9a%84%e6%89%8d%e5%87%ba%e5%8e%bb%ef%bc%8c%e4%b8%8d%e8%83%bd%e6%8a%8a%e6%89%80%e6%9c%89%e7%9a%84%e6%b5%81%e9%87%8f%e5%85%a8%e9%83%a8%e5%af%bc%e5%87%ba%e5%8e%bb%20%e9%99%84%e4%bb%b6%20169IP%e6%ae%b5%ef%bc%9a%20https://www.&url=/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="eva eva-twitter hover:text-theme"></i
+            ></a><a
+                class="mr-4 inline-flex h-5 w-5 items-center"
+                title="分享到 Facebook"
+                href="https://www.facebook.com/sharer.php?u=/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="eva eva-facebook hover:text-theme"></i
+            ></a><a
+                class="mr-4 inline-flex h-5 w-5 items-center"
+                title="分享到微博"
+                href="https://service.weibo.com/share/share.php?url=/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/&title=%e8%ae%b0%e5%bd%95%e4%b8%80%e6%ac%a1%e5%8a%9e%e5%85%ac%e7%bd%91%e5%85%a8%e7%90%83%e5%8c%96%e7%9a%84%e6%94%b9%e9%80%a0%e8%ae%a1%e5%88%92&sudaref="
+                target="_blank"
+                rel="noopener noreferrer"
+            ><svg class="inline-block h-5 w-5 fill-current hover:text-theme" viewBox="0 0 1193 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2681" width="200" height="200"> <path d="M456.991736 557.336482c-107.598583 0-194.644628 74.956316-194.644629 166.838252s87.046045 166.838253 194.644629 166.838253c107.598583 0 194.644628-74.956316 194.644628-166.838253s-87.046045-166.838253-194.644628-166.838252zM391.707202 822.101535c-36.269185 0-66.493506-27.806375-66.493507-62.866588s29.015348-62.866588 66.493507-62.866588c36.269185 0 66.493506 27.806375 66.493506 62.866588S427.976387 822.101535 391.707202 822.101535z m93.090909-91.881936c-14.507674 0-26.597403-12.089728-26.597403-26.597403s12.089728-26.597403 26.597403-26.597403 26.597403 12.089728 26.597403 26.597403-12.089728 26.597403-26.597403 26.597403zM239.376623 281.690673C97.9268 394.125148-18.134593 600.859504 30.224321 661.308146c32.642267 41.105077 59.239669-19.343566 124.524203-89.46399 30.224321-32.642267 77.374262-54.403778 122.106258-90.672964 20.552538-16.92562 197.062574-35.060213 230.913813-35.060212 97.9268-99.135773 114.85242-207.943329 74.956316-258.720189-48.358914-59.239669-201.898465-16.92562-343.348288 94.299882z" p-id="2682" ></path> <path d="M808.802834 560.9634C906.729634 461.827627 911.565525 377.199528 870.460449 326.422668c-47.149941-60.448642-211.570248-32.642267-351.811098 78.583235" p-id="2683" ></path> <path d="M605.695396 353.020071c-14.507674 8.46281-25.38843 12.089728-29.015349 7.253837-1.208973-2.417946-1.208973-6.044864 1.208973-9.671783-16.92562-1.208973-33.85124-1.208973-50.776859-1.208973C235.749705 349.393152 0 500.514758 0 686.696576s235.749705 337.303424 527.112161 337.303424 527.112161-151.121606 527.11216-337.303424c0-170.465171-194.644628-309.497048-448.528925-333.676505zM481.171192 959.924439C275.645809 959.924439 108.807556 847.489965 108.807556 708.458087s166.838253-251.466352 372.363636-251.466351 372.363636 112.434475 372.363637 251.466351-166.838253 251.466352-372.363637 251.466352z" p-id="2684" ></path> <path d="M1021.582054 423.140496c-3.626919 0-6.044864 0-9.671782-1.208973-18.134593-4.835891-29.015348-24.179457-22.970485-42.31405 2.417946-7.253837 3.626919-16.92562 3.626919-29.015348 0-65.284534-53.194805-119.688312-119.688312-119.688312-19.343566 0-33.85124-15.716647-33.851239-33.851239s15.716647-33.85124 33.851239-33.85124c103.971665 0 187.390791 84.628099 187.390791 187.390791 0 18.134593-2.417946 33.85124-6.044864 48.358914-4.835891 14.507674-18.134593 24.179457-32.642267 24.179457z" p-id="2685" ></path> <path d="M1146.106257 473.917355c-2.417946 0-6.044864 0-8.46281-1.208972-20.552538-4.835891-32.642267-25.38843-27.806375-45.940969 6.044864-24.179457 8.46281-47.149941 8.46281-71.329397C1118.299882 201.898465 991.357733 74.956316 836.609209 74.956316c-20.552538 0-37.478158-16.92562-37.478158-37.478158S816.056671 0 836.609209 0c197.062574 0 356.646989 159.584416 356.646989 356.646989 0 29.015348-3.626919 59.239669-10.880755 88.255018-3.626919 18.134593-19.343566 29.015348-36.269186 29.015348z" p-id="2686" ></path> </svg></a><i class="eva eva-copy mr-4 cursor-pointer hover:text-theme" title="复制链接" data-clipboard-text="/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/"></i></div>
+<div class="border-b dark:border-darkBorder"></div><div class="flex justify-between px-2 py-4 text-xl md:px-6 md:text-2xl">
+    <div>
+        <a
+            href="/2023/02/16/%E6%B8%85%E7%90%86%E8%87%AA%E5%AE%9A%E4%B9%89dhcp%E4%B8%8B%E5%8F%91%E5%BC%82%E5%B8%B8%E6%96%AD%E5%BC%80%E5%AF%BC%E8%87%B4ip%E5%9C%B0%E5%9D%80%E5%8D%A0%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98.html/"
+            title="清理自定义DHCP下发，异常断开导致IP地址占用的问题"
+            class="invisible flex cursor-pointer items-center text-gray-500 transition duration-300 ease-[ease] hover:text-theme dark:text-darkTextPlaceholder dark:hover:text-darkText"style="visibility: visible;">
+            <span class="flex items-center text-5xl opacity-70 dark:bg-opacity-100">
+                <i class="eva eva-chevron-left-outline"></i>
+            </span>
+            <span>上一篇</span>
+        </a>
+    </div><div class="hidden items-center text-xs xl:flex">
+        除特殊声明外，本博客一律使用以下协议进行授权 「
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener noreferrer" class="text-theme">署名 - 非商业性使用 - 禁止演绎 4.0</a>
+        」
+    </div>
+    <div class="flex items-center text-sm xl:hidden">
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener noreferrer" class="text-theme">
+            <img src="/Cc-by-nc-nd.svg" alt="署名 - 非商业性使用 - 禁止演绎 4.0" title="署名 - 非商业性使用 - 禁止演绎 4.0" class="w-24" />
+        </a>
+    </div>
+
+    <a
+        href="/2023/02/20/curl-%E6%A3%80%E6%B5%8B%E4%BB%A3%E7%90%86%E7%9A%84%E5%8F%AF%E7%94%A8%E6%80%A7%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F.html/"
+        title="curl 检测代理的可用性以及延迟"
+        class="invisible flex cursor-pointer items-center text-gray-500 transition duration-300 ease-[ease] hover:text-theme dark:text-darkTextPlaceholder dark:hover:text-darkText"style="visibility: visible;">
+        <span>下一篇</span>
+        <span class="flex items-center text-5xl opacity-70 dark:bg-opacity-100">
+            <i class="eva eva-chevron-right-outline"></i>
+        </span>
+    </a>
+</div>
+<div class="border-t py-6 px-6 dark:border-darkBorder md:px-8">
+        <script
+        src="https://giscus.app/client.js"
+        data-repo="almightyYantao/almighty.yantao"
+        data-repo-id="R_kgDOJWsqjA"
+        data-category="General"
+        data-category-id="DIC_kwDOJWsqjM4CVzHh"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        data-loading=""
+        crossorigin="anonymous"
+        data-swup-reload-script
+        async
+    ></script>
+
+    <script data-swup-reload-script>
+        (function () {
+            addEventListener('message', e => {
+                if (event.origin !== 'https://giscus.app') return;
+                handler();
+            });
+            window.addEventListener('onThemeChange', handler);
+
+            function handler() {
+                if (document.documentElement.dataset.scheme === 'light') {
+                    setGiscusTheme('light');
+                } else {
+                    setGiscusTheme('dark');
+                }
+            }
+        })();
+
+        function setGiscusTheme(theme) {
+            let giscus = document.querySelector('iframe.giscus-frame');
+            if (giscus) {
+                giscus.contentWindow.postMessage(
+                    {
+                        giscus: {
+                            setConfig: {
+                                theme: theme,
+                            },
+                        },
+                    },
+                    'https://giscus.app'
+                );
+            }
+        }
+    </script>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+</div>
+                </main><footer>
+    <div
+        class="com-footer flex flex-col items-center border-t py-4 px-4 text-sm leading-none text-gray-600 dark:border-darkBorder dark:text-darkTextPlaceholder md:flex-row md:justify-between"
+    >
+        <div class="mb-2 flex items-center justify-between text-center md:mb-0">
+            <span class="">© 2022 - 2023</span>
+            <span class="mx-1.5 opacity-50"> | </span>由 <a data-no-swup class="mx-1 font-bold hover:text-theme" href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> <span class="text-xs opacity-70">❤</span> <a data-no-swup class="mx-1 font-bold hover:text-theme" href="https://github.com/Ice-Hazymoon/hugo-theme-luna" target="_blank" rel="noopener noreferrer">Luna</a> 驱动</div>
+
+        <div class="flex items-center"><span class="noscript-hidden mx-1.5 hidden opacity-50 md:block"> | </span><a data-no-swup href="/index.xml" target="_blank" class="mr-1.5 hover:text-theme">
+                    <span class=" md:hidden lg:inline"><svg t="1650887361919" class="mr-0.5 w-3 fill-current text-inherit inline-block align-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3091"><path d="M320.16155 831.918c0 70.738-57.344 128.082-128.082 128.082S63.99955 902.656 63.99955 831.918s57.344-128.082 128.082-128.082 128.08 57.346 128.08 128.082z m351.32 94.5c-16.708-309.2-264.37-557.174-573.9-573.9C79.31155 351.53 63.99955 366.21 63.99955 384.506v96.138c0 16.83 12.98 30.944 29.774 32.036 223.664 14.568 402.946 193.404 417.544 417.544 1.094 16.794 15.208 29.774 32.036 29.774h96.138c18.298 0.002 32.978-15.31 31.99-33.58z m288.498 0.576C943.19155 459.354 566.92955 80.89 97.00555 64.02 78.94555 63.372 63.99955 77.962 63.99955 96.032v96.136c0 17.25 13.67 31.29 30.906 31.998 382.358 15.678 689.254 322.632 704.93 704.93 0.706 17.236 14.746 30.906 31.998 30.906h96.136c18.068-0.002 32.658-14.948 32.01-33.008z" p-id="3092"></path></svg></span>
+                    <span>RSS</span>
+                </a><a data-no-swup href="/sitemap.xml" target="_blank" class="mr-1.5 hover:text-theme">
+                    <span class=" md:hidden lg:inline"><svg t="1650887940556" class="mr-0.5 w-3 fill-current text-inherit inline-block align-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6291"><path d="M950.044 625.778h-68.266v-56.89c0-45.51-39.822-85.332-85.334-85.332h-256v-85.334h68.267c39.822 0 73.956-34.133 73.956-73.955V130.844c0-39.822-34.134-73.955-73.956-73.955H415.29c-39.822 0-73.956 34.133-73.956 73.955v193.423c0 39.822 34.134 73.955 73.956 73.955h68.267v85.334h-256c-45.512 0-85.334 39.822-85.334 85.333v56.889H73.956C34.133 625.778 0 659.91 0 699.733v193.423c0 39.822 34.133 73.955 73.956 73.955h193.422c39.822 0 73.955-34.133 73.955-73.955V699.733c0-39.822-34.133-73.955-73.955-73.955H199.11v-56.89c0-17.066 11.378-28.444 28.445-28.444h568.888c17.067 0 28.445 11.378 28.445 28.445v56.889h-68.267c-39.822 0-73.955 34.133-73.955 73.955v193.423c0 39.822 34.133 73.955 73.955 73.955h193.422c39.823 0 73.956-34.133 73.956-73.955V699.733c0-39.822-34.133-73.955-73.956-73.955z" p-id="6292"></path></svg></span>
+                    <span>Sitemap</span>
+                </a></div><div id="run-time" class="mt-2 flex-grow text-right md:mt-0">
+    <span>运行时间： </span><b id="run-time-d">0</b>
+    <span class="text-xs">天</span>
+    <b id="run-time-h">0</b>
+    <span class="text-xs">小时</span>
+    <b id="run-time-m">0</b>
+    <span class="text-xs">分钟</span>
+    <b id="run-time-s">0</b>
+    <span class="text-xs">秒</span>
+</div>
+</div>
+
+    <script type="text/javascript">
+window.__theme = {
+    cdn: '',
+    pjax: true ,
+    isServer: false ,
+    $version:"",
+    lang: 'zh-cn',
+    imageZoom: true ,
+    lazyload: true ,
+    bionicReading: {
+        enabled: true ,
+        skipLinks: false ,
+        autoBionic: false ,
+        excludeWords:[],
+        excludeClasses:["github"],
+        excludeNodeNames:[],
+    },
+    katex: true ,
+    search: true ,
+    backtop: true ,
+    pangu: true ,
+    autoDarkMode: false ,
+    googleAnalytics:false,
+    hugoEncrypt: {
+        wrongPasswordText: '密码错误',
+        userStorage:window['sessionStorage'],
+    },
+    console: {
+        enabled: true ,
+        leftColor: '#dd6065',
+        rightColor: '#feb462',
+        leftText: 'Almighty.YanTao',
+        rightText: 'Powered by Hugo ❤ Luna',
+    },
+    assets: {
+        error_svg: "\/images\/error.svg",
+        search_svg: "\/images\/search.svg",
+    },
+    i18n: {
+        copy: {
+            success: "复制成功",
+            failed: "复制失败，请手动复制",
+            copyCode: "复制代码",
+        },
+        search: {
+            untitled: "无标题",
+            loadFailure: "初始化搜索引擎失败",
+            input: "请输入内容...",
+        },
+        darkMode: {
+            dark: "切换到夜间模式",
+            light: "切换到日间模式"
+        }
+    },creatTime: "2022\/10\/23"}
+</script>
+<script type="text/javascript" src="/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('\/sw.js');
+        });
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    
+</script>
+
+<script data-swup-reload-script>
+    
+    
+</script>
+</footer>
+</div>
+        </div><a
+        href="#nav"
+        title="返回顶部"
+        id="back-top"
+        class="fixed right-6 bottom-9 z-10 translate-y-3 scale-90 cursor-pointer rounded-full bg-white opacity-0 transition duration-300 ease-[ease] dark:bg-darkBgAccent sm:scale-100"
+    >
+        <div class="relative">
+            <div class="absolute left-0 top-0 flex h-full w-full items-center justify-center text-xl">
+                <i class="eva eva-arrow-upward-outline"></i>
+            </div>
+            <svg id="svg" width="54" height="54" viewBox="0 0 54 54" preserveAspectRatio="xMinYMin meet">
+                <circle
+                    transform="rotate(-90, 27 , 27)"
+                    style="stroke-dasharray: 157, 157; stroke-dashoffset: 157;"
+                    cx="27"
+                    cy="27"
+                    r="25"
+                    fill="none"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke="var(--theme)"
+                />
+            </svg>
+        </div>
+    </a><noscript>
+    <style>
+        .dark-mode-switch,
+        #run-time,
+        #bionicReading,
+        .noscript-hidden,
+        [data-clipboard-text],
+        [data-lazyload] {
+            display: none;
+        }
+        #back-top {
+            opacity: 1;
+        }
+        .noscript-show {
+            display: initial;
+        }
+    </style>
+</noscript>
+</body>
+</html>

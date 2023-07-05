@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on Almighty.YanTao</title>
+    <link>/tags/nginx/</link>
+    <description>Recent content in nginx on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 18 May 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题</title>
+      <link>/2023/05/18/%E8%A7%A3%E5%86%B3nginx-ssl-%E4%BB%A3%E7%90%86-tomcat-%E8%8E%B7%E5%8F%96-scheme-%E6%80%BB%E6%98%AF-http-%E9%97%AE%E9%A2%98.html/</link>
+      <pubDate>Thu, 18 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/05/18/%E8%A7%A3%E5%86%B3nginx-ssl-%E4%BB%A3%E7%90%86-tomcat-%E8%8E%B7%E5%8F%96-scheme-%E6%80%BB%E6%98%AF-http-%E9%97%AE%E9%A2%98.html/</guid>
+      <description>背景 公司之前用的是http，但是出于苹果app审核和服务器安全性问题，要改为https，我们公司用的是沃通的ssl，按照沃通的官方文档提供的步骤完成服务器的配置。 架构上使用了 Nginx +tomcat 集群, 且nginx下配置了SSL,tomcat 没有配置SSL,项目使用https协议。
+原因 配置成功后明明是https url请求,发现 log里面，tomcat获取scheme的时候，一直是http，而不是想像中的https
+1 2 3 4 5 6 7 8 0415 16:01:10 INFO (PaymentInterceptor.java:44) preHandle() - requestStringForLog: { &amp;#34;request.getRequestURL():&amp;#34;: &amp;#34;http://m.xxx.com/payment/paymentChannel?id=212&amp;amp;s=a84485e0985afe97fffd7fd7741c93851d83a4f6&amp;#34;, &amp;#34;request.getMethod:&amp;#34;: &amp;#34;GET&amp;#34;, &amp;#34;_parameterMap&amp;#34;: { &amp;#34;id&amp;#34;: [&amp;#34;212&amp;#34;], &amp;#34;s&amp;#34;: [&amp;#34;a84485e0985afe97fffd7fd7741c93851d83a4f6&amp;#34;] } } request.getRequestURL() 输出出来的 一直是
+http://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd7741c93851d83a4f6 但是浏览器中的URL却是
+https://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd7741c93851d83a4f6 下面我们进一步研究发现，java API上写得很清楚:
+1 2 3 4 5 getRequestURL(): Reconstructs the URL the client used to make the request. The returned URL contains a protocol, server name, port number, and server path, but it does not include query string parameters.</description>
+    </item>
+    
+    <item>
+      <title>hugo &#43; github自动化部署静态博客</title>
+      <link>/2023/04/18/hugo--github%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/18/hugo--github%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html/</guid>
+      <description>背景 在使用hugo + nginx搭建好博客后，文章可以通过ftp上传到服务器，然后在服务器上再编译成网页，或者本地搭建的hugo环境，编译好网页再上传到服务器，这样做虽然也可以，但是很麻烦，如果每次都这么发布文章，肯定玩几次就不想弄了。
+使用webhook就能实现自动部署，其实原理很简单。理想状态就是我把我的myblog项目托管到github，然后每次我写完文章直接push到github仓库，webhook监听到我的push，给我的服务器发送一个http请求，服务器收到请求后执行本地shell脚本，自动拉取最新的仓库代码，然后执行hugo编译成网页。这样就实现自动部署啦!
+服务器环境配置 node 1 2 3 4 5 6 cd ~ wget https://nodejs.org/dist/v14.17.3/node-v14.17.3-linux-x64.tar.xz tar -xvf node-v14.17.3-linux-x64.tar.xz cd node-v14.17.3-linux-x64/bin ln -s /root/node-v14.17.3-linux-x64/bin/node /usr/bin/ ln -s /root/node-v14.17.3-linux-x64/bin/npm /usr/bin/ 我是centos系统，直接安装编译好的二进制文件了，之前试过自己编译，要等好久就放弃了
+安装完后可以执行以下命令检查：
+1 2 node -v npm -v pm2 1 2 3 npm install pm2@latest -g ln -s /root/node-v14.17.3-linux-x64/bin/pm2 /usr/bin/ pm2 -v 项目代码托管到github 在常用的本地机器上安装git，myblog 目录作为 git 仓库，push 到 github 进行备份。由于 public 目录下的静态网页完全可由其余文件自动生成，因此仓库可以排除 public 目录。
+1 2 3 4 5 touch .</description>
+    </item>
+    
+  </channel>
+</rss>

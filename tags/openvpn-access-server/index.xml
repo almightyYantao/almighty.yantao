@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>openvpn access server on Almighty.YanTao</title>
+    <link>/tags/openvpn-access-server/</link>
+    <description>Recent content in openvpn access server on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/openvpn-access-server/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装&amp;破解Openvpn Access Server</title>
+      <link>/2023/01/05/%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3openvpn-access-server.html/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/01/05/%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3openvpn-access-server.html/</guid>
+      <description>在线安装（需要翻墙） 1 2 yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm yum -y install openvpn-as 管理员登录 首先需要修改管理员密码
+1 passwd openvpn 输入之后可以登录管理员页面了。
+如果密码一直错误的话，说明修改失败了，可以查看下原来的密码是什么
+1 cat /usr/local/openvpn_as/init.log 登录后点击User Management–&amp;gt;User Permissions 添加用户
+破解用户数 主要操作的文件是一个名叫 pyovpn-2.0-pyx.x.egg 的文件，以我了解的情况来看，从 2.5.0 到 2.9.x 文件名一直都是这个，只是不同版本里面的内容不一样. 这个文件有点类似 Java 当中的 jar 库文件，也是一个 zip 压缩文件，里面包含了一些 Python 的字节码文件. 破解的原理大概是在 Python 中采用类似 Java 动态代理的技术，将原本读取用户属性的调用返回值拦截，修改用户限制数量再返回. 方法 2.9.0 以下版本破解的目标文件是 /pyovpn/lic/uprop.pyo, 2.9.0 及以上是 /pyovpn/lic/uprop.pyc; 按照网上流行的破解方法，把这个文件解压出来并改名为 uprop2.pyo 或 uprop2.pyc, 然后新建一个 uprop.py 文件，内容如下:
+**2.9.0**以下版本内容:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 import uprop2 old_figure = None def new_figure(self, licdict): ret = old_figure(self, licdict) ret[&amp;#39;concurrent_connections&amp;#39;] = 1024 return ret for x in dir(uprop2): if x[:2] == &amp;#39;__&amp;#39;: continue if x == &amp;#39;UsageProperties&amp;#39;: exec(&amp;#39;old_figure = uprop2.</description>
+    </item>
+    
+  </channel>
+</rss>

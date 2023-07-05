@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>多拨 on Almighty.YanTao</title>
+    <link>/tags/%E5%A4%9A%E6%8B%A8/</link>
+    <description>Recent content in 多拨 on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 28 Feb 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/%E5%A4%9A%E6%8B%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenWrt多拨使用教程</title>
+      <link>/2023/02/28/openwrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html/</link>
+      <pubDate>Tue, 28 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/28/openwrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html/</guid>
+      <description> 多拨类 多拨相关的插件主要是 多线多拨 和 负载均衡 插件。
+Syncdial 多线多拨 使用macvlan驱动创建多个虚拟WAN口，支持并发多拨
+1 opkg install luci-app-syncdial MWAN3负载均衡 支持多根网线或者多个PPPOE账号的同时拨号使用和负载均衡。并且还可以通过Ping方式来检测中断线路并自动屏蔽中断线路
+1 opkg install luci-i18n-mwan3-zh-cn 其他 如发现无法安装或更新，请执行以下操作
+更新OPKG软件列表 1 opkg update </description>
+    </item>
+    
+  </channel>
+</rss>

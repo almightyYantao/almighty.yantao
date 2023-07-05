@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wg-quick on Almighty.YanTao</title>
+    <link>/tags/wg-quick/</link>
+    <description>Recent content in wg-quick on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 23 Apr 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/wg-quick/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>解决 wg-quick 在 Mac 上 bash 3 无法运行的问题</title>
+      <link>/2023/04/23/%E8%A7%A3%E5%86%B3-wg-quick-%E5%9C%A8-mac-%E4%B8%8A-bash-3-%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98.html/</link>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/23/%E8%A7%A3%E5%86%B3-wg-quick-%E5%9C%A8-mac-%E4%B8%8A-bash-3-%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98.html/</guid>
+      <description>问题原因 我可以理解，开发人员不想使用苹果使用的旧bash v3。但从用户的帖子来看，安装一个较新的bash并不那么好
+所以我看了wireguard的wg-quick。需要支持的唯一变化，两个bash版本都是为了摆脱关联数组SERVICE_DNS，并处理v3的BASHPID。
+解决方案 那么就有了一下的操作
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 diff --git a/src/tools/wg-quick/darwin.</description>
+    </item>
+    
+  </channel>
+</rss>

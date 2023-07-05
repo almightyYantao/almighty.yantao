@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chatgpt on Almighty.YanTao</title>
+    <link>/tags/chatgpt/</link>
+    <description>Recent content in chatgpt on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 21 Feb 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/chatgpt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python ChatGPT Telegram Bot</title>
+      <link>/2023/02/21/python-chatgpt-telegram-bot.html/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/21/python-chatgpt-telegram-bot.html/</guid>
+      <description>注册 这里如何注册我就不说明了，大家自行去注册，主要是现在GPT的基本上已经备用很多了，导致了接码的价格也上涨了，而且使用token的话，其实还是很快可以用完免费的18美金； 接码：https://sms-activate.org/
+准备材料 主要提供下Python的实现代码，首先需要准备一下的东西：
+Telegram Bot 的 Key ：找机器人爸爸获取 ChatGPT 的 API Key ： https://platform.openai.com/account/api-keys 脚本： {% codeblock &amp;ldquo;main.py&amp;rdquo; lang:python &amp;gt;folded %}
+1. Start by importing the necessary libraries and setting up the API clients import requests
+import json
+import os
+import threading
+OpenAI secret Key API_KEY = &amp;lsquo;xxxxxxxxx&amp;rsquo;
+Models: text-davinci-003,text-curie-001,text-babbage-001,text-ada-001 MODEL = &amp;rsquo;text-davinci-003&#39;
+Telegram secret access bot token BOT_TOKEN = &amp;lsquo;xxxxxxxxxxxxx&amp;rsquo;
+Defining the bot&amp;rsquo;s personality using adjectives BOT_PERSONALITY = &#39;&#39;</description>
+    </item>
+    
+  </channel>
+</rss>

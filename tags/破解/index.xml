@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>破解 on Almighty.YanTao</title>
+    <link>/tags/%E7%A0%B4%E8%A7%A3/</link>
+    <description>Recent content in 破解 on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/%E7%A0%B4%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 7 安装 Confluence 并且破解</title>
+      <link>/2023/06/16/centos-7-%E5%AE%89%E8%A3%85-confluence-%E5%B9%B6%E4%B8%94%E7%A0%B4%E8%A7%A3.html/</link>
+      <pubDate>Fri, 16 Jun 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/06/16/centos-7-%E5%AE%89%E8%A3%85-confluence-%E5%B9%B6%E4%B8%94%E7%A0%B4%E8%A7%A3.html/</guid>
+      <description>简介 Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。部署Confluence前，需确认服务器已部署Nginx+MySQL环境。
+搭建环境 系统版本：CentOS Linux release 7.6.1810 (Core)
+confluence版本：Confluence 7.13.4（最新版本）
+Java版本：java-11-openjdk-devel.x86_64
+confluence解除工具：confluence_keygen.jar
+注：解除工具链接: https://pan.baidu.com/s/1po6wouAIZPHbMG39oKKMVw
+提取码: guck
+Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​
+mysql-connector-java版本：mysql-connector-java-5.1.49 注：以上插件下载地址如下截图可自选【系统版本】和【插件版本】，切记不要使用最新版本插件，由于官网文档说明不支持最新版，然后我特意亲测了一下确实不支持，最大支持mysql-connector-java-5.1.x 高于此版本都不支持，建议使用5.1.x版本插件，插件下载地址： https://downloads.mysql.com/archives/c-j/
+关闭防火墙 systemctl stop firewalld.service​
+禁止防火墙开机自启 systemctl disable firewalld.service​
+关闭 selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config
+重启系统即可 reboot
+安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ yum -y install mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 修改配置文件 1 2 3 4 5 6 7 8 9 10 11 vi /etc/my.cnf [mysqld]下添加如下字段 character-set-server=utf8mb4 collation-server=utf8mb4_bin default-storage-engine=INNODB max_allowed_packet=64M innodb_log_file_size=512M transaction-isolation=READ-COMMITTED binlog_format=row log_bin_trust_function_creators = 1 optimizer_switch = derived_merge=off 启动数据库 1 2 systemctl start mysqld systemctl enable mysqld 创建数据库 1 2 3 4 create database confluence default character set utf8mb4 collate utf8mb4_bin; grant all on confluence.</description>
+    </item>
+    
+    <item>
+      <title>安装&amp;破解Openvpn Access Server</title>
+      <link>/2023/01/05/%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3openvpn-access-server.html/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/01/05/%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3openvpn-access-server.html/</guid>
+      <description>在线安装（需要翻墙） 1 2 yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm yum -y install openvpn-as 管理员登录 首先需要修改管理员密码
+1 passwd openvpn 输入之后可以登录管理员页面了。
+如果密码一直错误的话，说明修改失败了，可以查看下原来的密码是什么
+1 cat /usr/local/openvpn_as/init.log 登录后点击User Management–&amp;gt;User Permissions 添加用户
+破解用户数 主要操作的文件是一个名叫 pyovpn-2.0-pyx.x.egg 的文件，以我了解的情况来看，从 2.5.0 到 2.9.x 文件名一直都是这个，只是不同版本里面的内容不一样. 这个文件有点类似 Java 当中的 jar 库文件，也是一个 zip 压缩文件，里面包含了一些 Python 的字节码文件. 破解的原理大概是在 Python 中采用类似 Java 动态代理的技术，将原本读取用户属性的调用返回值拦截，修改用户限制数量再返回. 方法 2.9.0 以下版本破解的目标文件是 /pyovpn/lic/uprop.pyo, 2.9.0 及以上是 /pyovpn/lic/uprop.pyc; 按照网上流行的破解方法，把这个文件解压出来并改名为 uprop2.pyo 或 uprop2.pyc, 然后新建一个 uprop.py 文件，内容如下:
+**2.9.0**以下版本内容:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 import uprop2 old_figure = None def new_figure(self, licdict): ret = old_figure(self, licdict) ret[&amp;#39;concurrent_connections&amp;#39;] = 1024 return ret for x in dir(uprop2): if x[:2] == &amp;#39;__&amp;#39;: continue if x == &amp;#39;UsageProperties&amp;#39;: exec(&amp;#39;old_figure = uprop2.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>udp on Almighty.YanTao</title>
+    <link>/tags/udp/</link>
+    <description>Recent content in udp on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 11 Mar 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/udp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>linux通过SNMP检测TCP&amp;UDP连接数</title>
+      <link>/2023/03/11/linux%E9%80%9A%E8%BF%87snmp%E6%A3%80%E6%B5%8Btcpudp%E8%BF%9E%E6%8E%A5%E6%95%B0.html/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/03/11/linux%E9%80%9A%E8%BF%87snmp%E6%A3%80%E6%B5%8Btcpudp%E8%BF%9E%E6%8E%A5%E6%95%B0.html/</guid>
+      <description>先上图&amp;amp;介绍 记录一次全球化网络监控的看板建设； 之前都是通过zabbix来进行建设看板，但是用了一段时间后总是缺点感觉；后面通过大佬的介绍，试用了Grafana，这不试用还好，一试用，效果的展现让我无法自拔，这就是我想要的监控看板啊！能根据数值的不同进行颜色的区分，在大屏上一眼就可以看出当前哪一块网络出现了问题！
+美中不足的是，上面的两列不能设置报警，报警貌似必须是图表形式的才可以；不过可以建立一个通用的报警看板，问题不大～
+其他的一些监控项都是最简单基础的，我这边就不过多的赘述，大家可以自行上网搜索，或者之前引用之前zabbix的数据，主要讲解下TCP连接数和UDP连接数的获取
+别的不说，这图还是很好看的； 准备 SNMP 自定义OID snmp安装 1 2 3 yum install net-snmp systemctl start snmpd systemctl enable snmpd 修改配置文件 1 2 3 4 5 6 7 8 # 修改团体名 com2sec notConfigUser default xxxxx # view systemview included .1.3.6.1.2.1. （这两行注释） # view systemview included .1.3.6.1.2.1.25.1.1 # 这两行新增，表示可以查看所有的信息，要不然只能查看上面那两个指定的信息 view all included . view systemview included .1 创建获取连接数脚本 1 2 3 4 #!/bin/bash echo $2 echo integer echo $(netstat -an|awk &amp;#39;/^tcp/ {++s[$NF]} END {for(a in s ) print a,s[a]}&amp;#39; | grep ESTABLISHED | awk &amp;#39;{print $2}&amp;#39;) 这个是获取TCP连接数的脚本，如果要获取UDP的，请把tcp改成udp 设置脚本权限</description>
+    </item>
+    
+  </channel>
+</rss>

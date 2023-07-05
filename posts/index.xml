@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Almighty.YanTao</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS 7 安装 Confluence 并且破解</title>
+      <link>/2023/06/16/centos-7-%E5%AE%89%E8%A3%85-confluence-%E5%B9%B6%E4%B8%94%E7%A0%B4%E8%A7%A3.html/</link>
+      <pubDate>Fri, 16 Jun 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/06/16/centos-7-%E5%AE%89%E8%A3%85-confluence-%E5%B9%B6%E4%B8%94%E7%A0%B4%E8%A7%A3.html/</guid>
+      <description>简介 Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。部署Confluence前，需确认服务器已部署Nginx+MySQL环境。
+搭建环境 系统版本：CentOS Linux release 7.6.1810 (Core)
+confluence版本：Confluence 7.13.4（最新版本）
+Java版本：java-11-openjdk-devel.x86_64
+confluence解除工具：confluence_keygen.jar
+注：解除工具链接: https://pan.baidu.com/s/1po6wouAIZPHbMG39oKKMVw
+提取码: guck
+Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​
+mysql-connector-java版本：mysql-connector-java-5.1.49 注：以上插件下载地址如下截图可自选【系统版本】和【插件版本】，切记不要使用最新版本插件，由于官网文档说明不支持最新版，然后我特意亲测了一下确实不支持，最大支持mysql-connector-java-5.1.x 高于此版本都不支持，建议使用5.1.x版本插件，插件下载地址： https://downloads.mysql.com/archives/c-j/
+关闭防火墙 systemctl stop firewalld.service​
+禁止防火墙开机自启 systemctl disable firewalld.service​
+关闭 selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config
+重启系统即可 reboot
+安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ yum -y install mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 修改配置文件 1 2 3 4 5 6 7 8 9 10 11 vi /etc/my.cnf [mysqld]下添加如下字段 character-set-server=utf8mb4 collation-server=utf8mb4_bin default-storage-engine=INNODB max_allowed_packet=64M innodb_log_file_size=512M transaction-isolation=READ-COMMITTED binlog_format=row log_bin_trust_function_creators = 1 optimizer_switch = derived_merge=off 启动数据库 1 2 systemctl start mysqld systemctl enable mysqld 创建数据库 1 2 3 4 create database confluence default character set utf8mb4 collate utf8mb4_bin; grant all on confluence.</description>
+    </item>
+    
+    <item>
+      <title>VSphere VCenter 6.5以上版本安装80%失败处理</title>
+      <link>/2023/05/19/vsphere-vcenter-6.5%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%8580%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86.html/</link>
+      <pubDate>Fri, 19 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/05/19/vsphere-vcenter-6.5%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%8580%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86.html/</guid>
+      <description>起因 VCenter磁盘满，手贱ssh删除日志后重启失败，选择重装。故障：VC6.5安装卡80%，原因是安装包root密码过期了,root不可用。而且按照提示修改密码一直提示 Th&amp;hellip;
+故障 VC6.5安装卡80%，原因是安装包root密码过期了,root不可用。而且按照提示修改密码一直提示 The password change operation failed.
+解决 在80%时通过VSClient打开VC宿主虚机（注意要在第一时间打开，而不是已经提示错误。出现错误提示只能重新开始安装而不能继续） 重启在bios时按e进入GNU GRUB Menu 选择linux开头的这一行，在最后添加空格rw init=/bin/bash，然后F10进入 输入mount -o remount,rw / 回车（注意这个”/”别丢了） passwd 两次输入密码，建议用安装时设置的密码 umount /（注意这个”/”别丢了） reboot -f 主要是因为系统版本的问题，网上分享的一般都是：4602587 版本的，这个版本有 BUG，可以换成 U1G（8024368）</description>
+    </item>
+    
+    <item>
+      <title>解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题</title>
+      <link>/2023/05/18/%E8%A7%A3%E5%86%B3nginx-ssl-%E4%BB%A3%E7%90%86-tomcat-%E8%8E%B7%E5%8F%96-scheme-%E6%80%BB%E6%98%AF-http-%E9%97%AE%E9%A2%98.html/</link>
+      <pubDate>Thu, 18 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/05/18/%E8%A7%A3%E5%86%B3nginx-ssl-%E4%BB%A3%E7%90%86-tomcat-%E8%8E%B7%E5%8F%96-scheme-%E6%80%BB%E6%98%AF-http-%E9%97%AE%E9%A2%98.html/</guid>
+      <description>背景 公司之前用的是http，但是出于苹果app审核和服务器安全性问题，要改为https，我们公司用的是沃通的ssl，按照沃通的官方文档提供的步骤完成服务器的配置。 架构上使用了 Nginx +tomcat 集群, 且nginx下配置了SSL,tomcat 没有配置SSL,项目使用https协议。
+原因 配置成功后明明是https url请求,发现 log里面，tomcat获取scheme的时候，一直是http，而不是想像中的https
+1 2 3 4 5 6 7 8 0415 16:01:10 INFO (PaymentInterceptor.java:44) preHandle() - requestStringForLog: { &amp;#34;request.getRequestURL():&amp;#34;: &amp;#34;http://m.xxx.com/payment/paymentChannel?id=212&amp;amp;s=a84485e0985afe97fffd7fd7741c93851d83a4f6&amp;#34;, &amp;#34;request.getMethod:&amp;#34;: &amp;#34;GET&amp;#34;, &amp;#34;_parameterMap&amp;#34;: { &amp;#34;id&amp;#34;: [&amp;#34;212&amp;#34;], &amp;#34;s&amp;#34;: [&amp;#34;a84485e0985afe97fffd7fd7741c93851d83a4f6&amp;#34;] } } request.getRequestURL() 输出出来的 一直是
+http://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd7741c93851d83a4f6 但是浏览器中的URL却是
+https://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd7741c93851d83a4f6 下面我们进一步研究发现，java API上写得很清楚:
+1 2 3 4 5 getRequestURL(): Reconstructs the URL the client used to make the request. The returned URL contains a protocol, server name, port number, and server path, but it does not include query string parameters.</description>
+    </item>
+    
+    <item>
+      <title>CentOS 7 &amp; 8 开启BBR加速</title>
+      <link>/2023/04/24/centos-7-8-%E5%BC%80%E5%90%AFbbr%E5%8A%A0%E9%80%9F.html/</link>
+      <pubDate>Mon, 24 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/24/centos-7-8-%E5%BC%80%E5%90%AFbbr%E5%8A%A0%E9%80%9F.html/</guid>
+      <description> CentOS7 一键开启加速脚本 1 wget -N --no-check-certificate &amp;#34;https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh&amp;#34; &amp;amp;&amp;amp; chmod +x tcp.sh &amp;amp;&amp;amp; ./tcp.sh 建议安装：BBR魔改加速
+CentOS8 开启BBR加速 1 2 3 4 echo &amp;#34;net.core.default_qdisc=fq&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf echo &amp;#34;net.ipv4.tcp_congestion_control=bbr&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf sysctl -p reboot 检测是否开启成功 1 2 3 4 sysctl -n net.ipv4.tcp_congestion_control 。 ## 会返回bbr 。 lsmod | grep bbr ## 会返回tcp_bbr </description>
+    </item>
+    
+    <item>
+      <title>解决 wg-quick 在 Mac 上 bash 3 无法运行的问题</title>
+      <link>/2023/04/23/%E8%A7%A3%E5%86%B3-wg-quick-%E5%9C%A8-mac-%E4%B8%8A-bash-3-%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98.html/</link>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/23/%E8%A7%A3%E5%86%B3-wg-quick-%E5%9C%A8-mac-%E4%B8%8A-bash-3-%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C%E7%9A%84%E9%97%AE%E9%A2%98.html/</guid>
+      <description>问题原因 我可以理解，开发人员不想使用苹果使用的旧bash v3。但从用户的帖子来看，安装一个较新的bash并不那么好
+所以我看了wireguard的wg-quick。需要支持的唯一变化，两个bash版本都是为了摆脱关联数组SERVICE_DNS，并处理v3的BASHPID。
+解决方案 那么就有了一下的操作
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 diff --git a/src/tools/wg-quick/darwin.</description>
+    </item>
+    
+    <item>
+      <title>使用 Python ssh 远程登陆服务器的最佳方案</title>
+      <link>/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/</link>
+      <pubDate>Wed, 19 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/</guid>
+      <description>在使用 Python 写一些脚本的时候，在某些情况下，我们需要频繁登陆远程服务去执行一次命令，并返回一些结果。
+在 shell 环境中，我们是这样子做的。
+1 sshpass -p ${passwd} ssh -p ${port} -l ${user} -o StrictHostKeyChecking=no xx.xx.xx.xx &amp;#34;ls -l&amp;#34; 然后你会发现，你的输出有很多你并不需要，但是又不去不掉的一些信息（也许有方法，请留言交流），类似这样
+1 2 3 4 5 6 host: xx.xx.xx.xx, port: xx Warning: Permanently added &amp;#39;[xx.xx.xx.xx]:xx&amp;#39; (RSA) to the list of known hosts. Login failure: [Errno 1] This server is not registered to rmp platform, please confirm whether cdn server. total 4 -rw-r--r-- 1 root root 239 Mar 30 2018 admin-openrc 对于直接使用 shell 命令，来执行命令的，可以直接使用管道，或者将标准输出重定向到文件的方法取得执行命令返回的结果</description>
+    </item>
+    
+    <item>
+      <title>hugo &#43; github自动化部署静态博客</title>
+      <link>/2023/04/18/hugo--github%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/18/hugo--github%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2.html/</guid>
+      <description>背景 在使用hugo + nginx搭建好博客后，文章可以通过ftp上传到服务器，然后在服务器上再编译成网页，或者本地搭建的hugo环境，编译好网页再上传到服务器，这样做虽然也可以，但是很麻烦，如果每次都这么发布文章，肯定玩几次就不想弄了。
+使用webhook就能实现自动部署，其实原理很简单。理想状态就是我把我的myblog项目托管到github，然后每次我写完文章直接push到github仓库，webhook监听到我的push，给我的服务器发送一个http请求，服务器收到请求后执行本地shell脚本，自动拉取最新的仓库代码，然后执行hugo编译成网页。这样就实现自动部署啦!
+服务器环境配置 node 1 2 3 4 5 6 cd ~ wget https://nodejs.org/dist/v14.17.3/node-v14.17.3-linux-x64.tar.xz tar -xvf node-v14.17.3-linux-x64.tar.xz cd node-v14.17.3-linux-x64/bin ln -s /root/node-v14.17.3-linux-x64/bin/node /usr/bin/ ln -s /root/node-v14.17.3-linux-x64/bin/npm /usr/bin/ 我是centos系统，直接安装编译好的二进制文件了，之前试过自己编译，要等好久就放弃了
+安装完后可以执行以下命令检查：
+1 2 node -v npm -v pm2 1 2 3 npm install pm2@latest -g ln -s /root/node-v14.17.3-linux-x64/bin/pm2 /usr/bin/ pm2 -v 项目代码托管到github 在常用的本地机器上安装git，myblog 目录作为 git 仓库，push 到 github 进行备份。由于 public 目录下的静态网页完全可由其余文件自动生成，因此仓库可以排除 public 目录。
+1 2 3 4 5 touch .</description>
+    </item>
+    
+    <item>
+      <title>通过iptables进行wireguard的权限管理</title>
+      <link>/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/</guid>
+      <description>一、背景 由于目前openvpn的开源方案，链接VPN如果路由过多的话会导致链接速度变慢，效果非常的不理想，并且当iptables规则多的时候，转发明显性能下降；
+准备采用wireguard的方式来代替openvpn的隧道协议，但是wireguard目前没有一个很好的权限管理方案；
+二、服务端 2.1、安装wireguard 1 curl -O https://raw.githubusercontent.com/atrandys/wireguard/master/wg_mult.sh &amp;amp;&amp;amp; chmod +x wg_mult.sh &amp;amp;&amp;amp; ./wg_mult.sh 2.2、设置访问权限 环境变量：WG_PEER_IP可以获取连接着的IP地址
+1 2 PostUp = /path/to/script.sh PostDown = /path/to/teardown.sh 然后在根据情况设置ipset和iptables
+2.3、脚本案例 /path/to/script.sh 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 #!/bin/bash result=$(curl -s &amp;#34;VPN后端连接接口地址&amp;#34; | jq &amp;#39;.d&amp;#39;) permissionsAccept=($(jq &amp;#39;.accept[]&amp;#39; &amp;lt;&amp;lt;&amp;lt;$result)) permissionsDrop=($(jq &amp;#39;.drop[]&amp;#39; &amp;lt;&amp;lt;&amp;lt;$result)) # 创建新的ipset组 ipset create $WG_PEER_IP hash:ip ipset create ${WG_PEER_IP}-drop hash:ip for ((i=0;i&amp;lt;${#permissionsAccept[@]};i++)) do ipset add $WG_PEER_IP ${permissionsAccept[$i]//\&amp;#34;/} done for ((i=0;i&amp;lt;${#permissionsDrop[@]};i++)) do ipset add ${WG_PEER_IP}-drop ${permissionsDrop[$i]//\&amp;#34;/} done # 设置iptables生效规则 iptables -A FORWARD -s $WG_PEER_IP -m set --match-set ${WG_PEER_IP}-drop dst -j DROP iptables -A FORWARD -s $WG_PEER_IP -m set --match-set $WG_PEER_IP dst -j ACCEPT # 剩余没有匹配到的全部拒绝 iptables -A FORWARD -s $WG_PEER_IP -j DROP if [ $code = -1 ];then exit 1 ; fi /path/to/teardown.</description>
+    </item>
+    
+    <item>
+      <title>linux通过SNMP检测TCP&amp;UDP连接数</title>
+      <link>/2023/03/11/linux%E9%80%9A%E8%BF%87snmp%E6%A3%80%E6%B5%8Btcpudp%E8%BF%9E%E6%8E%A5%E6%95%B0.html/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/03/11/linux%E9%80%9A%E8%BF%87snmp%E6%A3%80%E6%B5%8Btcpudp%E8%BF%9E%E6%8E%A5%E6%95%B0.html/</guid>
+      <description>先上图&amp;amp;介绍 记录一次全球化网络监控的看板建设； 之前都是通过zabbix来进行建设看板，但是用了一段时间后总是缺点感觉；后面通过大佬的介绍，试用了Grafana，这不试用还好，一试用，效果的展现让我无法自拔，这就是我想要的监控看板啊！能根据数值的不同进行颜色的区分，在大屏上一眼就可以看出当前哪一块网络出现了问题！
+美中不足的是，上面的两列不能设置报警，报警貌似必须是图表形式的才可以；不过可以建立一个通用的报警看板，问题不大～
+其他的一些监控项都是最简单基础的，我这边就不过多的赘述，大家可以自行上网搜索，或者之前引用之前zabbix的数据，主要讲解下TCP连接数和UDP连接数的获取
+别的不说，这图还是很好看的； 准备 SNMP 自定义OID snmp安装 1 2 3 yum install net-snmp systemctl start snmpd systemctl enable snmpd 修改配置文件 1 2 3 4 5 6 7 8 # 修改团体名 com2sec notConfigUser default xxxxx # view systemview included .1.3.6.1.2.1. （这两行注释） # view systemview included .1.3.6.1.2.1.25.1.1 # 这两行新增，表示可以查看所有的信息，要不然只能查看上面那两个指定的信息 view all included . view systemview included .1 创建获取连接数脚本 1 2 3 4 #!/bin/bash echo $2 echo integer echo $(netstat -an|awk &amp;#39;/^tcp/ {++s[$NF]} END {for(a in s ) print a,s[a]}&amp;#39; | grep ESTABLISHED | awk &amp;#39;{print $2}&amp;#39;) 这个是获取TCP连接数的脚本，如果要获取UDP的，请把tcp改成udp 设置脚本权限</description>
+    </item>
+    
+    <item>
+      <title>Obsidian 免费的实时同步服务</title>
+      <link>/2023/03/06/obsidian-%E5%85%8D%E8%B4%B9%E7%9A%84%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1.html/</link>
+      <pubDate>Mon, 06 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/03/06/obsidian-%E5%85%8D%E8%B4%B9%E7%9A%84%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1.html/</guid>
+      <description>使用 fly.io 免费计划部署或自托管数据库，进行 LiveSync 插件的一系列配置后实现各设备间 Obsidian 实时增量修改同步，可以和官方同步服务相媲美。
+使用 fly.io 这次使用的是 fly.io 的免费计划，fly.io 是一个 SAAS（是（Platform as a Service）的缩写，是指平台即服务）平台，可以搭建如静态博客、Nextjs、Nuxtjs、Deno、Go、Python 等底层的各种各样的服务。但首先需要自己注册一个账号，这里可以直接使用 Github 登录。 注意：fly.io 的使用需要绑卡，如果没有绑卡会在创建应用 章节出现 Error 提示。绑卡过程请在 fly.io 面板 中 Billing 进行。正常使用国内的双币卡就可以，注意请如实填写信息。没有卡的朋友可以去各银行办一张（超好过的😗）或试试虚拟卡？（虚拟卡只是博主想到的一种方案，没有试过）
+安装 flyctl Windows 用户在本地打开 PowerShell 或 Windows 终端💻，输入：
+1 iwr https://fly.io/install.ps1 -useb | iex 注意：CMD 中不支持上面的命令，如果电脑中只有 CMD，或许你需要安装 PowerShell （选择 latest 版本）或 Windows 终端 。
+本地登录 1 flyctl auth signup 会自动打开浏览器进行验证账户操作。
+创建应用 在本地任意位置创建一个 fly.io 的工作目录（其实就是创建个能找到的文件夹，你不会放桌面上了吧😂？）。
+1 2 3 4 mkdir fly.io cd fly.</description>
+    </item>
+    
+    <item>
+      <title>通过 Haproxy 实现 Shadowshadows 负载均衡</title>
+      <link>/2023/03/05/%E9%80%9A%E8%BF%87-haproxy-%E5%AE%9E%E7%8E%B0-shadowshadows-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1.html/</link>
+      <pubDate>Sun, 05 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/03/05/%E9%80%9A%E8%BF%87-haproxy-%E5%AE%9E%E7%8E%B0-shadowshadows-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1.html/</guid>
+      <description>介绍 缺点：所有的SS的加密方式和密码必须一致 介绍：HAProxy是一个使用C语言编写的自由及开放原始码软件，其提供高可用性、负载均衡，以及基于TCP和HTTP的应用程序代理。
+安装Haproxy 1 yum install haproxy 配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 global chroot /var/lib/haproxy pidfile /var/run/haproxy.pid user haproxy group haproxy defaults mode tcp #服务器默认的工作模式 balance roundrobin #服务器默认使用的均衡模式 retries 3 #三次连接失败表示服务器不可用 maxconn 5000 #最大连接数 timeout connect 500ms #连接超时 timeout client 3s #客户端超时 timeout server 3s #服务器超时 listen WebPanel mode http #这里使用HTTP模式 bind 10.</description>
+    </item>
+    
+    <item>
+      <title>OpenWrt多拨使用教程</title>
+      <link>/2023/02/28/openwrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html/</link>
+      <pubDate>Tue, 28 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/28/openwrt%E5%A4%9A%E6%8B%A8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html/</guid>
+      <description> 多拨类 多拨相关的插件主要是 多线多拨 和 负载均衡 插件。
+Syncdial 多线多拨 使用macvlan驱动创建多个虚拟WAN口，支持并发多拨
+1 opkg install luci-app-syncdial MWAN3负载均衡 支持多根网线或者多个PPPOE账号的同时拨号使用和负载均衡。并且还可以通过Ping方式来检测中断线路并自动屏蔽中断线路
+1 opkg install luci-i18n-mwan3-zh-cn 其他 如发现无法安装或更新，请执行以下操作
+更新OPKG软件列表 1 opkg update </description>
+    </item>
+    
+    <item>
+      <title>Python ChatGPT Telegram Bot</title>
+      <link>/2023/02/21/python-chatgpt-telegram-bot.html/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/21/python-chatgpt-telegram-bot.html/</guid>
+      <description>注册 这里如何注册我就不说明了，大家自行去注册，主要是现在GPT的基本上已经备用很多了，导致了接码的价格也上涨了，而且使用token的话，其实还是很快可以用完免费的18美金； 接码：https://sms-activate.org/
+准备材料 主要提供下Python的实现代码，首先需要准备一下的东西：
+Telegram Bot 的 Key ：找机器人爸爸获取 ChatGPT 的 API Key ： https://platform.openai.com/account/api-keys 脚本： {% codeblock &amp;ldquo;main.py&amp;rdquo; lang:python &amp;gt;folded %}
+1. Start by importing the necessary libraries and setting up the API clients import requests
+import json
+import os
+import threading
+OpenAI secret Key API_KEY = &amp;lsquo;xxxxxxxxx&amp;rsquo;
+Models: text-davinci-003,text-curie-001,text-babbage-001,text-ada-001 MODEL = &amp;rsquo;text-davinci-003&#39;
+Telegram secret access bot token BOT_TOKEN = &amp;lsquo;xxxxxxxxxxxxx&amp;rsquo;
+Defining the bot&amp;rsquo;s personality using adjectives BOT_PERSONALITY = &#39;&#39;</description>
+    </item>
+    
+    <item>
+      <title>curl 检测代理的可用性以及延迟</title>
+      <link>/2023/02/20/curl-%E6%A3%80%E6%B5%8B%E4%BB%A3%E7%90%86%E7%9A%84%E5%8F%AF%E7%94%A8%E6%80%A7%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F.html/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/20/curl-%E6%A3%80%E6%B5%8B%E4%BB%A3%E7%90%86%E7%9A%84%E5%8F%AF%E7%94%A8%E6%80%A7%E4%BB%A5%E5%8F%8A%E5%BB%B6%E8%BF%9F.html/</guid>
+      <description>背景 在办公网的代理翻墙的过程中，经常没办法第一时间知道代理失效了，因为我们自身不是高用的用户，每次挂了都需要员工来反馈，体感非常的不好，因此想着可以通过zabbix如果把当前的延迟、可用性检测起来
+通过Curl 检测Google的延迟 这里为啥是curl而不是ping，因为默认ping事不支持代理的，然而curl也可以做到真正的是否可用
+1 curl -o /dev/null -x socks5h://127.0.0.1:12126 -s --connect-timeout 5 -w %{time_starttransfer}&amp;#34;\n&amp;#34; $1 socks5h的地址需要改成你的代理地址
+1 2 3 4 5 6 7 8 9 10 # 获取当前代理的可用性 ```bash url=$1 result=($(curl -x socks5h://localhost:12126 -I -s --connect-timeout 5 ${url} | head -1 | tr &amp;#34;\r&amp;#34; &amp;#34;\n&amp;#34;)) if [ &amp;#34;${result[1]}&amp;#34; == $2 -a &amp;#34;${result[2]}&amp;#34; == &amp;#39;OK&amp;#39; ] then echo 1 else echo 0 fi zabbix操作脚本 1 2 3 4 5 # 延迟 UserParameter=googleTime[*],/etc/zabbix/script/googleTime.</description>
+    </item>
+    
+    <item>
+      <title>记录一次办公网全球化的改造计划</title>
+      <link>/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/</guid>
+      <description>背景 办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～
+之前尝试过下面这种方式： 新增一台海外的机器（新加坡、香港）搭建SS/v2ray/trojan之类的协议，然后办公网新增一个软路由去连接，通过ACL把部分IP的用户跳转过去； 但是这种方式自己家里用用还行，如果想要在企业的办公网来使用的话，人一多就不行，因为所有人都从这个IP出去了，而且每次都需要命令行去操作ACL增加用户，非常的麻烦；
+Panabit 的 iWAN 为了解决前面的这种方式，决定测试使用 Panabit 的 Iwan 的方式，也就是所谓的 Panabit 的 SD-WAN；
+重连速度很快：
+比L2TP的要快一个数量级，L2TP要重连，需要有几十次交互，而我们只需要一次即可 客户端不受底层承载线路IP变化影响：
+当底层承载线路（比如PPPOE拨号线路）的IP地址发生变化时，不会影响iWAN隧道，iWAN隧道不会中断，保证通信正常进行；
+因为很多用户是通过PPPOE拨号线路出去的，PPPOE拨号线路重拨时一般会改变IP地址，如果用L2TP的话，那么这个L2TP会话就要重建；
+而用iWAN的话，现有的会话可以照常使用，不需要做任何改变； 传输效率高：
+iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压缩IP报文头，这样可以继续减少额外报文头的大小，所以能大幅度提升传输效率；
+如果用国际线路的话，节省下来的流量费用都是很可观的； 抗干扰：
+不像L2TP，中间人可以直接发包TERMINATE，iWAN控制命令有完整性检查，可以避免中间人攻击。 部署 1、搭建panabit 记得服务器申请2H的，1H需要需改核心，非常麻烦 下载Linux系统文件：文末 上传文件到root根目录下
+1 2 3 4 tar -xzf PanabitFREE_SUIr2p3_20220413_Linux3.tar.gz cd PanabitFREE_SUIr2p3_20220413_Linux3 # 输入以下命令进行安装 ./ipeinstall 修改/etc/PG.conf文件 因为是单网口，所以数据口和管理口都需要配置成eth0，后面不要加任何东西
+1 DATA_PORTS 修改成：DATA_PORTS=&amp;#34;eth0&amp;#34; 修改端口 上传文件，修改配置 需要上传一个joskmc文件（文件在文末） 在/etc/PG.conf中新增一下一行
+1 HTTPS_PORT=2194 执行joskmc 1 /root/joskmc tcp 2194 修改：/etc/rc.local，增加一下三行 1 2 sleep 10 /root/joskmc tcp 2194 2、进行隧道配置（海外） (1)、登录WEB页面，修改网卡方向 默认账号密码：admin/panabit 系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路 (2)、创建WAN线路 应用路由 → 接口线路： 需要注意，Mac地址必须克隆 (3)、创建IWAN连接账号 对象管理 → 账号管理 → 组织架构： 地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好 地址范围需要把网关地址留出来！！！！！ 对象管理 → 账号管理 → 本地账号： 处理用户组需要选择前面创建的用户组，其他的根据实际情况填写 (4)、创建iWAN服务 应用路由 → iWAN服务 → 服务列表： 注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发 应用路由 → iWAN服务 → 服务映射： 根据配置情况选择即可 iWAN使用的是UDP连接，因此端口需要开放UDP (5)、创建策略路由 应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败 这里选择iWAN的线路 3、客户端配置（办公网） (1)、新建WAN线路 应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置 注意：必须有一个外网的网卡，并且最好把加密开起来 (2)、设置DNS牵引 应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改 主要解决DNS污染问题，要不然可能部分网站会无法访问 这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效 (3)、设置策略路由 应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载） 主要为了只有需要海外的才出去，不能把所有的流量全部导出去 附件 169IP段： https://www.</description>
+    </item>
+    
+    <item>
+      <title>清理自定义DHCP下发，异常断开导致IP地址占用的问题</title>
+      <link>/2023/02/16/%E6%B8%85%E7%90%86%E8%87%AA%E5%AE%9A%E4%B9%89dhcp%E4%B8%8B%E5%8F%91%E5%BC%82%E5%B8%B8%E6%96%AD%E5%BC%80%E5%AF%BC%E8%87%B4ip%E5%9C%B0%E5%9D%80%E5%8D%A0%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98.html/</link>
+      <pubDate>Thu, 16 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/16/%E6%B8%85%E7%90%86%E8%87%AA%E5%AE%9A%E4%B9%89dhcp%E4%B8%8B%E5%8F%91%E5%BC%82%E5%B8%B8%E6%96%AD%E5%BC%80%E5%AF%BC%E8%87%B4ip%E5%9C%B0%E5%9D%80%E5%8D%A0%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98.html/</guid>
+      <description>背景 因为OpenVpn存在断开重连的机制，如果突然出现网络抖动，用户端没有触发断开命令，但是同时又触发了重新连接的命令，这时候VPN这里就会重新给下发一个新的地址，但是老的地址不会回收掉，这个也是很早之前DHCP被用完的真正原因
+处理方式 在每一台openvpn的机器上新增一个shell脚本做定时任务，每天临晨2点开始循环遍历
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 #!/bin/bash IFS=$&amp;#39;\n&amp;#39; # 修改默认分隔符 OLDIFS=&amp;#34;$IFS&amp;#34; # 清理无效的IP地址 function clearIp(){ # 取出当前已经分配下去的所有IP地址 result=$(curl -s &amp;#34;后端获取当前使用IP的接口地址&amp;#34;); ipList=`echo $result | jq &amp;#39;.</description>
+    </item>
+    
+    <item>
+      <title>zabbix 警报推送至企业微信（图文版）</title>
+      <link>/2023/02/05/zabbix-%E8%AD%A6%E6%8A%A5%E6%8E%A8%E9%80%81%E8%87%B3%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E5%9B%BE%E6%96%87%E7%89%88.html/</link>
+      <pubDate>Sun, 05 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/02/05/zabbix-%E8%AD%A6%E6%8A%A5%E6%8E%A8%E9%80%81%E8%87%B3%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E5%9B%BE%E6%96%87%E7%89%88.html/</guid>
+      <description>新增Python脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 # encoding: utf-8 import sys import requests import json import os import time import re url = &amp;#39;http://xx.</description>
+    </item>
+    
+    <item>
+      <title>安装&amp;破解Openvpn Access Server</title>
+      <link>/2023/01/05/%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3openvpn-access-server.html/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/01/05/%E5%AE%89%E8%A3%85%E7%A0%B4%E8%A7%A3openvpn-access-server.html/</guid>
+      <description>在线安装（需要翻墙） 1 2 yum -y install https://as-repository.openvpn.net/as-repo-centos7.rpm yum -y install openvpn-as 管理员登录 首先需要修改管理员密码
+1 passwd openvpn 输入之后可以登录管理员页面了。
+如果密码一直错误的话，说明修改失败了，可以查看下原来的密码是什么
+1 cat /usr/local/openvpn_as/init.log 登录后点击User Management–&amp;gt;User Permissions 添加用户
+破解用户数 主要操作的文件是一个名叫 pyovpn-2.0-pyx.x.egg 的文件，以我了解的情况来看，从 2.5.0 到 2.9.x 文件名一直都是这个，只是不同版本里面的内容不一样. 这个文件有点类似 Java 当中的 jar 库文件，也是一个 zip 压缩文件，里面包含了一些 Python 的字节码文件. 破解的原理大概是在 Python 中采用类似 Java 动态代理的技术，将原本读取用户属性的调用返回值拦截，修改用户限制数量再返回. 方法 2.9.0 以下版本破解的目标文件是 /pyovpn/lic/uprop.pyo, 2.9.0 及以上是 /pyovpn/lic/uprop.pyc; 按照网上流行的破解方法，把这个文件解压出来并改名为 uprop2.pyo 或 uprop2.pyc, 然后新建一个 uprop.py 文件，内容如下:
+**2.9.0**以下版本内容:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 import uprop2 old_figure = None def new_figure(self, licdict): ret = old_figure(self, licdict) ret[&amp;#39;concurrent_connections&amp;#39;] = 1024 return ret for x in dir(uprop2): if x[:2] == &amp;#39;__&amp;#39;: continue if x == &amp;#39;UsageProperties&amp;#39;: exec(&amp;#39;old_figure = uprop2.</description>
+    </item>
+    
+    <item>
+      <title>openvpn动态下发权限</title>
+      <link>/2022/12/14/openvpn%E5%8A%A8%E6%80%81%E4%B8%8B%E5%8F%91%E6%9D%83%E9%99%90.html/</link>
+      <pubDate>Wed, 14 Dec 2022 00:00:00 +0800</pubDate>
+      
+      <guid>/2022/12/14/openvpn%E5%8A%A8%E6%80%81%E4%B8%8B%E5%8F%91%E6%9D%83%E9%99%90.html/</guid>
+      <description>首先了解我们为什么要动态下发 开源的openvpn并不支持权限管理，大部分在做权限管理的时候使用的都是根据来源IP或IP段通过iptables/交换机来进行权限控制 权限控制太广了，根本无法很好的去做管理后台的配置，特别是需要用户组来进行区分的时候，那就更困难了 权限下发的逻辑 {% plantuml %}
+title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn openvpn-&amp;gt;openvpn:下发IP地址，设置动态权限 openvpn-&amp;gt;用户:完成连接 {% endplantuml %}
+用到的技术 ipset iptables 主要脚本内容 连接脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 /sbin/ipset create ${common_name}-${common_ip} hash:ip /sbin/ipset create ${common_name}-${common_ip}-drop hash:ip # 这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现 for index in `seq 0 $permissionsAcceptLength`; do /sbin/ipset add ${common_name}-${common_ip} ${permissionsAccept[$index]//\&amp;#34;/} done for index in `seq 0 $permissionsDropLength`; do /sbin/ipset add ${common_name}-${common_ip}-drop ${permissionsDrop[$index]//\&amp;#34;/} done # 设置iptables /sbin/iptables -A FORWARD -s $common_ip -m set --match-set ${common_name}-${common_ip} dst -j ACCEPT /sbin/iptables -A FORWARD -s $common_ip -m set --match-set ${common_name}-${common_ip}-drop dst -j DROP /sbin/iptables -A FORWARD -s $common_ip -j DROP 断开脚本 1 2 3 4 5 /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set ${common_name}-${ifconfig_pool_remote_ip} dst -j ACCEPT /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set ${common_name}-${ifconfig_pool_remote_ip}-drop dst -j DROP /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -j DROP /sbin/ipset destroy ${common_name}-${ifconfig_pool_remote_ip} /sbin/ipset destroy ${common_name}-${ifconfig_pool_remote_ip}-drop 如果在运行的过程中出现脚本权限不足 1 2 3 chmod 766 connect.</description>
+    </item>
+    
+    <item>
+      <title>openvpn-auth（支持企业微信认证&amp;LDAP）</title>
+      <link>/2022/12/13/openvpn-auth%E6%94%AF%E6%8C%81%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E8%AE%A4%E8%AF%81ldap.html/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate>
+      
+      <guid>/2022/12/13/openvpn-auth%E6%94%AF%E6%8C%81%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E8%AE%A4%E8%AF%81ldap.html/</guid>
+      <description>方案介绍 时序图 openvpn-auth 时序图 其中有两个地方需要修改 corpid: 企业微信的企业ID corpsecret: 拥有通讯录的企业微信的Secret 代码如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 package auth import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;github.com/tidwall/gjson&amp;#34; ) func GetAccessToken() string { return GetWecomToken() } // 从企业微信获取Token func GetWecomToken() string { //创建一个请求 req, err := http.</description>
+    </item>
+    
+  </channel>
+</rss>

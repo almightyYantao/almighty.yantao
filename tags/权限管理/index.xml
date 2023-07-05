@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>权限管理 on Almighty.YanTao</title>
+    <link>/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 权限管理 on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 18 Apr 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过iptables进行wireguard的权限管理</title>
+      <link>/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/</guid>
+      <description>一、背景 由于目前openvpn的开源方案，链接VPN如果路由过多的话会导致链接速度变慢，效果非常的不理想，并且当iptables规则多的时候，转发明显性能下降；
+准备采用wireguard的方式来代替openvpn的隧道协议，但是wireguard目前没有一个很好的权限管理方案；
+二、服务端 2.1、安装wireguard 1 curl -O https://raw.githubusercontent.com/atrandys/wireguard/master/wg_mult.sh &amp;amp;&amp;amp; chmod +x wg_mult.sh &amp;amp;&amp;amp; ./wg_mult.sh 2.2、设置访问权限 环境变量：WG_PEER_IP可以获取连接着的IP地址
+1 2 PostUp = /path/to/script.sh PostDown = /path/to/teardown.sh 然后在根据情况设置ipset和iptables
+2.3、脚本案例 /path/to/script.sh 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 #!/bin/bash result=$(curl -s &amp;#34;VPN后端连接接口地址&amp;#34; | jq &amp;#39;.d&amp;#39;) permissionsAccept=($(jq &amp;#39;.accept[]&amp;#39; &amp;lt;&amp;lt;&amp;lt;$result)) permissionsDrop=($(jq &amp;#39;.drop[]&amp;#39; &amp;lt;&amp;lt;&amp;lt;$result)) # 创建新的ipset组 ipset create $WG_PEER_IP hash:ip ipset create ${WG_PEER_IP}-drop hash:ip for ((i=0;i&amp;lt;${#permissionsAccept[@]};i++)) do ipset add $WG_PEER_IP ${permissionsAccept[$i]//\&amp;#34;/} done for ((i=0;i&amp;lt;${#permissionsDrop[@]};i++)) do ipset add ${WG_PEER_IP}-drop ${permissionsDrop[$i]//\&amp;#34;/} done # 设置iptables生效规则 iptables -A FORWARD -s $WG_PEER_IP -m set --match-set ${WG_PEER_IP}-drop dst -j DROP iptables -A FORWARD -s $WG_PEER_IP -m set --match-set $WG_PEER_IP dst -j ACCEPT # 剩余没有匹配到的全部拒绝 iptables -A FORWARD -s $WG_PEER_IP -j DROP if [ $code = -1 ];then exit 1 ; fi /path/to/teardown.</description>
+    </item>
+    
+  </channel>
+</rss>

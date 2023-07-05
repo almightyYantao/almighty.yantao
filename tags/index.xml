@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Almighty.YanTao</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CentOS</title>
+      <link>/tags/centos/</link>
+      <pubDate>Fri, 16 Jun 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/centos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Confluence</title>
+      <link>/tags/confluence/</link>
+      <pubDate>Fri, 16 Jun 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/confluence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>破解</title>
+      <link>/tags/%E7%A0%B4%E8%A7%A3/</link>
+      <pubDate>Fri, 16 Jun 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E7%A0%B4%E8%A7%A3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VCenter</title>
+      <link>/tags/vcenter/</link>
+      <pubDate>Fri, 19 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/vcenter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VSphere</title>
+      <link>/tags/vsphere/</link>
+      <pubDate>Fri, 19 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/vsphere/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>/tags/nginx/</link>
+      <pubDate>Thu, 18 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSL</title>
+      <link>/tags/ssl/</link>
+      <pubDate>Thu, 18 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/ssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tomcat</title>
+      <link>/tags/tomcat/</link>
+      <pubDate>Thu, 18 May 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/tomcat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bbr</title>
+      <link>/tags/bbr/</link>
+      <pubDate>Mon, 24 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/bbr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>加速</title>
+      <link>/tags/%E5%8A%A0%E9%80%9F/</link>
+      <pubDate>Mon, 24 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E5%8A%A0%E9%80%9F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash</title>
+      <link>/tags/bash/</link>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wg-quick</title>
+      <link>/tags/wg-quick/</link>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/wg-quick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wireguard</title>
+      <link>/tags/wireguard/</link>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/wireguard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wireguard-tool</title>
+      <link>/tags/wireguard-tool/</link>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/wireguard-tool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>/tags/python/</link>
+      <pubDate>Wed, 19 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>/tags/ssh/</link>
+      <pubDate>Wed, 19 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>/tags/github/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>/tags/hugo/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>权限</title>
+      <link>/tags/%E6%9D%83%E9%99%90/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E6%9D%83%E9%99%90/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>权限管理</title>
+      <link>/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>自动化部署</title>
+      <link>/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Tue, 18 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tcp</title>
+      <link>/tags/tcp/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/tcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>udp</title>
+      <link>/tags/udp/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/udp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zabbix</title>
+      <link>/tags/zabbix/</link>
+      <pubDate>Sat, 11 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/zabbix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Obsidian</title>
+      <link>/tags/obsidian/</link>
+      <pubDate>Mon, 06 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/obsidian/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openwrt</title>
+      <link>/tags/openwrt/</link>
+      <pubDate>Tue, 28 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/openwrt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>多拨</title>
+      <link>/tags/%E5%A4%9A%E6%8B%A8/</link>
+      <pubDate>Tue, 28 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E5%A4%9A%E6%8B%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chatgpt</title>
+      <link>/tags/chatgpt/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/chatgpt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gpt</title>
+      <link>/tags/gpt/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/gpt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>telegram</title>
+      <link>/tags/telegram/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/telegram/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>curl</title>
+      <link>/tags/curl/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/curl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>代理</title>
+      <link>/tags/%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E4%BB%A3%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>检测</title>
+      <link>/tags/%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Mon, 20 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E6%A3%80%E6%B5%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iwan</title>
+      <link>/tags/iwan/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/iwan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Panabit</title>
+      <link>/tags/panabit/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/panabit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sd-wan</title>
+      <link>/tags/sd-wan/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/sd-wan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>办公网</title>
+      <link>/tags/%E5%8A%9E%E5%85%AC%E7%BD%91/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E5%8A%9E%E5%85%AC%E7%BD%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>国际化</title>
+      <link>/tags/%E5%9B%BD%E9%99%85%E5%8C%96/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E5%9B%BD%E9%99%85%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>全球办公</title>
+      <link>/tags/%E5%85%A8%E7%90%83%E5%8A%9E%E5%85%AC/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E5%85%A8%E7%90%83%E5%8A%9E%E5%85%AC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>全球化</title>
+      <link>/tags/%E5%85%A8%E7%90%83%E5%8C%96/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E5%85%A8%E7%90%83%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dhcp</title>
+      <link>/tags/dhcp/</link>
+      <pubDate>Thu, 16 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/dhcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openvpn</title>
+      <link>/tags/openvpn/</link>
+      <pubDate>Thu, 16 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/openvpn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>报警</title>
+      <link>/tags/%E6%8A%A5%E8%AD%A6/</link>
+      <pubDate>Sun, 05 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E6%8A%A5%E8%AD%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>企业微信</title>
+      <link>/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/</link>
+      <pubDate>Sun, 05 Feb 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>2.9.0</title>
+      <link>/tags/2.9.0/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/2.9.0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openvpn access server</title>
+      <link>/tags/openvpn-access-server/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/openvpn-access-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>动态下发</title>
+      <link>/tags/%E5%8A%A8%E6%80%81%E4%B8%8B%E5%8F%91/</link>
+      <pubDate>Wed, 14 Dec 2022 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E5%8A%A8%E6%80%81%E4%B8%8B%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ldap</title>
+      <link>/tags/ldap/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/ldap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openvpn-auth</title>
+      <link>/tags/openvpn-auth/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/openvpn-auth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wecom</title>
+      <link>/tags/wecom/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/wecom/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>认证</title>
+      <link>/tags/%E8%AE%A4%E8%AF%81/</link>
+      <pubDate>Tue, 13 Dec 2022 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E8%AE%A4%E8%AF%81/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

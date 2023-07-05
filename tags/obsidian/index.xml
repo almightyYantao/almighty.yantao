@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Obsidian on Almighty.YanTao</title>
+    <link>/tags/obsidian/</link>
+    <description>Recent content in Obsidian on Almighty.YanTao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 06 Mar 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/obsidian/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Obsidian 免费的实时同步服务</title>
+      <link>/2023/03/06/obsidian-%E5%85%8D%E8%B4%B9%E7%9A%84%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1.html/</link>
+      <pubDate>Mon, 06 Mar 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/03/06/obsidian-%E5%85%8D%E8%B4%B9%E7%9A%84%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1.html/</guid>
+      <description>使用 fly.io 免费计划部署或自托管数据库，进行 LiveSync 插件的一系列配置后实现各设备间 Obsidian 实时增量修改同步，可以和官方同步服务相媲美。
+使用 fly.io 这次使用的是 fly.io 的免费计划，fly.io 是一个 SAAS（是（Platform as a Service）的缩写，是指平台即服务）平台，可以搭建如静态博客、Nextjs、Nuxtjs、Deno、Go、Python 等底层的各种各样的服务。但首先需要自己注册一个账号，这里可以直接使用 Github 登录。 注意：fly.io 的使用需要绑卡，如果没有绑卡会在创建应用 章节出现 Error 提示。绑卡过程请在 fly.io 面板 中 Billing 进行。正常使用国内的双币卡就可以，注意请如实填写信息。没有卡的朋友可以去各银行办一张（超好过的😗）或试试虚拟卡？（虚拟卡只是博主想到的一种方案，没有试过）
+安装 flyctl Windows 用户在本地打开 PowerShell 或 Windows 终端💻，输入：
+1 iwr https://fly.io/install.ps1 -useb | iex 注意：CMD 中不支持上面的命令，如果电脑中只有 CMD，或许你需要安装 PowerShell （选择 latest 版本）或 Windows 终端 。
+本地登录 1 flyctl auth signup 会自动打开浏览器进行验证账户操作。
+创建应用 在本地任意位置创建一个 fly.io 的工作目录（其实就是创建个能找到的文件夹，你不会放桌面上了吧😂？）。
+1 2 3 4 mkdir fly.io cd fly.</description>
+    </item>
+    
+  </channel>
+</rss>
