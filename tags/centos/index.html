@@ -10,7 +10,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="CentOS" />
 <meta property="og:description" content="一个混迹在IT行业的菜鸟" />
-<meta property="og:url" content="/tags/centos/" /><meta property="article:publisher" content="/tags/centos/" /><meta property="og:updated_time" content=" 2023-07-05T15:15:49&#43;08:00 " /><meta name="theme-color" content="#dd6065" />
+<meta property="og:url" content="/tags/centos/" /><meta property="article:publisher" content="/tags/centos/" /><meta property="og:updated_time" content=" 2023-07-05T15:48:01&#43;08:00 " /><meta name="theme-color" content="#dd6065" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="标签: CentOS - Almighty.YanTao" />
 <meta name="apple-mobile-web-app-status-bar-style" content="white" />
@@ -142,8 +142,11 @@ mysql-connector-java版本：mysql-connector-java-5.1.49 注：以上插件下�
 禁止防火墙开机自启 systemctl disable firewalld.service​
 关闭 selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config
 重启系统即可 reboot
-安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现： Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed 错误，那么就需要需要重新导入密钥了
-1 rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 修改配置文件 1 2 3 4 5 6 7 8 9 10 11 vi /etc/my.">简介 Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。部署Confluence前，需确认服务器已部署Nginx&#43;MySQL环境。
+安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现：
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
+错误，那么就需要需要重新导入密钥了
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+1 2 3 4 5 6 7 8 9 10 11 12 13 ### 修改配置文件 ```bash vi /etc/my.">简介 Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。部署Confluence前，需确认服务器已部署Nginx&#43;MySQL环境。
 搭建环境 系统版本：CentOS Linux release 7.6.1810 (Core)
 confluence版本：Confluence 7.13.4（最新版本）
 Java版本：java-11-openjdk-devel.x86_64
@@ -156,8 +159,11 @@ mysql-connector-java版本：mysql-connector-java-5.1.49 注：以上插件下�
 禁止防火墙开机自启 systemctl disable firewalld.service​
 关闭 selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config
 重启系统即可 reboot
-安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现： Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed 错误，那么就需要需要重新导入密钥了
-1 rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 修改配置文件 1 2 3 4 5 6 7 8 9 10 11 vi /etc/my.</div></div>
+安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现：
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
+错误，那么就需要需要重新导入密钥了
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+1 2 3 4 5 6 7 8 9 10 11 12 13 ### 修改配置文件 ```bash vi /etc/my.</div></div>
     </div>
 </a>
 
@@ -175,8 +181,11 @@ mysql-connector-java版本：mysql-connector-java-5.1.49 注：以上插件下�
 禁止防火墙开机自启 systemctl disable firewalld.service​
 关闭 selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config
 重启系统即可 reboot
-安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现： Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed 错误，那么就需要需要重新导入密钥了
-1 rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 修改配置文件 1 2 3 4 5 6 7 8 9 10 11 vi /etc/my.">简介 Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。部署Confluence前，需确认服务器已部署Nginx&#43;MySQL环境。
+安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现：
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
+错误，那么就需要需要重新导入密钥了
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+1 2 3 4 5 6 7 8 9 10 11 12 13 ### 修改配置文件 ```bash vi /etc/my.">简介 Confluence是一个专业的企业知识管理与协同软件，也可以用于构建企业wiki。使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。部署Confluence前，需确认服务器已部署Nginx&#43;MySQL环境。
 搭建环境 系统版本：CentOS Linux release 7.6.1810 (Core)
 confluence版本：Confluence 7.13.4（最新版本）
 Java版本：java-11-openjdk-devel.x86_64
@@ -189,8 +198,11 @@ mysql-connector-java版本：mysql-connector-java-5.1.49 注：以上插件下�
 禁止防火墙开机自启 systemctl disable firewalld.service​
 关闭 selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config
 重启系统即可 reboot
-安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现： Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed 错误，那么就需要需要重新导入密钥了
-1 rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 修改配置文件 1 2 3 4 5 6 7 8 9 10 11 vi /etc/my.</div></div>
+安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现：
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
+错误，那么就需要需要重新导入密钥了
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+1 2 3 4 5 6 7 8 9 10 11 12 13 ### 修改配置文件 ```bash vi /etc/my.</div></div>
 <div class="article-info flex justify-between px-5 py-4 text-sm">
     <div class="sm:text-inherit flex text-gray-400 dark:text-gray-400">
         <div class="mr-3 flex items-center md:mr-4">

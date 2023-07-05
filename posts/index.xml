@@ -26,8 +26,11 @@ mysql-connector-java版本：mysql-connector-java-5.1.49 注：以上插件下�
 禁止防火墙开机自启 systemctl disable firewalld.service​
 关闭 selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config
 重启系统即可 reboot
-安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现： Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed 错误，那么就需要需要重新导入密钥了
-1 rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022 修改配置文件 1 2 3 4 5 6 7 8 9 10 11 vi /etc/my.</description>
+安装数据库 下载mysql数据库社区yum源 1 2 3 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​ rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm yum -y install mysql-community-server 如果出现：
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
+错误，那么就需要需要重新导入密钥了
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+1 2 3 4 5 6 7 8 9 10 11 12 13 ### 修改配置文件 ```bash vi /etc/my.</description>
     </item>
     
     <item>

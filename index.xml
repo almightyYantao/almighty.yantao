@@ -89,25 +89,10 @@ Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​&lt;/p&gt;
 &gt;
     &lt;div class=&#34;mr-2&#34;&gt;
         &lt;i class=&#34;eva text-red-400 eva-minus-circle-outline text-2xl&#34;&gt;&lt;/i&gt;
-    &lt;/div&gt;&lt;p&gt;如果出现：
-Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
-错误，那么就需要需要重新导入密钥了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;
-
-
-
-&lt;h3 class=&#34;group &#34; id=&#34;修改配置文件&#34;
-    &gt;修改配置文件&lt;a href=&#34;#%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6&#34;
-        &gt;&lt;i class=&#34;eva eva-link ml-3 align-middle text-theme opacity-0 transition ease-in-out group-hover:opacity-100&#34;&gt;&lt;/i&gt;&lt;/a
-&gt;&lt;/h3&gt;
+    &lt;/div&gt;&lt;p style=&#34;margin: 0;&#34;&gt;如果出现：&lt;br&gt;
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed&lt;br&gt;
+错误，那么就需要需要重新导入密钥了&lt;br&gt;
+&lt;code&gt;rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -122,19 +107,23 @@ Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;13
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vi /etc/my.cnf
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;mysqld&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;下添加如下字段
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;character-set-server&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;utf8mb4
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;collation-server&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;utf8mb4_bin
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;default-storage-engine&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;INNODB
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;max_allowed_packet&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;64M
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;innodb_log_file_size&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;512M
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;transaction-isolation&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;READ-COMMITTED
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;binlog_format&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;row
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;log_bin_trust_function_creators&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;optimizer_switch&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;derived_merge&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;off
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;### 修改配置文件
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;```bash
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vi /etc/my.cnf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[mysqld]下添加如下字段
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;character-set-server=utf8mb4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;collation-server=utf8mb4_bin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;default-storage-engine=INNODB
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;max_allowed_packet=64M
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;innodb_log_file_size=512M
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;transaction-isolation=READ-COMMITTED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;binlog_format=row
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log_bin_trust_function_creators = 1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;optimizer_switch = derived_merge=off
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -209,6 +198,10 @@ Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
     class=&#34;link&#34;
     href=&#34;https://www.atlassian.com/zh/software/confluence/download-archives&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.atlassian.com/zh/software/confluence/download-archives&lt;/a
 &gt;
+可以直接下载&lt;a
+    class=&#34;link&#34;
+    href=&#34;https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-7.13.4-x64.bin&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;7.13.4&lt;/a
+&gt;
 &lt;/li&gt;
 &lt;li&gt;mysql插件下载地址： &lt;a
     class=&#34;link&#34;
@@ -259,10 +252,19 @@ Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./atlassian-confluence-7.13.5-x64.bin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;根据提示直接默认安装即可&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;confluence安装到了&lt;code&gt;/opt/atlassian/confluence&lt;/code&gt;和&lt;code&gt;/var/atlassian/application-data/confluence&lt;/code&gt;目录下，并且confluence默认监听的端口是8090.一路默认安装即可！注意confluence的主要配置文件为&lt;code&gt;/opt/atlassian/confluence/conf/server.xml&lt;/code&gt;，和jira类似。此server.xml相当于tomcat中的server.xml配置文件，如果要修改访问端口，可以这里修改。如果要修改confluence的数据目录，可以在安装的时候，在安装过程中进行更换（默认是&lt;code&gt;/var/atlassian/application-data/confluence&lt;/code&gt;）&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;/div&gt;&lt;p&gt;根据提示直接默认安装即可&lt;br&gt;
+&lt;div class=&#34;border-yellow-400 border-green-400 border-red-400 border-blue-400&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;bg-yellow-400 bg-green-400 bg-red-400 bg-blue-400&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;text-yellow-400 text-green-400 text-red-400 text-blue-400&#34;&gt;&lt;/div&gt;
+
+&lt;div
+    class=&#34;border-yellow-400 bg-yellow-400 my-4 ml-0 flex items-start rounded border-l-4 bg-opacity-10 p-5 dark:bg-darkBgAccent&#34;
+    
+&gt;
+    &lt;div class=&#34;mr-2&#34;&gt;
+        &lt;i class=&#34;eva text-yellow-400 eva-alert-circle-outline text-2xl&#34;&gt;&lt;/i&gt;
+    &lt;/div&gt;&lt;p style=&#34;margin: 0;&#34;&gt;confluence安装到了&lt;code&gt;/opt/atlassian/confluence&lt;/code&gt;和&lt;code&gt;/var/atlassian/application-data/confluence&lt;/code&gt;目录下，并且confluence默认监听的端口是8090.一路默认安装即可！注意confluence的主要配置文件为&lt;code&gt;/opt/atlassian/confluence/conf/server.xml&lt;/code&gt;，和jira类似。此server.xml相当于tomcat中的server.xml配置文件，如果要修改访问端口，可以这里修改。如果要修改confluence的数据目录，可以在安装的时候，在安装过程中进行更换（默认是&lt;code&gt;/var/atlassian/application-data/confluence&lt;/code&gt;）&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
 
 &lt;h3 class=&#34;group &#34; id=&#34;查看端口是否启动并被监听&#34;
@@ -288,11 +290,9 @@ Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp /opt/atlassian/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49-bin.jar
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/opt/atlassian/confluence/confluence/WEB-INF/lib/
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cp /opt/atlassian/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49-bin.jar /opt/atlassian/confluence/confluence/WEB-INF/lib/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -322,7 +322,7 @@ Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;echo&lt;/span&gt; -e ‘&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;export &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;JAVA_OPTS&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;“-javaagent:/opt/atlassian/atlassian-agent-v1.2.3/atlassian-agent.jar &lt;span style=&#34;color:#f1fa8c&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;JAVA_OPTS&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;}&lt;/span&gt;”&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;’ &amp;gt;&amp;gt; /opt/atlassian/confluence/bin/setenv.sh
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;echo&lt;/span&gt; -e &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;\nexport JAVA_OPTS=&amp;#34;-javaagent:/opt/atlassian/atlassian-agent-v1.2.3/atlassian-agent.jar ${JAVA_OPTS}&amp;#34;\n&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /opt/atlassian/confluence/bin/setenv.sh
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
