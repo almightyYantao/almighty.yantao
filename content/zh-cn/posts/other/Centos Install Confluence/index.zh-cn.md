@@ -22,7 +22,7 @@ Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​
 
 关闭防火墙 `systemctl stop firewalld.service​`  
 禁止防火墙开机自启 `systemctl disable firewalld.service​`  
-关闭 `selinux​ sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config`  
+关闭 selinux​ `sed -i ‘s/SELINUX=enforcing/SELINUX=disabled/g’ /etc/selinux/config`  
 重启系统即可 `reboot`
 
 ## 安装数据库
@@ -31,6 +31,13 @@ Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​
 wget  http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm​
 rpm -Uvh --force --nodeps mysql57-community-release-el7-10.noarch.rpm
 yum -y install mysql-community-server
+```
+{{< notice error >}}
+如果出现：  
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed  
+错误，那么就需要需要重新导入密钥了  
+`rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022`
+{{< /notice >}}
 ```
 ### 修改配置文件
 ```bash
@@ -55,7 +62,7 @@ systemctl enable mysqld
 ```sql
 create database confluence default character set utf8mb4 collate utf8mb4_bin;
 grant all on confluence.* to 'confluence'@'%' identified by 'Confluence.123' with grant option;
-grant all on confluence.* to 'confluence'@localhost identified by ‘Confluence.123’ with grant option;
+grant all on confluence.* to 'confluence'@localhost identified by 'Confluence.123' with grant option;
 flush privileges;
 ```
 ## 安装 Confluence
@@ -64,7 +71,7 @@ flush privileges;
 mkdir /opt/atlassian/
 ```
 ### 下载资源文件
-- confluence下载地址： [https://www.atlassian.com/zh/software/confluence/download-archives](https://www.atlassian.com/zh/software/confluence/download-archives)
+- confluence下载地址： [https://www.atlassian.com/zh/software/confluence/download-archives](https://www.atlassian.com/zh/software/confluence/download-archives)可以直接下载[7.13.4](https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-7.13.4-x64.bin)
 - mysql插件下载地址： [https://downloads.mysql.com/archives/c-j/](https://downloads.mysql.com/archives/c-j/)
 - atlassian-agent下载地址： [https://raw.githubusercontent.com/pmkol/atlassian-agent/master/atlassian-agent-v1.2.3.tar.gz](https://raw.githubusercontent.com/pmkol/atlassian-agent/master/atlassian-agent-v1.2.3.tar.gz)
 ### 解压文件
@@ -81,15 +88,16 @@ chmod +x /opt/atlassian/*
 ./atlassian-confluence-7.13.5-x64.bin
 ```
 根据提示直接默认安装即可  
->confluence安装到了`/opt/atlassian/confluence`和`/var/atlassian/application-data/confluence`目录下，并且confluence默认监听的端口是8090.一路默认安装即可！注意confluence的主要配置文件为`/opt/atlassian/confluence/conf/server.xml`，和jira类似。此server.xml相当于tomcat中的server.xml配置文件，如果要修改访问端口，可以这里修改。如果要修改confluence的数据目录，可以在安装的时候，在安装过程中进行更换（默认是`/var/atlassian/application-data/confluence`）
+{{< notice warn >}}
+confluence安装到了`/opt/atlassian/confluence`和`/var/atlassian/application-data/confluence`目录下，并且confluence默认监听的端口是8090.一路默认安装即可！注意confluence的主要配置文件为`/opt/atlassian/confluence/conf/server.xml`，和jira类似。此server.xml相当于tomcat中的server.xml配置文件，如果要修改访问端口，可以这里修改。如果要修改confluence的数据目录，可以在安装的时候，在安装过程中进行更换（默认是`/var/atlassian/application-data/confluence`）
+{{< /notice >}}
 ### 查看端口是否启动并被监听
 ```bash
 lsof -i :8090
 ```
 ### 安装 mysql 驱动
 ```bash
-cp /opt/atlassian/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49-bin.jar
-/opt/atlassian/confluence/confluence/WEB-INF/lib/
+cp /opt/atlassian/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49-bin.jar /opt/atlassian/confluence/confluence/WEB-INF/lib/
 ```
 ### 安装JDK
 ```bash
@@ -97,7 +105,7 @@ yum install java-11-openjdk-devel.x86_64
 ```
 ### 安装 atlassian-agent
 ```bash
-echo -e ‘\nexport JAVA_OPTS=“-javaagent:/opt/atlassian/atlassian-agent-v1.2.3/atlassian-agent.jar ${JAVA_OPTS}”\n’ >> /opt/atlassian/confluence/bin/setenv.sh
+echo -e '\nexport JAVA_OPTS="-javaagent:/opt/atlassian/atlassian-agent-v1.2.3/atlassian-agent.jar ${JAVA_OPTS}"\n' >> /opt/atlassian/confluence/bin/setenv.sh
 ```
 ### 重启 Confluence
 ```bash
