@@ -79,7 +79,30 @@ Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum -y install mysql-community-server
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;border-yellow-400 border-green-400 border-red-400 border-blue-400&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;bg-yellow-400 bg-green-400 bg-red-400 bg-blue-400&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;text-yellow-400 text-green-400 text-red-400 text-blue-400&#34;&gt;&lt;/div&gt;
+
+&lt;div
+    class=&#34;border-red-400 bg-red-400 my-4 ml-0 flex items-start rounded border-l-4 bg-opacity-10 p-5 dark:bg-darkBgAccent&#34;
+    
+&gt;
+    &lt;div class=&#34;mr-2&#34;&gt;
+        &lt;i class=&#34;eva text-red-400 eva-minus-circle-outline text-2xl&#34;&gt;&lt;/i&gt;
+    &lt;/div&gt;&lt;p&gt;如果出现：
+Public key for mysql-community-common-5.7.42-1.el7.x86_64.rpm is not installed
+错误，那么就需要需要重新导入密钥了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+
+
 
 &lt;h3 class=&#34;group &#34; id=&#34;修改配置文件&#34;
     &gt;修改配置文件&lt;a href=&#34;#%e4%bf%ae%e6%94%b9%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6&#34;
@@ -148,7 +171,7 @@ Mysql-server版本：mysql-community-server.x86_64 0:5.7.22-1.el7​&lt;/p&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;database&lt;/span&gt; confluence &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;character&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;set&lt;/span&gt; utf8mb4 &lt;span style=&#34;color:#ff79c6&#34;&gt;collate&lt;/span&gt; utf8mb4_bin;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;grant&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;all&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;on&lt;/span&gt; confluence.&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;confluence&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; identified &lt;span style=&#34;color:#ff79c6&#34;&gt;by&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;Confluence.123&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;grant&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;option&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;grant&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;all&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;on&lt;/span&gt; confluence.&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;confluence&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;@&lt;/span&gt;localhost identified &lt;span style=&#34;color:#ff79c6&#34;&gt;by&lt;/span&gt; ‘Confluence.&lt;span style=&#34;color:#bd93f9&#34;&gt;123&lt;/span&gt;’ &lt;span style=&#34;color:#ff79c6&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;grant&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;option&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;grant&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;all&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;on&lt;/span&gt; confluence.&lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;confluence&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;@&lt;/span&gt;localhost identified &lt;span style=&#34;color:#ff79c6&#34;&gt;by&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;Confluence.123&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;grant&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;option&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;flush &lt;span style=&#34;color:#ff79c6&#34;&gt;privileges&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
