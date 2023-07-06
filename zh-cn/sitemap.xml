@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/tags/agent/</loc>
+    <lastmod>2023-07-06T15:44:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>/</loc>
-    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
+    <lastmod>2023-07-06T15:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -22,28 +27,13 @@
                 href="/"
                 />
   </url><url>
-    <loc>/tags/centos/</loc>
-    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>/2023/06/16/centos-7-%E5%AE%89%E8%A3%85-confluence-%E5%B9%B6%E4%B8%94%E7%A0%B4%E8%A7%A3.html/</loc>
-    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>/tags/confluence/</loc>
-    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>/posts/</loc>
-    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
+    <lastmod>2023-07-06T15:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>/tags/</loc>
-    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
+    <lastmod>2023-07-06T15:44:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -61,6 +51,36 @@
                 hreflang="zh-cn"
                 href="/tags/"
                 />
+  </url><url>
+    <loc>/tags/zabbix/</loc>
+    <lastmod>2023-07-06T15:44:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/tags/zabbix-agent/</loc>
+    <lastmod>2023-07-06T15:44:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/2023/07/06/%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%86%85%E9%83%A8%E7%9A%84-zabbix-%E7%9B%91%E6%8E%A7-agent.html/</loc>
+    <lastmod>2023-07-06T15:44:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/tags/centos/</loc>
+    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/2023/06/16/centos-7-%E5%AE%89%E8%A3%85-confluence-%E5%B9%B6%E4%B8%94%E7%A0%B4%E8%A7%A3.html/</loc>
+    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/tags/confluence/</loc>
+    <lastmod>2023-07-05T15:48:01+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>/tags/%E7%A0%B4%E8%A7%A3/</loc>
     <lastmod>2023-07-05T15:48:01+08:00</lastmod>
@@ -204,11 +224,6 @@
   </url><url>
     <loc>/tags/udp/</loc>
     <lastmod>2023-04-21T10:14:16+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>/tags/zabbix/</loc>
-    <lastmod>2023-07-04T17:43:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
