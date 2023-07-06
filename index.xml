@@ -16,10 +16,10 @@
         <lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0800</lastBuildDate>
         <language>zh-cn</language>
         <generator>Hugo -- gohugo.io</generator><item>
-            <title>制作一个内部的 zabbix 监控 Agent</title>
-            <link>/2023/07/06/%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%86%85%E9%83%A8%E7%9A%84-zabbix-%E7%9B%91%E6%8E%A7-agent.html/</link>
+            <title>制作一个内部的 zabbix-agent 快速部署脚本</title>
+            <link>/2023/07/06/%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%86%85%E9%83%A8%E7%9A%84-zabbix-agent-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC.html/</link>
             <pubDate>Thu, 06 Jul 2023 00:00:00 +0800</pubDate>
-            <guid>/2023/07/06/%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%86%85%E9%83%A8%E7%9A%84-zabbix-%E7%9B%91%E6%8E%A7-agent.html/</guid><description>
+            <guid>/2023/07/06/%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%86%85%E9%83%A8%E7%9A%84-zabbix-agent-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC.html/</guid><description>
 
 &lt;h2 class=&#34;group &#34; id=&#34;下载官方的基础-agent-部署包&#34;
     &gt;下载官方的基础 agent 部署包&lt;a href=&#34;#%e4%b8%8b%e8%bd%bd%e5%ae%98%e6%96%b9%e7%9a%84%e5%9f%ba%e7%a1%80-agent-%e9%83%a8%e7%bd%b2%e5%8c%85&#34;
