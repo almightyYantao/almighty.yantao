@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
+                "file": "content/zh-cn/posts/zabbix/制作一个内部的 zabbix 监控 Agent/index.zh-cn.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
+                "file": "content/zh-cn/posts/zabbix/制作一个内部的 zabbix 监控 Agent/index.zh-cn.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
+                "file": "content/zh-cn/posts/zabbix/制作一个内部的 zabbix 监控 Agent/index.zh-cn.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md"
+                "file": "content/zh-cn/posts/zabbix/制作一个内部的 zabbix 监控 Agent/index.zh-cn.md"
               }
             }
           }
@@ -159,24 +159,28 @@
     "public/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css",
     "public/robots.txt",
     "public/sitemap.xml",
-    "public/index.xml",
-    "public/tags/认证/index.xml",
-    "public/tags/检测/index.xml",
     "public/tags/自动化部署/index.xml",
+    "public/tags/认证/index.xml",
+    "public/tags/权限管理/index.xml",
+    "public/tags/权限/index.xml",
+    "public/tags/多拨/index.xml",
     "public/tags/破解/index.xml",
-    "public/tags/企业微信/index.xml",
     "public/tags/报警/index.xml",
     "public/tags/国际化/index.xml",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
     "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
     "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_66df8b40cec26a8c5681f8581fbc4f22.jpg",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
     "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
     "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_q95_h2_catmullrom_3.webp",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png",
     "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_catmullrom_3.png",
-    "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1080x0_resize_q95_h2_catmullrom_3.webp",
-    "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1080x0_resize_catmullrom_3.png",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
+    "content/zh-cn/posts/zabbix/制作一个内部的 zabbix 监控 Agent/index.zh-cn.md",
+    "content/zh-cn/posts/other/VSPhere VCenter 6.5以上版本安装80%失败处理/index.zh-cn.md",
+    "content/zh-cn/posts/zabbix/zabbix-wecom/index.zh-cn.md",
+    "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
     "content/zh-cn/github.zh-cn.md",
     "content/zh-cn/github.md",
     "content/zh-cn/posts/openvpn/openvpn-auth/index.zh-cn.md",
@@ -198,10 +202,6 @@
     "themes/hugo-theme-luna/node_modules/csso/README.md",
     "themes/hugo-theme-luna/node_modules/csso/CHANGELOG.md",
     "themes/hugo-theme-luna/node_modules/object.assign/README.md",
-    "themes/hugo-theme-luna/node_modules/object.assign/CHANGELOG.md",
-    "themes/hugo-theme-luna/node_modules/yaml/README.md",
-    "themes/hugo-theme-luna/node_modules/postcss-easing-gradients/node_modules/postcss/README.md",
-    "themes/hugo-theme-luna/node_modules/postcss-selector-parser/README.md",
     "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/未命名.canvas"
   ]
 }
