@@ -6,7 +6,34 @@
     <description>Recent content in Tags on Almighty.YanTao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Jul 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>shell</title>
+      <link>/tags/shell/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>磁盘</title>
+      <link>/tags/%E7%A3%81%E7%9B%98/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E7%A3%81%E7%9B%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>磁盘读写</title>
+      <link>/tags/%E7%A3%81%E7%9B%98%E8%AF%BB%E5%86%99/</link>
+      <pubDate>Sat, 08 Jul 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/%E7%A3%81%E7%9B%98%E8%AF%BB%E5%86%99/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>agent</title>
       <link>/tags/agent/</link>

@@ -2,13 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/tags/agent/</loc>
-    <lastmod>2023-07-06T15:47:43+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>/</loc>
-    <lastmod>2023-07-06T15:47:43+08:00</lastmod>
+    <lastmod>2023-07-08T15:48:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -28,12 +23,17 @@
                 />
   </url><url>
     <loc>/posts/</loc>
-    <lastmod>2023-07-06T15:47:43+08:00</lastmod>
+    <lastmod>2023-07-08T15:48:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/tags/shell/</loc>
+    <lastmod>2023-07-08T15:48:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>/tags/</loc>
-    <lastmod>2023-07-06T15:47:43+08:00</lastmod>
+    <lastmod>2023-07-08T15:48:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -51,6 +51,26 @@
                 hreflang="zh-cn"
                 href="/tags/"
                 />
+  </url><url>
+    <loc>/tags/%E7%A3%81%E7%9B%98/</loc>
+    <lastmod>2023-07-08T15:48:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/tags/%E7%A3%81%E7%9B%98%E8%AF%BB%E5%86%99/</loc>
+    <lastmod>2023-07-08T15:48:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/2023/07/08/%E5%88%A9%E7%94%A8-shell-%E7%9B%91%E6%8E%A7%E7%A3%81%E7%9B%98%E7%9A%84%E8%AF%BB%E5%86%99%E6%83%85%E5%86%B5.html/</loc>
+    <lastmod>2023-07-08T15:48:35+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>/tags/agent/</loc>
+    <lastmod>2023-07-06T15:47:43+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>/tags/zabbix/</loc>
     <lastmod>2023-07-06T15:47:43+08:00</lastmod>
