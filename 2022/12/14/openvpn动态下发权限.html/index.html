@@ -10,7 +10,7 @@ title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn 
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="openvpn动态下发权限 - Almighty.YanTao" />
 <link href="/index.xml" title="openvpn动态下发权限 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>openvpn动态下发权限 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="openvpn动态下发权限 - Almighty.YanTao" />
+<title>openvpn动态下发权限 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="openvpn动态下发权限 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="openvpn动态下发权限" />
 <meta property="og:description" content="首先了解我们为什么要动态下发 开源的openvpn并不支持权限管理，大部分在做权限管理的时候使用的都是根据来源IP或IP段通过iptables/交换机来进行权限控制 权限控制太广了，根本无法很好的去做管理后台的配置，特别是需要用户组来进行区分的时候，那就更困难了 权限下发的逻辑 {% plantuml %}
@@ -27,9 +27,9 @@ title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn 
 title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn openvpn-&amp;gt;openvpn:下发IP地址，设置动态权限 openvpn-&amp;gt;用户:完成连接 {% endplantuml %}
 用到的技术 ipset iptables 主要脚本内容 连接脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 /sbin/ipset create ${common_name}-${common_ip} hash:ip /sbin/ipset create ${common_name}-${common_ip}-drop hash:ip # 这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现 for index in `seq 0 $permissionsAcceptLength`; do /sbin/ipset add ${common_name}-${common_ip} ${permissionsAccept[$index]//\&amp;#34;/} done for index in `seq 0 $permissionsDropLength`; do /sbin/ipset add ${common_name}-${common_ip}-drop ${permissionsDrop[$index]//\&amp;#34;/} done # 设置iptables /sbin/iptables -A FORWARD -s $common_ip -m set --match-set ${common_name}-${common_ip} dst -j ACCEPT /sbin/iptables -A FORWARD -s $common_ip -m set --match-set ${common_name}-${common_ip}-drop dst -j DROP /sbin/iptables -A FORWARD -s $common_ip -j DROP 断开脚本 1 2 3 4 5 /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set ${common_name}-${ifconfig_pool_remote_ip} dst -j ACCEPT /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set ${common_name}-${ifconfig_pool_remote_ip}-drop dst -j DROP /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -j DROP /sbin/ipset destroy ${common_name}-${ifconfig_pool_remote_ip} /sbin/ipset destroy ${common_name}-${ifconfig_pool_remote_ip}-drop 如果在运行的过程中出现脚本权限不足 1 2 3 chmod 766 connect." />
 <meta name="twitter:url" content="/2022/12/14/openvpn%E5%8A%A8%E6%80%81%E4%B8%8B%E5%8F%91%E6%9D%83%E9%99%90.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="shortcut icon" />
-<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -449,7 +449,7 @@ openvpn-&gt;用户:完成连接
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -502,7 +502,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');

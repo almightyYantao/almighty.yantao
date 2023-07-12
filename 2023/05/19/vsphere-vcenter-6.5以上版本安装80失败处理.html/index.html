@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="VSphere VCenter 6.5以上版本安装80%失败处理 - Almighty.YanTao" />
 <link href="/index.xml" title="VSphere VCenter 6.5以上版本安装80%失败处理 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>VSphere VCenter 6.5以上版本安装80%失败处理 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="VSphere VCenter 6.5以上版本安装80%失败处理 - Almighty.YanTao" />
+<title>VSphere VCenter 6.5以上版本安装80%失败处理 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="VSphere VCenter 6.5以上版本安装80%失败处理 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="VSphere VCenter 6.5以上版本安装80%失败处理" />
 <meta property="og:description" content="起因 VCenter磁盘满，手贱ssh删除日志后重启失败，选择重装。故障：VC6.5安装卡80%，原因是安装包root密码过期了,root不可用。而且按照提示修改密码一直提示 Th&amp;hellip;
@@ -27,9 +27,9 @@
 故障 VC6.5安装卡80%，原因是安装包root密码过期了,root不可用。而且按照提示修改密码一直提示 The password change operation failed.
 解决 在80%时通过VSClient打开VC宿主虚机（注意要在第一时间打开，而不是已经提示错误。出现错误提示只能重新开始安装而不能继续） 重启在bios时按e进入GNU GRUB Menu 选择linux开头的这一行，在最后添加空格rw init=/bin/bash，然后F10进入 输入mount -o remount,rw / 回车（注意这个”/”别丢了） passwd 两次输入密码，建议用安装时设置的密码 umount /（注意这个”/”别丢了） reboot -f 主要是因为系统版本的问题，网上分享的一般都是：4602587 版本的，这个版本有 BUG，可以换成 U1G（8024368）" />
 <meta name="twitter:url" content="/2023/05/19/vsphere-vcenter-6.5%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%8580%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="shortcut icon" />
-<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -120,7 +120,7 @@
 >
     <picture class="noscript-hidden"><img
             data-src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202305191745679.png"
-            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/images/outload.svg"
+            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/images/outload.svg"
             
             
             data-
@@ -359,7 +359,7 @@
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -412,7 +412,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');

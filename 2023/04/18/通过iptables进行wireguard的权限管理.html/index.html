@@ -14,7 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="通过iptables进行wireguard的权限管理 - Almighty.YanTao" />
 <link href="/index.xml" title="通过iptables进行wireguard的权限管理 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>通过iptables进行wireguard的权限管理 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="通过iptables进行wireguard的权限管理 - Almighty.YanTao" />
+<title>通过iptables进行wireguard的权限管理 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="通过iptables进行wireguard的权限管理 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="通过iptables进行wireguard的权限管理" />
 <meta property="og:description" content="一、背景 由于目前openvpn的开源方案，链接VPN如果路由过多的话会导致链接速度变慢，效果非常的不理想，并且当iptables规则多的时候，转发明显性能下降；
@@ -35,9 +35,9 @@
 1 2 PostUp = /path/to/script.sh PostDown = /path/to/teardown.sh 然后在根据情况设置ipset和iptables
 2.3、脚本案例 /path/to/script.sh 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 #!/bin/bash result=$(curl -s &amp;#34;VPN后端连接接口地址&amp;#34; | jq &amp;#39;.d&amp;#39;) permissionsAccept=($(jq &amp;#39;.accept[]&amp;#39; &amp;lt;&amp;lt;&amp;lt;$result)) permissionsDrop=($(jq &amp;#39;.drop[]&amp;#39; &amp;lt;&amp;lt;&amp;lt;$result)) # 创建新的ipset组 ipset create $WG_PEER_IP hash:ip ipset create ${WG_PEER_IP}-drop hash:ip for ((i=0;i&amp;lt;${#permissionsAccept[@]};i&#43;&#43;)) do ipset add $WG_PEER_IP ${permissionsAccept[$i]//\&amp;#34;/} done for ((i=0;i&amp;lt;${#permissionsDrop[@]};i&#43;&#43;)) do ipset add ${WG_PEER_IP}-drop ${permissionsDrop[$i]//\&amp;#34;/} done # 设置iptables生效规则 iptables -A FORWARD -s $WG_PEER_IP -m set --match-set ${WG_PEER_IP}-drop dst -j DROP iptables -A FORWARD -s $WG_PEER_IP -m set --match-set $WG_PEER_IP dst -j ACCEPT # 剩余没有匹配到的全部拒绝 iptables -A FORWARD -s $WG_PEER_IP -j DROP if [ $code = -1 ];then exit 1 ; fi /path/to/teardown." />
 <meta name="twitter:url" content="/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/" /><meta name="twitter:image" content="/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img.png" />
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="shortcut icon" />
-<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -126,12 +126,12 @@
     style="background-image: linear-gradient(180deg,#e5d3d3, #b37678);padding-bottom:42%;"
     class="article-cover h-0Page(/posts/wireguard/增加权限账号管理系统/index.zh-cn.md) relative w-full"
 >
-    <picture class="noscript-hidden"><source data-srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
-            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img.png"
-            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg"
+    <picture class="noscript-hidden"><source data-srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
+            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img.png"
+            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg"
             width="1200"
             height="630"
-            data-srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png 1440w"
+            data-srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png 1440w"
             alt="通过iptables进行wireguard的权限管理"
             class="absolute left-0 top-0 h-full w-full object-cover object-center"
             data-lazyload data-lazyload-blur
@@ -139,9 +139,9 @@
         />
     </picture>
     <noscript>
-        <picture><source srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
-                src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img.png"
-                srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png 1440w"
+        <picture><source srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
+                src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img.png"
+                srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/2023/04/18/%E9%80%9A%E8%BF%87iptables%E8%BF%9B%E8%A1%8Cwireguard%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png 1440w"
                 alt="通过iptables进行wireguard的权限管理"width="1200"
                 height="630"
                 class="absolute left-0 top-0 h-full w-full object-cover object-center"
@@ -606,7 +606,7 @@
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -659,7 +659,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');

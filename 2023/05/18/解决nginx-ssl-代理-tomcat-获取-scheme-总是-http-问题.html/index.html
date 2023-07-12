@@ -16,7 +16,7 @@ https://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd774
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题 - Almighty.YanTao" />
 <link href="/index.xml" title="解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题 - Almighty.YanTao" />
+<title>解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题" />
 <meta property="og:description" content="背景 公司之前用的是http，但是出于苹果app审核和服务器安全性问题，要改为https，我们公司用的是沃通的ssl，按照沃通的官方文档提供的步骤完成服务器的配置。 架构上使用了 Nginx &#43;tomcat 集群, 且nginx下配置了SSL,tomcat 没有配置SSL,项目使用https协议。
@@ -39,9 +39,9 @@ http://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd7741
 https://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd7741c93851d83a4f6 下面我们进一步研究发现，java API上写得很清楚:
 1 2 3 4 5 getRequestURL(): Reconstructs the URL the client used to make the request. The returned URL contains a protocol, server name, port number, and server path, but it does not include query string parameters." />
 <meta name="twitter:url" content="/2023/05/18/%E8%A7%A3%E5%86%B3nginx-ssl-%E4%BB%A3%E7%90%86-tomcat-%E8%8E%B7%E5%8F%96-scheme-%E6%80%BB%E6%98%AF-http-%E9%97%AE%E9%A2%98.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="shortcut icon" />
-<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -206,15 +206,15 @@ https://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd774
 >
     <picture class="noscript-hidden"><img
             
-            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img1.png"
-            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/images/outload.svg"data-data-zoomable
+            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/img/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img1.png"
+            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/images/outload.svg"data-data-zoomable
             data-lazyload data-lazyload-blur
         />
     </picture>
     <noscript data-lazyload-noscript>
-        <a class="after:hidden" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img1.png" target="_blank" rel="noopener noreferrer">
+        <a class="after:hidden" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img1.png" target="_blank" rel="noopener noreferrer">
             <picture><img
-                    src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img1.png"/>
+                    src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img1.png"/>
             </picture>
         </a>
     </noscript></figure>
@@ -276,15 +276,15 @@ https://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd774
 >
     <picture class="noscript-hidden"><img
             
-            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img2.png"
-            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/images/outload.svg"data-data-zoomable
+            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/img/解决Nginx%20SSL%20代理%20Tomcat%20获取%20Scheme%20总是%20Http%20问题/img2.png"
+            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/images/outload.svg"data-data-zoomable
             data-lazyload data-lazyload-blur
         />
     </picture>
     <noscript data-lazyload-noscript>
-        <a class="after:hidden" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img2.png" target="_blank" rel="noopener noreferrer">
+        <a class="after:hidden" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img2.png" target="_blank" rel="noopener noreferrer">
             <picture><img
-                    src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img2.png"/>
+                    src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/img/%e8%a7%a3%e5%86%b3Nginx%20SSL%20%e4%bb%a3%e7%90%86%20Tomcat%20%e8%8e%b7%e5%8f%96%20Scheme%20%e6%80%bb%e6%98%af%20Http%20%e9%97%ae%e9%a2%98/img2.png"/>
             </picture>
         </a>
     </noscript></figure>
@@ -510,7 +510,7 @@ https://m.xxx.com/payment/paymentChannel?id=212&amp;s=a84485e0985afe97fffd7fd774
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -563,7 +563,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');
