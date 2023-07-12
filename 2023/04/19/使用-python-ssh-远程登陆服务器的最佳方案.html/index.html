@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="使用 Python ssh 远程登陆服务器的最佳方案 - Almighty.YanTao" />
 <link href="/index.xml" title="使用 Python ssh 远程登陆服务器的最佳方案 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>使用 Python ssh 远程登陆服务器的最佳方案 - Almighty.YanTao</title><link rel="stylesheet" href="/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="使用 Python ssh 远程登陆服务器的最佳方案 - Almighty.YanTao" />
+<title>使用 Python ssh 远程登陆服务器的最佳方案 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="使用 Python ssh 远程登陆服务器的最佳方案 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="使用 Python ssh 远程登陆服务器的最佳方案" />
 <meta property="og:description" content="在使用 Python 写一些脚本的时候，在某些情况下，我们需要频繁登陆远程服务去执行一次命令，并返回一些结果。
@@ -31,9 +31,9 @@
 1 sshpass -p ${passwd} ssh -p ${port} -l ${user} -o StrictHostKeyChecking=no xx.xx.xx.xx &amp;#34;ls -l&amp;#34; 然后你会发现，你的输出有很多你并不需要，但是又不去不掉的一些信息（也许有方法，请留言交流），类似这样
 1 2 3 4 5 6 host: xx.xx.xx.xx, port: xx Warning: Permanently added &amp;#39;[xx.xx.xx.xx]:xx&amp;#39; (RSA) to the list of known hosts. Login failure: [Errno 1] This server is not registered to rmp platform, please confirm whether cdn server. total 4 -rw-r--r-- 1 root root 239 Mar 30 2018 admin-openrc 对于直接使用 shell 命令，来执行命令的，可以直接使用管道，或者将标准输出重定向到文件的方法取得执行命令返回的结果" />
 <meta name="twitter:url" content="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/" /><meta name="twitter:image" content="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img.png" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
-<link href="/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -122,12 +122,12 @@
     style="background-image: linear-gradient(180deg,#030e0e, #ccc);padding-bottom:42%;"
     class="article-cover h-0Page(/posts/python/使用 Python ssh 远程登陆服务器的最佳方案/index.zh-cn.md) relative w-full"
 >
-    <picture class="noscript-hidden"><source data-srcset="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
-            data-src="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img.png"
-            src="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_66df8b40cec26a8c5681f8581fbc4f22.jpg"
+    <picture class="noscript-hidden"><source data-srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
+            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img.png"
+            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_66df8b40cec26a8c5681f8581fbc4f22.jpg"
             width="1920"
             height="1080"
-            data-srcset="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_catmullrom_3.png 1440w"
+            data-srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_catmullrom_3.png 1440w"
             alt="使用 Python ssh 远程登陆服务器的最佳方案"
             class="absolute left-0 top-0 h-full w-full object-cover object-center"
             data-lazyload data-lazyload-blur
@@ -135,9 +135,9 @@
         />
     </picture>
     <noscript>
-        <picture><source srcset="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
-                src="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img.png"
-                srcset="/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_catmullrom_3.png 1440w"
+        <picture><source srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_q95_h2_catmullrom_3.webp 1440w" type="image/webp" /><img
+                src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img.png"
+                srcset="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_catmullrom_3.png 1440w"
                 alt="使用 Python ssh 远程登陆服务器的最佳方案"width="1920"
                 height="1080"
                 class="absolute left-0 top-0 h-full w-full object-cover object-center"
@@ -692,7 +692,7 @@
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: '',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@master',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -745,7 +745,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');
