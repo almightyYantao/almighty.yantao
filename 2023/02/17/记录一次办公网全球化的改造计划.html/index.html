@@ -32,7 +32,7 @@ iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="记录一次办公网全球化的改造计划 - Almighty.YanTao" />
 <link href="/index.xml" title="记录一次办公网全球化的改造计划 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>记录一次办公网全球化的改造计划 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="记录一次办公网全球化的改造计划 - Almighty.YanTao" />
+<title>记录一次办公网全球化的改造计划 - Almighty.YanTao</title><link rel="stylesheet" href="/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="记录一次办公网全球化的改造计划 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="记录一次办公网全球化的改造计划" />
 <meta property="og:description" content="背景 办公网每次去海外找资料都需要重新连接VPN，或者自己连接自己买的小飞机之类的才可以。但是这种在互联网公司内的话，非常的不友好；为公司工作还要自己花钱买小飞机～
@@ -71,9 +71,9 @@ iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压
 1 DATA_PORTS 修改成：DATA_PORTS=&amp;#34;eth0&amp;#34; 修改端口 上传文件，修改配置 需要上传一个joskmc文件（文件在文末） 在/etc/PG.conf中新增一下一行
 1 HTTPS_PORT=2194 执行joskmc 1 /root/joskmc tcp 2194 修改：/etc/rc.local，增加一下三行 1 2 sleep 10 /root/joskmc tcp 2194 2、进行隧道配置（海外） (1)、登录WEB页面，修改网卡方向 默认账号密码：admin/panabit 系统概况 → 网络接口：eth0，修改成对外，只有对外才可以创建WAN线路 (2)、创建WAN线路 应用路由 → 接口线路： 需要注意，Mac地址必须克隆 (3)、创建IWAN连接账号 对象管理 → 账号管理 → 组织架构： 地址范围：这一块可以自己定一个内网的IP段就可以，不要冲突就好 地址范围需要把网关地址留出来！！！！！ 对象管理 → 账号管理 → 本地账号： 处理用户组需要选择前面创建的用户组，其他的根据实际情况填写 (4)、创建iWAN服务 应用路由 → iWAN服务 → 服务列表： 注意：服务器网关地址要和你前面设置的地址范围要在一块，并且需要排除这个地址的下发 应用路由 → iWAN服务 → 服务映射： 根据配置情况选择即可 iWAN使用的是UDP连接，因此端口需要开放UDP (5)、创建策略路由 应用路由 → 策略路由：需要添加一条回程的全程路由，要不然DNS牵引、FQ都会失败 这里选择iWAN的线路 3、客户端配置（办公网） (1)、新建WAN线路 应用路由 → 接口线路 → WAN线路：按照信息提示填写即可完成iWAN线路配置 注意：必须有一个外网的网卡，并且最好把加密开起来 (2)、设置DNS牵引 应用路由 → DNS管控：海外域名是一个域名群组，可以自己修改 主要解决DNS污染问题，要不然可能部分网站会无法访问 这里有一个很注意的点，就是你的DNS，访问DNS的链路必须经过PA，否则牵引不会生效 (3)、设置策略路由 应用路由 → 策略路由：我这边直接拿了飞连的609海外分流IP段进行分流，你也可以自己修改（文末下载） 主要为了只有需要海外的才出去，不能把所有的流量全部导出去 附件 169IP段： https://www." />
 <meta name="twitter:url" content="/2023/02/17/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E5%8A%9E%E5%85%AC%E7%BD%91%E5%85%A8%E7%90%83%E5%8C%96%E7%9A%84%E6%94%B9%E9%80%A0%E8%AE%A1%E5%88%92.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="shortcut icon" />
-<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
+<link href="/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -164,7 +164,7 @@ iWAN的包头很小，只有8个字节，而且在后续版本里，我们会压
 >
     <picture class="noscript-hidden"><img
             data-src="https://bbs.panabit.com/static/image/common/logo.png"
-            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/images/outload.svg"
+            src="/images/outload.svg"
             
             
             data-
@@ -666,7 +666,7 @@ joskmc： <a
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest',
+    cdn: '',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -719,7 +719,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');
