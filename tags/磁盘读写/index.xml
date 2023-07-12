@@ -14,7 +14,7 @@
       
       <guid>/2023/07/08/%E5%88%A9%E7%94%A8-shell-%E7%9B%91%E6%8E%A7%E7%A3%81%E7%9B%98%E7%9A%84%E8%AF%BB%E5%86%99%E6%83%85%E5%86%B5.html/</guid>
       <description>背景 在做监控的时候，zabbix 自带的不支持做读写性能的监控，那么在有这个需求的时候就很蛋疼了，因此采用 shell 脚本的形式，然后将数据返回给 zabbix 中去
-配置方式 conf 配置文件 1 UserParameter=qunhe.it.disk.info.iospeed[*],/etc/zabbix/zabbix_agentd.d/zabbix_disk_speed.sh $1 shell 脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 #!/bin/bash DISK=&amp;#34;$1&amp;#34; DISK_MOUNT=&amp;#34;&amp;#34; DISK_SPEED=&amp;#34;&amp;#34; DISK_SPEED_UNIT=&amp;#34;&amp;#34; DISK_AVAIL=&amp;#34;&amp;#34; OUTPUT_FILE=&amp;#34;/tmp/${DISK}_iotest&amp;#34; if [ ! -d $DISK ] || [ -z $DISK ]; then echo &amp;#34;the disk isn&amp;#39;t exist !</description>
+配置方式 conf 配置文件 1 UserParameter=qunhe.it.disk.info.iospeed[*],/etc/zabbix/zabbix_agentd.d/zabbix_disk_speed.sh $1 shell 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 #!/bin/bash DISK=&amp;#34;$1&amp;#34; DISK_MOUNT=&amp;#34;&amp;#34; DISK_SPEED=&amp;#34;&amp;#34; DISK_SPEED_UNIT=&amp;#34;&amp;#34; DISK_AVAIL=&amp;#34;&amp;#34; OUTPUT_FILE=&amp;#34;/tmp/${DISK}_iotest&amp;#34; if [ ! -d $DISK ] || [ -z $DISK ]; then echo &amp;#34;the disk isn&amp;#39;t exist !</description>
     </item>
     
   </channel>
