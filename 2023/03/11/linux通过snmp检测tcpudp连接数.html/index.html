@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="linux通过SNMP检测TCP&amp;UDP连接数 - Almighty.YanTao" />
 <link href="/index.xml" title="linux通过SNMP检测TCP&amp;UDP连接数 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>linux通过SNMP检测TCP&amp;UDP连接数 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="linux通过SNMP检测TCP&amp;UDP连接数 - Almighty.YanTao" />
+<title>linux通过SNMP检测TCP&amp;UDP连接数 - Almighty.YanTao</title><link rel="stylesheet" href="/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="linux通过SNMP检测TCP&amp;UDP连接数 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="linux通过SNMP检测TCP&amp;UDP连接数" />
 <meta property="og:description" content="先上图&amp;amp;介绍 记录一次全球化网络监控的看板建设； 之前都是通过zabbix来进行建设看板，但是用了一段时间后总是缺点感觉；后面通过大佬的介绍，试用了Grafana，这不试用还好，一试用，效果的展现让我无法自拔，这就是我想要的监控看板啊！能根据数值的不同进行颜色的区分，在大屏上一眼就可以看出当前哪一块网络出现了问题！
@@ -31,9 +31,9 @@
 其他的一些监控项都是最简单基础的，我这边就不过多的赘述，大家可以自行上网搜索，或者之前引用之前zabbix的数据，主要讲解下TCP连接数和UDP连接数的获取
 别的不说，这图还是很好看的； 准备 SNMP 自定义OID snmp安装 1 2 3 yum install net-snmp systemctl start snmpd systemctl enable snmpd 修改配置文件 1 2 3 4 5 6 7 8 # 修改团体名 com2sec notConfigUser default xxxxx # view systemview included .1.3.6.1.2.1. （这两行注释） # view systemview included .1.3.6.1.2.1.25.1.1 # 这两行新增，表示可以查看所有的信息，要不然只能查看上面那两个指定的信息 view all included . view systemview included .1 创建获取连接数脚本 1 2 3 4 #!/bin/bash echo $2 echo integer echo $(netstat -an|awk &amp;#39;/^tcp/ {&#43;&#43;s[$NF]} END {for(a in s ) print a,s[a]}&amp;#39; | grep ESTABLISHED | awk &amp;#39;{print $2}&amp;#39;) 这个是获取TCP连接数的脚本，如果要获取UDP的，请把tcp改成udp 设置脚本权限" />
 <meta name="twitter:url" content="/2023/03/11/linux%E9%80%9A%E8%BF%87snmp%E6%A3%80%E6%B5%8Btcpudp%E8%BF%9E%E6%8E%A5%E6%95%B0.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/icon.png" rel="shortcut icon" />
-<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
+<link href="/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -124,7 +124,7 @@
 >
     <picture class="noscript-hidden"><img
             data-src="https://raw.githubusercontent.com/almightyYantao/blog-img/master/202303112218722.png"
-            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/images/outload.svg"
+            src="/images/outload.svg"
             
             
             data-
@@ -499,7 +499,7 @@
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@master',
+    cdn: '',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -552,7 +552,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@master/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');
