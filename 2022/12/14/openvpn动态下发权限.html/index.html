@@ -10,7 +10,7 @@ title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn 
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="openvpn动态下发权限 - Almighty.YanTao" />
 <link href="/index.xml" title="openvpn动态下发权限 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>openvpn动态下发权限 - Almighty.YanTao</title><link rel="stylesheet" href="/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="openvpn动态下发权限 - Almighty.YanTao" />
+<title>openvpn动态下发权限 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="openvpn动态下发权限 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="openvpn动态下发权限" />
 <meta property="og:description" content="首先了解我们为什么要动态下发 开源的openvpn并不支持权限管理，大部分在做权限管理的时候使用的都是根据来源IP或IP段通过iptables/交换机来进行权限控制 权限控制太广了，根本无法很好的去做管理后台的配置，特别是需要用户组来进行区分的时候，那就更困难了 权限下发的逻辑 {% plantuml %}
@@ -27,9 +27,9 @@ title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn 
 title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn openvpn-&amp;gt;openvpn:下发IP地址，设置动态权限 openvpn-&amp;gt;用户:完成连接 {% endplantuml %}
 用到的技术 ipset iptables 主要脚本内容 连接脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 /sbin/ipset create ${common_name}-${common_ip} hash:ip /sbin/ipset create ${common_name}-${common_ip}-drop hash:ip # 这里是动态去你的后端获取出来的允许访问的列表，接口自己去实现 for index in `seq 0 $permissionsAcceptLength`; do /sbin/ipset add ${common_name}-${common_ip} ${permissionsAccept[$index]//\&amp;#34;/} done for index in `seq 0 $permissionsDropLength`; do /sbin/ipset add ${common_name}-${common_ip}-drop ${permissionsDrop[$index]//\&amp;#34;/} done # 设置iptables /sbin/iptables -A FORWARD -s $common_ip -m set --match-set ${common_name}-${common_ip} dst -j ACCEPT /sbin/iptables -A FORWARD -s $common_ip -m set --match-set ${common_name}-${common_ip}-drop dst -j DROP /sbin/iptables -A FORWARD -s $common_ip -j DROP 断开脚本 1 2 3 4 5 /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set ${common_name}-${ifconfig_pool_remote_ip} dst -j ACCEPT /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -m set --match-set ${common_name}-${ifconfig_pool_remote_ip}-drop dst -j DROP /sbin/iptables -D FORWARD -s $ifconfig_pool_remote_ip -j DROP /sbin/ipset destroy ${common_name}-${ifconfig_pool_remote_ip} /sbin/ipset destroy ${common_name}-${ifconfig_pool_remote_ip}-drop 如果在运行的过程中出现脚本权限不足 1 2 3 chmod 766 connect." />
 <meta name="twitter:url" content="/2022/12/14/openvpn%E5%8A%A8%E6%80%81%E4%B8%8B%E5%8F%91%E6%9D%83%E9%99%90.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
-<link href="/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -177,7 +177,7 @@ title openvpn连接示意图 用户 -&amp;gt; openvpn:通过公网连接openvpn 
         </aside><div class="border-b bg-blue-100 bg-opacity-20 p-6 dark:border-darkBorder dark:bg-darkBg md:px-10">
             <time
                 datetime="2023-02-20T13:36:03+08:00"
-                >文章最后编辑于: <span class="mx-1 font-bold">138</span> 天前，文中所描述的信息可能已发生改变</time
+                >文章最后编辑于: <span class="mx-1 font-bold">142</span> 天前，文中所描述的信息可能已发生改变</time
             >
         </div><section class="article-content typo relative flex-grow px-6 py-5 md:px-10"><i title="更快的阅读" id="bionicReading" class="absolute right-0 top-0 cursor-pointer p-3"
             ><svg class="w-4 h-4 fill-current text-gray-400" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10811" ><path d="M480 192c-19.2 0-32-12.8-32-32v-128c0-19.2 12.8-32 32-32s32 12.8 32 32v128c0 19.2-12.8 32-32 32zM160 1024c-6.4 0-19.2 0-25.6-6.4l-128-128c0-6.4-6.4-19.2-6.4-25.6s6.4-19.2 6.4-25.6l512-512c12.8-6.4 38.4-6.4 51.2 0l128 128c0 6.4 6.4 19.2 6.4 25.6s-6.4 19.2-6.4 25.6l-512 512c-6.4 6.4-19.2 6.4-25.6 6.4z m-83.2-160l83.2 83.2 467.2-467.2-83.2-83.2-467.2 467.2zM992 576h-128c-19.2 0-32-12.8-32-32s12.8-32 32-32h128c19.2 0 32 12.8 32 32s-12.8 32-32 32zM768 288c-6.4 0-19.2 0-25.6-6.4-12.8-12.8-12.8-32 0-44.8l96-96c12.8-12.8 32-12.8 44.8 0s12.8 32 0 44.8l-96 96c0 6.4-12.8 6.4-19.2 6.4zM256 288c-6.4 0-19.2 0-25.6-6.4L134.4 185.6c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 12.8-12.8 12.8-19.2 12.8zM864 896c-6.4 0-19.2 0-25.6-6.4l-96-96c-12.8-12.8-12.8-32 0-44.8s32-12.8 44.8 0l96 96c12.8 12.8 12.8 32 0 44.8 0 6.4-12.8 6.4-19.2 6.4z" p-id="10812"></path><path d="M544 640c-6.4 0-19.2 0-25.6-6.4l-128-128c-6.4-12.8-6.4-38.4 0-51.2s32-12.8 44.8 0l128 128c12.8 12.8 12.8 38.4 6.4 51.2-6.4 6.4-19.2 6.4-25.6 6.4z" p-id="10813"></path></svg></i
@@ -449,7 +449,7 @@ openvpn-&gt;用户:完成连接
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: '',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest\/',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -502,7 +502,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');

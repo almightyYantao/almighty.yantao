@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="清理自定义DHCP下发，异常断开导致IP地址占用的问题 - Almighty.YanTao" />
 <link href="/index.xml" title="清理自定义DHCP下发，异常断开导致IP地址占用的问题 - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>清理自定义DHCP下发，异常断开导致IP地址占用的问题 - Almighty.YanTao</title><link rel="stylesheet" href="/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="清理自定义DHCP下发，异常断开导致IP地址占用的问题 - Almighty.YanTao" />
+<title>清理自定义DHCP下发，异常断开导致IP地址占用的问题 - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="清理自定义DHCP下发，异常断开导致IP地址占用的问题 - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="清理自定义DHCP下发，异常断开导致IP地址占用的问题" />
 <meta property="og:description" content="背景 因为OpenVpn存在断开重连的机制，如果突然出现网络抖动，用户端没有触发断开命令，但是同时又触发了重新连接的命令，这时候VPN这里就会重新给下发一个新的地址，但是老的地址不会回收掉，这个也是很早之前DHCP被用完的真正原因
@@ -27,9 +27,9 @@
 处理方式 在每一台openvpn的机器上新增一个shell脚本做定时任务，每天临晨2点开始循环遍历
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 #!/bin/bash IFS=$&amp;#39;\n&amp;#39; # 修改默认分隔符 OLDIFS=&amp;#34;$IFS&amp;#34; # 清理无效的IP地址 function clearIp(){ # 取出当前已经分配下去的所有IP地址 result=$(curl -s &amp;#34;后端获取当前使用IP的接口地址&amp;#34;); ipList=`echo $result | jq &amp;#39;." />
 <meta name="twitter:url" content="/2023/02/16/%E6%B8%85%E7%90%86%E8%87%AA%E5%AE%9A%E4%B9%89dhcp%E4%B8%8B%E5%8F%91%E5%BC%82%E5%B8%B8%E6%96%AD%E5%BC%80%E5%AF%BC%E8%87%B4ip%E5%9C%B0%E5%9D%80%E5%8D%A0%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="/icon.png" rel="shortcut icon" />
-<link href="/icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="/icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -442,7 +442,7 @@
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: '',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest\/',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -495,7 +495,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');
