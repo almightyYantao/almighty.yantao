@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <meta itemprop="name" content="openvpn-auth（支持企业微信认证&amp;LDAP） - Almighty.YanTao" />
 <link href="/index.xml" title="openvpn-auth（支持企业微信认证&amp;LDAP） - Almighty.YanTao" type="application/rss+xml" rel="alternate" />
-<title>openvpn-auth（支持企业微信认证&amp;LDAP） - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="openvpn-auth（支持企业微信认证&amp;LDAP） - Almighty.YanTao" />
+<title>openvpn-auth（支持企业微信认证&amp;LDAP） - Almighty.YanTao</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css" integrity="sha256-k2J99G0I8P4PIDm2eo89D6yaB5jNqSZmrtuC2CITVNA=" /><meta property="og:site_name" content="openvpn-auth（支持企业微信认证&amp;LDAP） - Almighty.YanTao" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="openvpn-auth（支持企业微信认证&amp;LDAP）" />
 <meta property="og:description" content="方案介绍 时序图 openvpn-auth 时序图 其中有两个地方需要修改 corpid: 企业微信的企业ID corpsecret: 拥有通讯录的企业微信的Secret 代码如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 package auth import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;github.com/tidwall/gjson&amp;#34; ) func GetAccessToken() string { return GetWecomToken() } // 从企业微信获取Token func GetWecomToken() string { //创建一个请求 req, err := http." />
@@ -19,9 +19,9 @@
     <meta name="twitter:creator" content="@Almighty.YanTao" /><meta name="twitter:title" content="openvpn-auth（支持企业微信认证&amp;LDAP） - Almighty.YanTao" />
 <meta name="twitter:description" content="方案介绍 时序图 openvpn-auth 时序图 其中有两个地方需要修改 corpid: 企业微信的企业ID corpsecret: 拥有通讯录的企业微信的Secret 代码如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 package auth import ( &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;github.com/tidwall/gjson&amp;#34; ) func GetAccessToken() string { return GetWecomToken() } // 从企业微信获取Token func GetWecomToken() string { //创建一个请求 req, err := http." />
 <meta name="twitter:url" content="/2022/12/13/openvpn-auth%E6%94%AF%E6%8C%81%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E8%AE%A4%E8%AF%81ldap.html/" /><meta name="twitter:image" content="" />
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" rel="shortcut icon" />
-<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" rel="Bookmark" />
-<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//icon.png" /><script type="application/ld+json">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/favicon.ico" type="image/x-icon" /><link rel="manifest" href="/manifest.json" /><link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="shortcut icon" />
+<link href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" rel="Bookmark" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/icon.png" /><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "BlogPosting",
@@ -195,15 +195,15 @@
 >
     <picture class="noscript-hidden"><img
             
-            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//img/openvpn-auth/image2022-12-12_20-11-38.png"
-            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//images/outload.svg"data-alt="openvpn-auth 时序图"data-zoomable
+            data-src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/openvpn-auth/image2022-12-12_20-11-38.png"
+            src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/images/outload.svg"data-alt="openvpn-auth 时序图"data-zoomable
             data-lazyload data-lazyload-blur
         />
     </picture>
     <noscript data-lazyload-noscript>
-        <a class="after:hidden" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//img/openvpn-auth/image2022-12-12_20-11-38.png" target="_blank" rel="noopener noreferrer">
+        <a class="after:hidden" href="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/openvpn-auth/image2022-12-12_20-11-38.png" target="_blank" rel="noopener noreferrer">
             <picture><img
-                    src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//img/openvpn-auth/image2022-12-12_20-11-38.png"alt="openvpn-auth 时序图"/>
+                    src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/img/openvpn-auth/image2022-12-12_20-11-38.png"alt="openvpn-auth 时序图"/>
             </picture>
         </a>
     </noscript><figcaption>openvpn-auth 时序图</figcaption></figure>
@@ -651,7 +651,7 @@
 
     <script type="text/javascript">
 window.__theme = {
-    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest\/',
+    cdn: 'https:\/\/cdn.jsdelivr.net\/gh\/almightyYantao\/almighty.yantao@latest',
     pjax: true ,
     isServer: false ,
     $version:"",
@@ -704,7 +704,7 @@ window.__theme = {
         }
     },creatTime: "2022\/10\/23"}
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest//ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/almightyYantao/almighty.yantao@latest/ts/main.1f7accfe243b98c78d4e4dd412caf872a0bc99d72fa4ed9b8bdf02db3f739896.js" defer integrity="sha256-H3rM/iQ7mMeNTk3UEsr4cqC8mdcvpO2bi98C2z9zmJY="></script><script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('\/sw.js');
