@@ -297,8 +297,8 @@ params:
   # GitHub 页面设置
   # github page
   github:
-    id: "gvanrossum" # or ["torvalds", "gvanrossum"]
-    minStars: 5 # 最小 star 项目 / min stars
+    id: "torvalds" # or ["torvalds", "gvanrossum"]
+    minStars: -1 # 最小 star 项目 / min stars
     rsshub: "https://rsshub.rssforever.com"
 
   # Twitter 页面设置
@@ -437,9 +437,9 @@ languages:
         id: "Almighty.YanTao"
         imageProcessing: true
       github:
-        id: "almightyYantao"
+        id: almightyYantao
         rsshub: "https://rsshub.rssforever.com"
-        minStars: 10
+        minStars: -1
       license:
         enabled: true
         name: "署名 - 非商业性使用 - 禁止演绎 4.0"
