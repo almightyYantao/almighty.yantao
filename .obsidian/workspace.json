@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/zh-cn/posts/other/利用 shell 监控磁盘的读写情况/index.zh-cn.md",
+                "file": "content/zh-cn/posts/other/iterm2 通过 Profiles 快速连接SSH/index.zh-cn.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/zh-cn/posts/other/利用 shell 监控磁盘的读写情况/index.zh-cn.md",
+                "file": "content/zh-cn/posts/other/iterm2 通过 Profiles 快速连接SSH/index.zh-cn.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/zh-cn/posts/other/利用 shell 监控磁盘的读写情况/index.zh-cn.md",
+                "file": "content/zh-cn/posts/other/iterm2 通过 Profiles 快速连接SSH/index.zh-cn.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/zh-cn/posts/other/利用 shell 监控磁盘的读写情况/index.zh-cn.md"
+                "file": "content/zh-cn/posts/other/iterm2 通过 Profiles 快速连接SSH/index.zh-cn.md"
               }
             }
           }
@@ -154,32 +154,34 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e12834e2ed45f49f",
+  "active": "76ee4493a294165f",
   "lastOpenFiles": [
     "public/main.93627df46d08f0fe0f2039b67a8f3d0fac9a0798cda92666aedb82d8221354d0.css",
     "public/robots.txt",
     "public/sitemap.xml",
+    "public/index.xml",
+    "public/tags/磁盘读写/index.xml",
     "public/tags/自动化部署/index.xml",
     "public/tags/认证/index.xml",
-    "public/tags/磁盘读写/index.xml",
-    "public/tags/wecom/index.xml",
-    "public/tags/破解/index.xml",
-    "public/tags/权限/index.xml",
+    "public/tags/权限管理/index.xml",
     "public/tags/磁盘/index.xml",
-    "public/tags/tomcat/index.xml",
-    "public/2023/04/19/使用-python-ssh-远程登陆服务器的最佳方案.html/img_hu329e69c1adb399fa54b646fc6c6a5f6b_305113_1440x0_resize_catmullrom_3.png",
+    "public/tags/权限/index.xml",
+    "public/tags/破解/index.xml",
+    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
+    "public/2023/04/18/hugo--github自动化部署静态博客.html/img_huf6171ab9e39e99b8563bb3587a747fa8_37967_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
+    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg",
+    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
+    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png",
     "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
     "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
+    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
+    "public/2023/04/18/通过iptables进行wireguard的权限管理.html/img.png",
     "public/2023/03/11/linux通过snmp检测tcpudp连接数.html/img.webp",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1ab723ab58b2faf975193f87837e8efa.jpg",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_0x20_resize_q95_bgffffff_catmullrom_3.jpg",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_q95_h2_catmullrom_3.webp",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1200x0_resize_catmullrom_3.png",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_q95_h2_catmullrom_3.webp",
-    "public/2023/04/23/解决-wg-quick-在-mac-上-bash-3-无法运行的问题.html/img_hu7225715ee0e8d4f9853764366fc38ddf_51026_1080x0_resize_catmullrom_3.png",
-    "content/zh-cn/posts/other/解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题/index.zh-cn.md",
-    "content/zh-cn/posts/other/利用 shell 监控磁盘的读写情况/index.zh-cn.md",
     "content/zh-cn/posts/zabbix/制作一个内部的 zabbix 监控 Agent/index.zh-cn.md",
+    "content/zh-cn/posts/other/iterm2 通过 Profiles 快速连接SSH/index.zh-cn.md",
+    "content/zh-cn/posts/other/linux通过SNMP检测TCP&UDP连接数/index.zh-cn.md",
+    "content/zh-cn/posts/other/利用 shell 监控磁盘的读写情况/index.zh-cn.md",
+    "content/zh-cn/posts/other/解决Nginx SSL 代理 Tomcat 获取 Scheme 总是 Http 问题/index.zh-cn.md",
     "content/zh-cn/posts/other/VSPhere VCenter 6.5以上版本安装80%失败处理/index.zh-cn.md",
     "content/zh-cn/posts/zabbix/zabbix-wecom/index.zh-cn.md",
     "content/zh-cn/posts/other/Centos Install Confluence/index.zh-cn.md",
@@ -200,8 +202,6 @@
     "themes/hugo-theme-luna/node_modules/chroma-js/readme.md",
     "themes/hugo-theme-luna/node_modules/svgo/README.md",
     "themes/hugo-theme-luna/node_modules/jiti/README.md",
-    "themes/hugo-theme-luna/node_modules/autoprefixer/README.md",
-    "themes/hugo-theme-luna/node_modules/csso/README.md",
     "content/en-us/posts/other/linux通过SNMP检测TCP&UDP连接数/未命名.canvas"
   ]
 }
