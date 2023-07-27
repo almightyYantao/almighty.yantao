@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ssh on Almighty.YanTao</title>
+    <title>SSH on Almighty.YanTao</title>
     <link>/tags/ssh/</link>
-    <description>Recent content in ssh on Almighty.YanTao</description>
+    <description>Recent content in SSH on Almighty.YanTao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 19 Apr 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Jul 2023 00:00:00 +0800</lastBuildDate><atom:link href="/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iterm2 通过 Profiles 快速连接SSH</title>
+      <link>/2023/07/27/iterm2-%E9%80%9A%E8%BF%87-profiles-%E5%BF%AB%E9%80%9F%E8%BF%9E%E6%8E%A5ssh.html/</link>
+      <pubDate>Thu, 27 Jul 2023 00:00:00 +0800</pubDate>
+      
+      <guid>/2023/07/27/iterm2-%E9%80%9A%E8%BF%87-profiles-%E5%BF%AB%E9%80%9F%E8%BF%9E%E6%8E%A5ssh.html/</guid>
+      <description>背景 每次想要连接交换机或者其他SSH的时候都非常的麻烦，需要手动输入账号和密码。用过termius、warp、等总有点不如人意，最终还是拥抱了iterm2
+开始教程 新增脚本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 #!/usr/bin/expect trap { set rows [stty rows] set cols [stty columns] stty rows $rows columns $cols &amp;lt; $spawn_out(slave,name) } WINCH set timeout 30 set host [lindex $argv 0] set port [lindex $argv 1] set user [lindex $argv 2] set pswd [lindex $argv 3] set param [lindex $argv 4] if { &amp;#34;$param&amp;#34; == &amp;#34;ssh-rsa&amp;#34; } { spawn ssh -o &amp;#34;ServerAliveInterval=30&amp;#34; -o &amp;#34;StrictHostKeyChecking=no&amp;#34; -o &amp;#34;HostKeyAlgorithms=+ssh-rsa&amp;#34; -o &amp;#34;PubkeyAcceptedKeyTypes=+ssh-rsa&amp;#34; -p $port $user@$host } if { &amp;#34;$param&amp;#34; == &amp;#34;other&amp;#34; } { spawn ssh -o &amp;#34;ServerAliveInterval=30&amp;#34; -o &amp;#34;StrictHostKeyChecking=no&amp;#34; $param -p $port $user@$host } expect { &amp;#34;(yes/no)?</description>
+    </item>
+    
     <item>
       <title>使用 Python ssh 远程登陆服务器的最佳方案</title>
       <link>/2023/04/19/%E4%BD%BF%E7%94%A8-python-ssh-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%A1%88.html/</link>
